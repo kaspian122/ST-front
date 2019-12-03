@@ -1,6 +1,8 @@
-СИСТЕМА ТЕСТИРОВАНИЯ СТУДЕНТОВ
+## СИСТЕМА ТЕСТИРОВАНИЯ СТУДЕНТОВ
+
 Мой ГПО проект в ТУСУР
-Дизайн https://www.figma.com/file/lpTb7K6Pd495Gbk7Celvh0/Student-Testing-System?node-id=3218%3A4201
+
+Дизайн  https://www.figma.com/file/lpTb7K6Pd495Gbk7Celvh0/Student-Testing-System?node-id=3218%3A4201
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
