@@ -11,6 +11,7 @@ function Button(props) {
     'blue-light': props.color === 'blue-light',
     navigation: props.navigation,
     icon: props.icon,
+    secondary: props.secondary,
   });
 
   return (
@@ -31,6 +32,7 @@ Button.propTypes = {
   color: PropTypes.oneOf(['white', 'blue-light']),
   disabled: PropTypes.bool,
   icon: PropTypes.bool,
+  secondary: PropTypes.bool,
   label: PropTypes.string,
   onClick: PropTypes.func,
   parentBlock: PropTypes.string,
@@ -44,6 +46,7 @@ Button.defaultProps = {
   color: null,
   disabled: false,
   icon: false,
+  secondary: false,
   label: ' ',
   onClick: () => {},
   parentBlock: null,

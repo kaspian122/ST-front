@@ -1,10 +1,9 @@
-import './LoginPage.scss';
+import './RegistrationPage.scss';
 import React, { useState } from 'react';
 import Field from '../../components/field';
-import { ReactComponent as LogoSVG } from '../../static/images/svg/logo.svg';
 import Button from '../../components/button/Button';
 
-function LoginPage() {
+function RegistrationPage() {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
@@ -14,24 +13,26 @@ function LoginPage() {
   return (
     <div className="login-page">
       <h1 className="login-page__title">Система тестирования студентов</h1>
-      <div className="login-form">
-        <div className="login-form__header">
-          <div className="login-form__logo">
-            <LogoSVG />
-          </div>
-          <div className="login-form__title">Авторизация</div>
+      <div className="registration-form">
+        <div className="registration-form__header">
+          <div className="registration-form__title">регистрация преподавателя</div>
         </div>
-        <form className="login-form__form">
-          <div className="login-form__fields-wrapper">
-            <div className="login-form__field">
-              <Field
-                className="login-form__field"
-                name="login"
-                label="Логин"
-                value={login}
-                onChange={handleLoginChange}
-              />
+        <form className="registration-form__form">
+          <div className="registration-form__fields-wrapper">
+            <div className="registration-form__row">
+              <div className="registration-form__field--short">
+                <Field name="login" label="Фамилия" value={login} onChange={handleLoginChange} />
+              </div>
+              <div className="registration-form__field--short">
+                <Field name="login" label="Имя" value={login} onChange={handleLoginChange} />
+              </div>
             </div>
+            <div className="registration-form__row"></div>
+            <div className="registration-form__row"></div>
+            <div className="registration-form__row"></div>
+            <div className="registration-form__row"></div>
+            <div className="registration-form__row"></div>
+
             <div className="login-form__field">
               <Field
                 className="login-form__field"
@@ -59,4 +60,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default RegistrationPage;
