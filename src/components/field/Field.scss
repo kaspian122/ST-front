@@ -1,4 +1,6 @@
 .field {
+  $self: &;
+
   display: flex;
   flex-direction: column;
   position: relative;
@@ -10,12 +12,6 @@
     color: #b3b3b3;
     transition: 0.2s;
     cursor: text;
-
-    &--focus {
-      color: #008fbc;
-      transform: translateY(-20px);
-      cursor: default;
-    }
   }
 
   &__input {
@@ -52,5 +48,14 @@
     color: #008fbc;
     padding-left: 12px;
     margin-top: 10px;
+  }
+
+  &--dirt,
+  &--focus {
+    #{$self}__label {
+      color: #008fbc;
+      transform: translateY(-20px);
+      cursor: default;
+    }
   }
 }
