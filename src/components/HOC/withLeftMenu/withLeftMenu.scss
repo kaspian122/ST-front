@@ -75,15 +75,30 @@
       align-items: center;
       box-sizing: border-box;
 
+      &--active,
+      &:active,
       &:hover {
-        background: #d1f4ff;
         border-left: 2px solid $main-blue;
         padding-left: 18px;
+      }
+
+      &--active,
+      &:active {
+        background: #d1f4ff !important;
+      }
+
+      &:hover {
+        background: #d1f4ff66;
+      }
+
+      &-logo {
+        margin-bottom: 10px;
       }
 
       &-text {
         font-weight: bold;
         color: $text-heading;
+        text-transform: capitalize;
       }
     }
 
