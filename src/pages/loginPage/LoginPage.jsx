@@ -1,15 +1,23 @@
 import './LoginPage.scss';
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Field from '../../components/field';
 import { ReactComponent as LogoSVG } from '../../static/images/svg/logo.svg';
 import Button from '../../components/button/Button';
+import Api from '../../services/api/api';
 
 function LoginPage() {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLoginChange = event => setLogin(event.target.value);
-  const handlePasswordChange = event => setPassword(event.target.value);
+  const handleLoginChange = useCallback(event => setLogin(event.target.value), []);
+  const handlePasswordChange = useCallback(event => setPassword(event.target.value), []);
+  const handleSubmit = useCallback(
+    event => {
+      event.preventDefault();
+      Api.auth(login, password);
+    },
+    [login, password]
+  );
 
   return (
     <div className="login-page">
@@ -21,7 +29,7 @@ function LoginPage() {
           </div>
           <div className="login-form__title">Авторизация</div>
         </div>
-        <form className="login-form__form">
+        <form className="login-form__form" onSubmit={handleSubmit}>
           <div className="login-form__fields-wrapper">
             <div className="login-form__field">
               <Field
@@ -47,7 +55,7 @@ function LoginPage() {
           <div className="login-form__reset-block"> </div>
           <div className="login-form__buttons-block">
             <div className="login-form__login-button">
-              <Button label="Вход" />
+              <Button type="submit" label="Вход" />
             </div>
             <div className="login-form__registration-button">
               <Button label="Реггистрация преподавателя" secondary />

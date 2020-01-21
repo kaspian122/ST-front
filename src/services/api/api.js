@@ -8,7 +8,14 @@ import http from './apiConfig';
  */
 
 // const initConnection = body => http.post('tnl/init/connection', body);
+/**
+ *
+ * @param login {String}
+ * @param password {String}
+ * @returns {Promise<AxiosResponse<T>>}
+ */
+const auth = (login, password) => http.post('auth/token/', { login, password });
 
-const Api = {};
+const Api = { auth };
 
 export default Api;
