@@ -7,26 +7,26 @@ import CssUtils from '../../utils/sassUtils';
 function Field(props) {
   const { error } = props;
 
-  const [isUsed, setIsUsed] = useState(Boolean(props.value));
+  const [isDirt, setIsDirt] = useState(Boolean(props.value));
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleInputChange = event => props.onChange(event);
 
   const handleInputFocus = event => {
-    setIsUsed(true);
+    setIsDirt(true);
+    setIsFocused(true);
     props.onFocus(event);
   };
 
   const handleInputBlur = event => {
-    setIsUsed(Boolean(props.value));
+    setIsDirt(Boolean(props.value));
+    setIsFocused(false);
     props.onBlur(event);
   };
 
   return (
-    <div className="field">
-      <label
-        htmlFor={props.name}
-        className={CssUtils.mergeModifiers('field__label', { focus: isUsed })}
-      >
+    <div className={CssUtils.mergeModifiers('field', { dirt: isDirt, focus: isFocused })}>
+      <label htmlFor={props.name} className="field__label">
         {props.label}
       </label>
 
