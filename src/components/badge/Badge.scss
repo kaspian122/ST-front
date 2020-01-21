@@ -1,0 +1,33 @@
+@import 'src/scss/vars';
+.badge {
+  border: 1px solid $main-blue;
+  border-radius: 6px;
+  width: 300px;
+  height: 136px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  &:hover {
+    background: #d1f4ff66;
+  }
+  &:active {
+    background: #d1f4ff;
+  }
+  &__title {
+    color: $main-blue;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 23px;
+  }
+
+  &__info {
+    font-family: 'Gotham Pro', sans-serif;
+    font-size: 14px;
+    line-height: 13px;
+    color: #585858;
+  }
+}

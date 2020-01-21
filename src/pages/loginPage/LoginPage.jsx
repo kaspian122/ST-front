@@ -4,19 +4,28 @@ import Field from '../../components/field';
 import { ReactComponent as LogoSVG } from '../../static/images/svg/logo.svg';
 import Button from '../../components/button/Button';
 import Api from '../../services/api/api';
+import { useHistory } from 'react-router';
+import RouterPaths from '../../constants/routerPaths';
+import { useDispatch } from 'react-redux';
+import AppActions from '../../store/actions/appActions';
 
 function LoginPage() {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleLoginChange = useCallback(event => setLogin(event.target.value), []);
   const handlePasswordChange = useCallback(event => setPassword(event.target.value), []);
   const handleSubmit = useCallback(
-    event => {
+    async event => {
       event.preventDefault();
-      Api.auth(login, password);
+      await Api.auth(login, password);
+      const user = await Api.authMe();
+      dispatch(AppActions.setUser(user));
+      history.push(RouterPaths.disciplines);
     },
-    [login, password]
+    [dispatch, history, login, password]
   );
 
   return (

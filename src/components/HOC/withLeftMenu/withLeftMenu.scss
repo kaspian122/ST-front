@@ -49,6 +49,16 @@
     justify-content: center;
     align-items: center;
     margin-top: 25px;
+    cursor: pointer;
+    outline: none;
+
+    &:hover {
+      background: #d1f4ff66;
+    }
+
+    &:active {
+      background: #d1f4ff;
+    }
   }
 
   &__username {
@@ -64,6 +74,18 @@
     flex-grow: 1;
     overflow-y: auto;
     overflow-x: hidden;
+    padding: 35px 280px;
+    box-sizing: border-box;
+  }
+
+  &__header {
+    &-title {
+      color: $main-blue;
+      font-weight: bold;
+      font-size: 24px;
+    }
+
+    margin-bottom: 15px;
   }
 
   .menu {
@@ -100,10 +122,6 @@
         color: $text-heading;
         text-transform: capitalize;
       }
-    }
-
-    a {
-      text-decoration: none;
     }
   }
 }
