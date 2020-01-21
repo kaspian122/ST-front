@@ -4,16 +4,17 @@ import { ReactComponent as DisciplinesSVG } from '../../static/images/svg/discip
 import { ReactComponent as TestsSVG } from '../../static/images/svg/tests.svg';
 import { useLocation } from 'react-router';
 import CssUtils from '../../utils/sassUtils';
+import RouterPaths from '../../constants/routerPaths';
 
 const menuItems = [
   {
     text: 'Дисциплины',
-    to: '/disciplines',
+    to: RouterPaths.disciplines,
     logo: DisciplinesSVG,
   },
   {
     text: 'тесты',
-    to: '/tests',
+    to: RouterPaths.tests,
     logo: TestsSVG,
   },
 ];

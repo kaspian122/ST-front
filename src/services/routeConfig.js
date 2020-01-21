@@ -9,8 +9,8 @@ import TestsPage from '../pages/testsPage';
 const Routes = [
   makeRoute(RouterPaths.mainPage, IndexPage, true),
   makeRoute(RouterPaths.loginPage, LoginPage),
-  makeRoute(RouterPaths.disciplines, DisciplinesPage),
-  makeRoute(RouterPaths.tests, TestsPage),
+  makeRoute(RouterPaths.disciplines, DisciplinesPage, false, true),
+  makeRoute(RouterPaths.tests, TestsPage, false, true),
   makeRoute(RouterPaths.registration, RegistrationPage),
 ];
 
