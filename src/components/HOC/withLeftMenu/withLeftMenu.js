@@ -3,10 +3,10 @@ import React from 'react';
 import { ReactComponent as ExitSVG } from '../../../static/images/svg/exit.svg';
 import { ReactComponent as LogoSVG } from '../../../static/images/svg/logo.svg';
 import './withLeftMenu.scss';
+import Menu from '../../menu';
 
 function withLeftMenu(component) {
-  return function wrapper(props) {
-    console.log(props);
+  return function wrapper() {
     return (
       <div className="logged-zone">
         <div className="logged-zone__menu">
@@ -15,7 +15,7 @@ function withLeftMenu(component) {
               <LogoSVG />
               <span className="logged-zone__title">Система тестирования студентов</span>
             </div>
-            <div className="logged-zone__menu-items" />
+            <Menu />
           </div>
 
           <div className="logged-zone__menu-bottom">
