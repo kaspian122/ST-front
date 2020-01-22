@@ -6,8 +6,8 @@ import Routes from '../services/routeConfig';
 import App from './App';
 import configureStore from '../store/configureStore';
 
+export const store = configureStore();
 function Root() {
-  const store = configureStore();
   console.log(Routes);
   return (
     <Provider store={store}>
