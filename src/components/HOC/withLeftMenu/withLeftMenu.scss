@@ -74,18 +74,46 @@
     flex-grow: 1;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 35px 280px;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+
+    &-wrapper {
+      width: 940px;
+      padding: 35px 0;
+    }
   }
 
   &__header {
+    margin-bottom: 15px;
+    position: relative;
     &-title {
       color: $main-blue;
       font-weight: bold;
       font-size: 24px;
     }
 
-    margin-bottom: 15px;
+    &-back {
+      position: absolute;
+      bottom: -8px;
+      left: -60px;
+      width: 40px;
+      height: 40px;
+      border: 1px solid $main-blue;
+      border-radius: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      &:active {
+        background: #d1f4ff !important;
+      }
+
+      &:hover {
+        background: #d1f4ff66;
+      }
+    }
   }
 
   .menu {
