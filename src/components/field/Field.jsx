@@ -1,8 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-for */
-import './Field.scss';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+
 import CssUtils from '../../utils/sassUtils';
+
+import './Field.scss';
 
 function Field(props) {
   const { error } = props;

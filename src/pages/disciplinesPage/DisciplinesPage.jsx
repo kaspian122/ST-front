@@ -1,12 +1,13 @@
 import React, { useCallback } from 'react';
-
-import './DisciplinesPage.scss';
 import { useHistory } from 'react-router-dom';
-import { useDidMount } from '../../utils/hooks';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+
+import { useDidMount } from '../../utils/hooks';
 import DisciplinesActions from '../../store/actions/disciplinesActions';
 import BadgeList from '../../components/badgeList';
-import PropTypes from 'prop-types';
+
+import './DisciplinesPage.scss';
 
 function DisciplinesPage({ setTitle = () => {} }) {
   const dispatch = useDispatch();
@@ -18,9 +19,12 @@ function DisciplinesPage({ setTitle = () => {} }) {
     setTitle('Дисциплины');
   });
 
-  const handleDisciplineClick = useCallback(item => {
-    history.push(`/disciplines/${item.id}`);
-  }, [history]);
+  const handleDisciplineClick = useCallback(
+    item => {
+      history.push(`/disciplines/${item.id}`);
+    },
+    [history]
+  );
 
   return (
     <div className="disciplines-page">

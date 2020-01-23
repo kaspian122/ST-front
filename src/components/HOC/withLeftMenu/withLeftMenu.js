@@ -1,13 +1,14 @@
 import React, { useCallback, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useHistory, useLocation } from 'react-router';
+
+import Menu from '../../menu';
+import Api from '../../../services/api/api';
 
 import { ReactComponent as ExitSVG } from '../../../static/images/svg/exit.svg';
 import { ReactComponent as BackSVG } from '../../../static/images/svg/left-arrow.svg';
 import { ReactComponent as LogoSVG } from '../../../static/images/svg/logo.svg';
 import './withLeftMenu.scss';
-import Menu from '../../menu';
-import Api from '../../../services/api/api';
-import { useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router';
 
 function withLeftMenu(Component) {
   return function Wrapper() {

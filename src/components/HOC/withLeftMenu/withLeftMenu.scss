@@ -30,7 +30,6 @@
   }
 
   &__title {
-    font-family: 'Gotham Pro', sans-serif;
     font-weight: 500;
     margin-top: 20px;
     font-size: 14px;
@@ -62,7 +61,6 @@
   }
 
   &__username {
-    font-family: 'Gotham Pro', sans-serif;
     text-align: center;
     font-weight: 500;
     color: $main-blue;
@@ -77,7 +75,6 @@
     box-sizing: border-box;
     display: flex;
     justify-content: center;
-    padding-left: 100px;
 
     &-wrapper {
       width: 940px;

@@ -1,7 +1,9 @@
-import './RegistrationPage.scss';
 import React, { useState } from 'react';
+
 import Field from '../../components/field';
 import Button from '../../components/button/Button';
+
+import './RegistrationPage.scss';
 
 function RegistrationPage() {
   const [login, setLogin] = useState('');

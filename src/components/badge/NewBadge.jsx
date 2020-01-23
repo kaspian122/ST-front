@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
+
 import { ReactComponent as AddSVG } from '../../static/images/svg/add.svg';
-import { ReactReduxContext } from 'react-redux';
 
 function NewBadge({ text, onClick }) {
   const handleClick = useCallback(() => {
@@ -9,7 +9,7 @@ function NewBadge({ text, onClick }) {
   }, [onClick]);
   return (
     <>
-      {!onClick && (
+      {onClick && (
         <div className="badge badge--new" onClick={handleClick}>
           <AddSVG />
           <span className="badge__text">{text}</span>

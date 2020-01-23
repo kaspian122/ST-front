@@ -1,14 +1,14 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
+
 import Badge from '../badge';
+import NewBadge from '../badge/NewBadge';
 
 import './BadgeList.scss';
-import NewBadge from '../badge/NewBadge';
 
 const defaultMap = { title: 'title', info: 'info', key: 'id' };
 
 function BadgeList({ items, keyMap, onClick, onNewClick, newText }) {
-  console.log(items);
   const formatItem = useCallback(
     item =>
       Object.entries(Object.assign({}, defaultMap, keyMap)).reduce((acc, [key, mapper]) => {

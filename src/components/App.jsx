@@ -2,9 +2,10 @@ import './App.scss';
 import React, { useState } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import withLeftMenu from './HOC/withLeftMenu/withLeftMenu';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
+
+import withLeftMenu from './HOC/withLeftMenu/withLeftMenu';
 import { useDidMount } from '../utils/hooks';
 import Api from '../services/api/api';
 import AppActions from '../store/actions/appActions';

@@ -5,7 +5,8 @@ import { parseSearch } from './history';
 export const useDidMount = func => {
   useEffect(() => {
     func();
-  }, [func]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 };
 
 export const useSearchString = () => {

@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { useRouteMatch, useHistory } from 'react-router';
+import { useRouteMatch } from 'react-router';
+import { useSelector } from 'react-redux';
+import { Tabs } from 'antd';
+
 import RouterPaths from '../../constants/routerPaths';
 import Api from '../../services/api/api';
-import { useSelector } from 'react-redux';
-import { useDidMount, useSearchString } from '../../utils/hooks';
+import { useDidMount } from '../../utils/hooks';
 import BadgeList from '../../components/badgeList';
-import { Tabs } from 'antd';
-import 'antd/dist/antd.css';
+
 import './DisciplinePage.scss';
 
 const { TabPane } = Tabs;

@@ -1,13 +1,15 @@
-import './LoginPage.scss';
 import React, { useState, useCallback } from 'react';
+import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
+
 import Field from '../../components/field';
 import { ReactComponent as LogoSVG } from '../../static/images/svg/logo.svg';
 import Button from '../../components/button/Button';
 import Api from '../../services/api/api';
-import { useHistory } from 'react-router';
 import RouterPaths from '../../constants/routerPaths';
-import { useDispatch } from 'react-redux';
 import AppActions from '../../store/actions/appActions';
+
+import './LoginPage.scss';
 
 function LoginPage() {
   const [login, setLogin] = useState('');
