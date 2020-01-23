@@ -8,7 +8,6 @@ import configureStore from '../store/configureStore';
 
 export const store = configureStore();
 function Root() {
-  console.log(Routes);
   return (
     <Provider store={store}>
       <Router history={history}>

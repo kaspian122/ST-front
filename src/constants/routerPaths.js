@@ -11,4 +11,6 @@ const RouterPaths = {
   makeHera: 'hera',
 };
 
+export const freeRoutes = [RouterPaths.mainPage, RouterPaths.registration, RouterPaths.loginPage];
+
 export default RouterPaths;
