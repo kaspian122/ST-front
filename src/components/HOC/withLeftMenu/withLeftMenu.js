@@ -34,13 +34,7 @@ function withLeftMenu(Component) {
 
           <div className="logged-zone__menu-bottom">
             <div className="logged-zone__username">{user.fio}</div>
-            <div
-              className="logged-zone__logout"
-              role="button"
-              onKeyPress={() => {}}
-              tabIndex={-999}
-              onClick={handleLogOut}
-            >
+            <div className="logged-zone__logout" onClick={handleLogOut}>
               <ExitSVG />
             </div>
           </div>
@@ -49,13 +43,7 @@ function withLeftMenu(Component) {
           <div className="logged-zone__content-wrapper">
             <div className="logged-zone__header">
               {!/^\/\w+$/g.test(pathname) && (
-                <div
-                  className="logged-zone__header-back"
-                  role="button"
-                  onKeyPress={() => {}}
-                  tabIndex={-999}
-                  onClick={handleGoBack}
-                >
+                <div className="logged-zone__header-back" onClick={handleGoBack}>
                   <BackSVG />
                 </div>
               )}

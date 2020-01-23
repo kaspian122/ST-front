@@ -11,7 +11,14 @@ import AppActions from '../store/actions/appActions';
 import RouterPaths, { freeRoutes } from '../constants/routerPaths';
 
 function PrivateRoute(route) {
-  return <Route exact={route.exact} path={route.path} component={withLeftMenu(route.component)} />;
+  return (
+    <Route
+      key={route.path}
+      exact={route.exact}
+      path={route.path}
+      component={withLeftMenu(route.component)}
+    />
+  );
 }
 
 function App(props) {

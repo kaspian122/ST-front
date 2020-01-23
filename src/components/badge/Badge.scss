@@ -1,5 +1,7 @@
 @import 'src/scss/vars';
 .badge {
+  $self: &;
+
   border: 1px solid $main-blue;
   border-radius: 6px;
   width: 300px;
@@ -29,5 +31,18 @@
     font-size: 14px;
     line-height: 13px;
     color: #585858;
+  }
+
+  &--new {
+    border-style: dashed;
+    justify-content: center;
+    align-items: center;
+    #{$self}__text {
+      font-size: 12px;
+      line-height: 11px;
+      font-weight: bold;
+      color: $main-blue;
+      margin-top: 20px;
+    }
   }
 }
