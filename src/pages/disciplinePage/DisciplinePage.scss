@@ -1,0 +1,56 @@
+@import 'src/scss/vars';
+
+.discipline-page {
+  .ant-tabs {
+    &-bar {
+      border: 0;
+    }
+
+    &-nav {
+      width: 100%;
+
+      div:not([class]) {
+        display: flex;
+      }
+    }
+
+    &-tab {
+      $tab: &;
+
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 17px;
+      color: $disabled-blue;
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 2px solid $disabled-blue;
+      transition: border-bottom-color 0.2s ease;
+      padding-bottom: 15px;
+
+      &:hover {
+        color: $main-blue;
+      }
+
+      &-active {
+        border-bottom-color: transparent;
+        color: $main-blue;
+      }
+
+      &-disabled {
+        color: grey;
+        border-bottom: 2px solid grey;
+
+        &:hover {
+          cursor: default;
+          color: grey;
+        }
+      }
+    }
+
+    &-ink-bar {
+      background-color: $main-blue;
+    }
+  }
+}

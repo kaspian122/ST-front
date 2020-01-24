@@ -1,0 +1,13 @@
+.badge-list {
+  width: 100%;
+
+  .badge {
+    vertical-align: top;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+  }
+}

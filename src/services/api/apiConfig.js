@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import history from '../../utils/history';
 import RouterPaths from '../../constants/routerPaths';
 
@@ -13,7 +14,6 @@ const http = axios.create({
   baseURL: standUrl + apiPath,
   timeout: 1000,
   headers: { 'Content-Type': 'application/json' },
-  // withCredentials: true,
 });
 
 http.interceptors.request.use(
@@ -26,7 +26,7 @@ http.interceptors.request.use(
 http.interceptors.response.use(
   response => response.data,
   error => {
-    const { status } = error.response;
+    const status = error?.response?.status;
     if (status === 401) {
       sessionStorage.removeItem('refresh');
       sessionStorage.removeItem('token');

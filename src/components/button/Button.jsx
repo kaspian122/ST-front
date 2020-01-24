@@ -1,7 +1,9 @@
-import './Button.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import CssUtils from '../../utils/sassUtils';
+
+import './Button.scss';
 
 function Button(props) {
   const baseClass = 'button';
