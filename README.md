@@ -10,11 +10,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 node.js => 12.14.1
 
+yarn => 1.21.1 (если нет устанавливается командой `npm install -g yarn`)
+
 ## Развертывание
 
-yarn install
+`yarn install`
 
-yarn start
+`yarn start`
 
 ## Available Scripts
 
