@@ -6,7 +6,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Развертывание
+## Требования
 
 node.js => 12.14.1
 
