@@ -1,6 +1,6 @@
 ## СИСТЕМА ТЕСТИРОВАНИЯ СТУДЕНТОВ
 
-Мой ГПО проект в ТУСУР
+Наш ГПО проект в ТУСУР
 
 [Дизайн](https://www.figma.com/file/lpTb7K6Pd495Gbk7Celvh0/Student-Testing-System?node-id=3218%3A4201)
 
