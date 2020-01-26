@@ -38,7 +38,7 @@ const logout = () =>
     }
   });
 
-const getDisciplines = () => http.get('teacher/disciplines');
+const getDisciplines = () => http.get('teacher/disciplines/');
 
 const getThemes = discipline => http.get(`teacher/themes/${discipline}/`);
 
