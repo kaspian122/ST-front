@@ -9,6 +9,7 @@ const RouterPaths = {
   errorPage: '/error',
   fakePage: '/fake',
   makeHera: 'hera',
+  testPage: '/test',
 };
 
 export const freeRoutes = [RouterPaths.mainPage, RouterPaths.registration, RouterPaths.loginPage];

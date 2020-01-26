@@ -40,8 +40,10 @@ const logout = () =>
 
 const getDisciplines = () => http.get('teacher/disciplines');
 
+const getGroups = () => http.get('teacher/group-list/');
+
 const getThemes = discipline => http.get(`teacher/themes/${discipline}/`);
 
-const Api = { authMe, auth, logout, getDisciplines, getThemes };
+const Api = { authMe, auth, logout, getDisciplines, getThemes, getGroups };
 
 export default Api;
