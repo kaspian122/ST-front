@@ -17,10 +17,8 @@ const { TabPane } = Tabs;
 
 function DisciplinePage({ setTitle = () => {} }) {
   const [themes, setThemes] = useState([]);
+  const [discipline, setDiscipline] = useState({});
   const { params } = useRouteMatch(RouterPaths.discipline);
-  const discipline = useSelector(state =>
-    state.disciplines.find(it => String(it.id) === params.id)
-  );
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -28,13 +26,12 @@ function DisciplinePage({ setTitle = () => {} }) {
     setTitle(discipline?.name);
   }, [setTitle, discipline]);
   useDidMount(() => {
-    Api.getThemes(params.id)
-      .then(response => {
-        setThemes(response);
-      })
-      .catch(() => {
-        history.push('/disciplines');
-      });
+    Api.getDiscipline(params.id).then(response => {
+      setDiscipline(response);
+    });
+    Api.getTabs(params.id).then(response => {
+      setThemes(response.themes);
+    });
   });
   const handleThemeClick = useCallback(item => {
     console.log(item);

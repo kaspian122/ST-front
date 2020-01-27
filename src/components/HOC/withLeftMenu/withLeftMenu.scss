@@ -52,11 +52,11 @@
     outline: none;
 
     &:hover {
-      background: #d1f4ff66;
+      background: $hover-blue;
     }
 
     &:active {
-      background: #d1f4ff;
+      background: $active-blue;
     }
   }
 
@@ -107,12 +107,12 @@
       align-items: center;
       cursor: pointer;
 
-      &:active {
-        background: #d1f4ff !important;
+      &:hover {
+        background: $hover-blue;
       }
 
-      &:hover {
-        background: #d1f4ff66;
+      &:active {
+        background: $active-blue;
       }
     }
   }
@@ -133,13 +133,13 @@
         padding-left: 18px;
       }
 
-      &--active,
-      &:active {
-        background: #d1f4ff !important;
+      &:hover {
+        background: $hover-blue;
       }
 
-      &:hover {
-        background: #d1f4ff66;
+      &--active,
+      &:active {
+        background: $active-blue;
       }
 
       &-logo {

@@ -40,8 +40,13 @@ const logout = () =>
 
 const getDisciplines = () => http.get('teacher/disciplines/');
 
+const getDiscipline = id => http.get(`teacher/discipline/${id}/`);
+
 const getThemes = discipline => http.get(`teacher/themes/${discipline}/`);
 
-const Api = { authMe, auth, logout, getDisciplines, getThemes };
+// WTFAK
+const getTabs = id => http.get(`teacher/get-tabs/${id}/`).then(JSON.parse);
+
+const Api = { authMe, auth, logout, getDisciplines, getDiscipline, getThemes, getTabs };
 
 export default Api;

@@ -1,0 +1,49 @@
+@import 'src/scss/vars';
+
+.multiple-form {
+  &__selector {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    &-item {
+      vertical-align: top;
+      display: inline-flex;
+      width: 110px;
+      height: 60px;
+      border-radius: 6px;
+      color: $main-blue;
+      border: 1px solid $main-blue;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 18px;
+      margin-right: 10px;
+
+      &:not(&--active) {
+        &:hover {
+          cursor: pointer;
+          background: $hover-blue;
+        }
+
+        &:active {
+          background: $active-blue;
+        }
+      }
+
+      &--active {
+        background: $main-blue;
+        color: white;
+      }
+
+      &--new {
+        content: 'pidoras';
+        border-style: dashed;
+
+        svg {
+          width: 24px;
+        }
+      }
+    }
+  }
+}
