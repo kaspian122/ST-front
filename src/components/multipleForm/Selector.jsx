@@ -1,8 +1,9 @@
 import React, { useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { ReactComponent as AddSVG } from '../../static/images/svg/add.svg';
 import { ReactComponent as CloseSVG } from '../../static/images/svg/close.svg';
 
-function Item({ pk, content, onClick, onClose, isActive = false }) {
+function Item({ pk, content, onClick, onClose, isActive }) {
   const handleClick = useCallback(() => {
     onClick(pk);
   }, [pk, onClick]);
@@ -30,6 +31,21 @@ function Item({ pk, content, onClick, onClose, isActive = false }) {
     </div>
   );
 }
+
+Item.propTypes = {
+  pk: PropTypes.number.isRequired,
+  content: PropTypes.oneOfType([PropTypes.string, PropTypes.node, PropTypes.number]),
+  onClick: PropTypes.func,
+  onClose: PropTypes.func,
+  isActive: PropTypes.bool,
+};
+
+Item.defaultProps = {
+  content: undefined,
+  onClick: () => {},
+  onClose: undefined,
+  isActive: false,
+};
 
 function Selector({ items, onSelect, onAdd, onDelete, selected }) {
   const handleAdd = useCallback(() => {
@@ -67,5 +83,19 @@ function Selector({ items, onSelect, onAdd, onDelete, selected }) {
     </div>
   );
 }
+
+Selector.propTypes = {
+  items: PropTypes.array.isRequired,
+  onSelect: PropTypes.func,
+  onAdd: PropTypes.func,
+  onDelete: PropTypes.func,
+  selected: PropTypes.number.isRequired,
+};
+
+Selector.defaultProps = {
+  onSelect: () => {},
+  onAdd: () => {},
+  onDelete: () => {},
+};
 
 export default Selector;

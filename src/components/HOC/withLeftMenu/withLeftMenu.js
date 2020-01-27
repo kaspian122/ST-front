@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 
@@ -21,6 +21,8 @@ function withLeftMenu(Component) {
     const { pathname } = useLocation();
     const modal = useSelector(state => state.modal);
     const dispatch = useDispatch();
+
+    useEffect(() => {}, []);
 
     const handleLogOut = useCallback(() => {
       Api.logout();

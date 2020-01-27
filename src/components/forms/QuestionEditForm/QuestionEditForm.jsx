@@ -1,8 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { Input, Select } from 'antd';
 
 import Answers from './Answers';
-import { ReactComponent as CloseSVG } from '../../../static/images/svg/close.svg';
 import './QuestionEditForm.scss';
 import QuestionConstants from '../../../constants/questions';
 
@@ -10,41 +10,76 @@ const { TextArea } = Input;
 const { Option } = Select;
 
 function QuestionEditForm({ onChange, form }) {
-  const handleChangeType = useCallback(
-    fieldname => e => {
+  const handleChange = useCallback(
+    fieldName => e => {
       let value = e;
-      if (e?.target?.value) {
+      if (e?.target?.value || Object.getPrototypeOf(e).constructor.name === 'SyntheticEvent') {
         value = e.target?.value;
       }
-      onChange({ ...form, [fieldname]: value });
+      onChange({ ...form, [fieldName]: value });
     },
     [form, onChange]
   );
 
+  const handleComplexChange = useCallback(
+    obj => {
+      onChange({ ...form, ...obj });
+    },
+    [form, onChange]
+  );
+
+  const handleTypeChange = useCallback(
+    value => {
+      const res = {};
+      // handleChange('type')(value);
+      res.type = value;
+      switch (value) {
+        case QuestionConstants.questionTypes.MULTIPLE:
+        case QuestionConstants.questionTypes.SINGLE:
+          res.answers = [];
+          break;
+        case QuestionConstants.questionTypes.INPUT_NUMBER:
+          res.answers = [{}];
+          break;
+        default:
+      }
+
+      handleComplexChange(res);
+    },
+    [handleComplexChange]
+  );
   return (
-    <div className="question-form">
-      <div className="question-form__row">
-        <div className="question-form__row-item">
-          <div className="question-form__label">Текст вопроса</div>
-          <TextArea value={form.text} onChange={handleChangeType('text')} />
+    form && (
+      <div className="question-form">
+        <div className="question-form__row">
+          <div className="question-form__row-item">
+            <div className="question-form__label">Текст вопроса</div>
+            <TextArea value={form.name} onChange={handleChange('name')} />
+          </div>
+          <div className="question-form__row-item">
+            <div className="question-form__label">Тип вопроса</div>
+            <Select value={form.type} onChange={handleTypeChange}>
+              {QuestionConstants.allowedQuestionTypes.map(type => (
+                <Option key={type}>{QuestionConstants.questionTypesTitles[type]}</Option>
+              ))}
+            </Select>
+          </div>
         </div>
-        <div className="question-form__row-item">
-          <div className="question-form__label">Тип вопроса</div>
-          <Select value={form.questionType} onChange={handleChangeType('questionType')}>
-            {QuestionConstants.allowedQuestionTypes.map(type => (
-              <Option key={type}>{QuestionConstants.questionTypesTitles[type]}</Option>
-            ))}
-          </Select>
-        </div>
+        <Answers value={form.answers} onChange={handleChange('answers')} type={form.type} />
       </div>
-      {/*<div className="question-form__row">*/}
-      {/*  <div className="question-form__row-item">*/}
-      {/*    <Input size="large" className="variant" addonBefore="1" addonAfter={<CloseSVG />} />*/}
-      {/*  </div>*/}
-      {/*</div>*/}
-      <Answers type={form.questionType} />
-    </div>
+    )
   );
 }
+
+QuestionEditForm.propTypes = {
+  form: PropTypes.shape({
+    text: PropTypes.string,
+    type: PropTypes.oneOf(QuestionConstants.allowedQuestionTypes),
+    answers: PropTypes.arrayOf(
+      PropTypes.shape({ name: PropTypes.string.isRequired, is_correct: PropTypes.bool.isRequired })
+    ),
+  }).isRequired,
+  onChange: PropTypes.func,
+};
 
 export default QuestionEditForm;

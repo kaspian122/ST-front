@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { ModalTypes } from '../../constants/modalConstants';
 import AddThemeModal from './AddThemeModal';
 
 function Consumer({ children }) {
   const type = useSelector(state => state.modal?.type);
-  console.log('tip modalki', type);
 
   const modalComponent = useMemo(() => {
     switch (type) {
@@ -29,5 +29,12 @@ function Consumer({ children }) {
     </>
   );
 }
+
+Consumer.propTypes = {
+  children: PropTypes.node,
+};
+Consumer.defaultProps = {
+  children: <></>,
+};
 
 export default Consumer;

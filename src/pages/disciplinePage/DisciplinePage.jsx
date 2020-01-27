@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory, useRouteMatch } from 'react-router';
+import { useRouteMatch } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { Tabs } from 'antd';
 
@@ -16,26 +16,25 @@ import { ModalTypes } from '../../constants/modalConstants';
 const { TabPane } = Tabs;
 
 function DisciplinePage({ setTitle = () => {} }) {
-  const [themes, setThemes] = useState([]);
   const [discipline, setDiscipline] = useState({});
   const { params } = useRouteMatch(RouterPaths.discipline);
   const dispatch = useDispatch();
-  const history = useHistory();
+  const modalType = useSelector(state => state.modal?.type);
 
   useEffect(() => {
     setTitle(discipline?.name);
   }, [setTitle, discipline]);
+  useEffect(() => {
+    Api.getDiscipline(params.id).then(response => {
+      setDiscipline(response);
+    });
+  }, [params.id, modalType]);
   useDidMount(() => {
     Api.getDiscipline(params.id).then(response => {
       setDiscipline(response);
     });
-    Api.getTabs(params.id).then(response => {
-      setThemes(response.themes);
-    });
   });
-  const handleThemeClick = useCallback(item => {
-    console.log(item);
-  }, []);
+  const handleThemeClick = useCallback(() => {}, []);
   const handleNewThemeClick = useCallback(() => {
     dispatch(ModalActions.openModal(ModalTypes.ADD_THEME));
   }, [dispatch]);
@@ -47,13 +46,15 @@ function DisciplinePage({ setTitle = () => {} }) {
           xyu
         </TabPane>
         <TabPane tab="Темы" key="themes">
-          <BadgeList
-            items={themes}
-            keyMap={{ title: 'name' }}
-            onClick={handleThemeClick}
-            onNewClick={handleNewThemeClick}
-            newText="Создать тему"
-          />
+          {discipline.theme_list && (
+            <BadgeList
+              items={discipline.theme_list}
+              keyMap={{ title: 'name' }}
+              onClick={handleThemeClick}
+              onNewClick={handleNewThemeClick}
+              newText="Создать тему"
+            />
+          )}
         </TabPane>
         <TabPane tab="Журнал" key="journal" disabled>
           2

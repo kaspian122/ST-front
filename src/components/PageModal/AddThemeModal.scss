@@ -1,5 +1,19 @@
 .add-theme {
   &__title {
     width: 50%;
+
+    &-label {
+      margin-bottom: 10px;
+      font-size: 14px;
+      line-height: 14px;
+      color: #585858;
+      font-weight: 500;
+    }
+  }
+
+  .button {
+    margin: 40px auto 0;
+    display: block;
+    width: 50%;
   }
 }
