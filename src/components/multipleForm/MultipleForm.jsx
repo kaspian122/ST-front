@@ -1,20 +1,60 @@
-import React from 'react';
-import { ReactComponent as AddSVG } from '../../static/images/svg/add.svg';
+import React, { useState, useCallback, useEffect } from 'react';
 
 import './MultipleForm.scss';
+import Selector from './Selector';
 
-function MultipleForm({ onChange }) {
+function MultipleForm({ renderForm }) {
+  const [forms, setForms] = useState([{}]);
+  const [selectedForm, setSelectedForm] = useState(0);
+
+  useEffect(() => {
+    if (!forms.length) setSelectedForm(null);
+  }, [forms]);
+
+  const handleAddForm = useCallback(() => {
+    setSelectedForm(forms.length);
+    setForms(prevState => [...prevState, {}]);
+  }, [forms]);
+
+  const handleSelectForm = useCallback(index => {
+    setSelectedForm(index);
+  }, []);
+
+  const handleDeleteForm = useCallback(
+    index => {
+      setForms(prevState => {
+        const prevForms = [...prevState];
+        prevForms.splice(index, 1);
+        return prevForms;
+      });
+      if (index < selectedForm) {
+        setSelectedForm(prevState => prevState - 1);
+      }
+    },
+    [setForms, setSelectedForm, selectedForm]
+  );
+
+  const handleFormChange = useCallback(
+    formValue => {
+      setForms(prevState => {
+        const prevForms = [...prevState];
+        prevForms[selectedForm] = formValue;
+        return prevForms;
+      });
+    },
+    [setForms, selectedForm]
+  );
+
   return (
     <div className="multiple-form">
-      <div className="multiple-form__selector">
-        {[1, 2, 3].map((item, index) => (
-          <div className="multiple-form__selector-item">{index + 1}</div>
-        ))}
-        <div className="multiple-form__selector-item multiple-form__selector-item--active">123</div>
-        <div className="multiple-form__selector-item multiple-form__selector-item--new">
-          <AddSVG />
-        </div>
-      </div>
+      <Selector
+        items={forms}
+        onAdd={handleAddForm}
+        onDelete={handleDeleteForm}
+        onSelect={handleSelectForm}
+        selected={selectedForm}
+      />
+      {renderForm({ form: forms[selectedForm], onChange: handleFormChange })}
     </div>
   );
 }

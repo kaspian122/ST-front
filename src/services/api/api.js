@@ -45,7 +45,7 @@ const getDiscipline = id => http.get(`teacher/discipline/${id}/`);
 const getThemes = discipline => http.get(`teacher/themes/${discipline}/`);
 
 // WTFAK
-const getTabs = id => http.get(`teacher/get-tabs/${id}/`).then(JSON.parse);
+const getTabs = id => http.get(`teacher/get-tabs/${id}/`);
 
 const Api = { authMe, auth, logout, getDisciplines, getDiscipline, getThemes, getTabs };
 

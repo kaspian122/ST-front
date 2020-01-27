@@ -1,6 +1,7 @@
 @import 'src/scss/vars';
 .logged-zone {
   display: flex;
+  background: url('../../../static/images/svg/bg_logo1.svg') no-repeat top right/auto 250px;
 
   &__menu {
     box-sizing: border-box;
@@ -96,7 +97,7 @@
 
     &-back {
       position: absolute;
-      bottom: -8px;
+      bottom: 0;
       left: -60px;
       width: 40px;
       height: 40px;
