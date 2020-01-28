@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useParams } from 'react-router';
+import { useDispatch } from 'react-redux';
 import { Input } from 'antd';
 import MultipleForm from '../multipleForm';
 import { QuestionEditForm } from '../forms';
@@ -8,9 +9,19 @@ import './AddThemeModal.scss';
 import Button from '../button';
 import RouterPaths from '../../constants/routerPaths';
 import Api from '../../services/api/api';
+import { useDidMount } from '../../utils/hooks';
+import ModalActions from '../../store/actions/modalActions';
 
-function AddThemeModal() {
+function AddThemeModal({ modal, isEdit }) {
   const [form, setForm] = useState({ name: '', questions: [{}] });
+  const dispatch = useDispatch();
+  useDidMount(() => {
+    if (isEdit) {
+      Api.getTheme(modal.additionalProps.id).then(response => {
+        setForm(response);
+      });
+    }
+  });
   const { id: discipline } = useParams(RouterPaths.discipline);
   const handleChange = useCallback(
     fieldName => e => {
@@ -32,15 +43,20 @@ function AddThemeModal() {
   );
 
   const handleSubmitForm = useCallback(() => {
-    Api.sendTheme({ ...form, discipline });
-  }, [form, discipline]);
+    Api.sendTheme({ ...form, discipline }).then(() => {
+      dispatch(ModalActions.closeModal());
+    });
+  }, [dispatch, form, discipline]);
 
-  // console.log(form)
   return (
     <div className="add-theme">
       <div className="add-theme__title">
         <div className="add-theme__title-label">Название темы</div>
-        <Input className="input add-theme__title-input" onChange={handleChange('name')} />
+        <Input
+          value={form.name}
+          className="input add-theme__title-input"
+          onChange={handleChange('name')}
+        />
       </div>
       <MultipleForm
         value={form.questions}
@@ -48,7 +64,11 @@ function AddThemeModal() {
         renderForm={QuestionEditForm}
       />
 
-      <Button onClick={handleSubmitForm}>Сохранить</Button>
+      {!isEdit && (
+        <Button disabled={isEdit} onClick={handleSubmitForm}>
+          Сохранить
+        </Button>
+      )}
     </div>
   );
 }
