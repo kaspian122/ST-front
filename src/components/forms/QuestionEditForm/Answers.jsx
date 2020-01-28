@@ -35,6 +35,14 @@ function Answers({ onChange, type, value }) {
     },
     [value, onChange]
   );
+  const handleChangeImageVariant = useCallback(
+    pk => val => {
+      const prevValue = [...value];
+      prevValue[pk].image = val;
+      onChange(prevValue);
+    },
+    [value, onChange]
+  );
 
   const handleSelectVariant = useCallback(
     pks => {
@@ -75,6 +83,7 @@ function Answers({ onChange, type, value }) {
         <Variants
           value={value}
           onChange={handleChangeVariant}
+          onChangeImage={handleChangeImageVariant}
           onSelectCorrect={handleSelectVariant}
           onDelete={handleDeleteVariant}
           onAdd={handleAddVariant}
@@ -85,6 +94,7 @@ function Answers({ onChange, type, value }) {
         <Variants
           value={value}
           onChange={handleChangeVariant}
+          onChangeImage={handleChangeImageVariant}
           onSelectCorrect={handleSelectVariant}
           onDelete={handleDeleteVariant}
           onAdd={handleAddVariant}
