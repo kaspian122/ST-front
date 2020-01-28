@@ -69,7 +69,11 @@ const getTabs = id => http.get(`teacher/get-tabs/${id}/`);
 
 const sendTheme = body => http.post('teacher/theme/', body);
 
-const getTest = id => http.get(`teacher/test/${id}`);
+const getTest = id => http.get(`teacher/test/${id}/`);
+
+const getSolution = id => http.get(`teacher/details-solution/${id}/`);
+
+const sendMark = data => http.post('/teacher/send-mark/', data);
 
 const Api = {
   authMe,
@@ -83,6 +87,8 @@ const Api = {
   getTabs,
   sendTheme,
   getTest,
+  getSolution,
+  sendMark,
 };
 
 export default Api;

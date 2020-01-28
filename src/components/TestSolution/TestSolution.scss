@@ -1,0 +1,38 @@
+.solution {
+  &__question {
+    min-height: 40px;
+    padding: 8px;
+    border: #676767 1px solid;
+    margin-bottom: 10px;
+    border-radius: 6px;
+
+    > p {
+      font-weight: 500;
+      font-size: 16px;
+    }
+
+    &--correct {
+      background-color: #008fbc;
+      border-color: #008fbc;
+    }
+
+    &--incorrect {
+      background-color: #eb5757;
+      border-color: #eb5757;
+    }
+  }
+
+  &__answers {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__answer {
+    min-width: 461px;
+    text-align: center;
+  }
+
+  &__mark-zone {
+    display: flex;
+  }
+}
