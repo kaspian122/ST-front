@@ -34,6 +34,12 @@
     height: 40px;
     border-color: #008fbc;
   }
+
+  &__theme-name {
+    height: 40px;
+    width: 460px;
+    border: #008fbc dashed 1px;
+  }
 }
 
 .ant-select-selection {
@@ -58,6 +64,11 @@
 
 .ant-calendar-picker-input.ant-input,
 .ant-time-picker-input {
+  height: 40px;
+  border-color: #008fbc;
+}
+
+.input {
   height: 40px;
   border-color: #008fbc;
 }
