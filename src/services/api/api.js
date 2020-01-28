@@ -68,6 +68,7 @@ const createTest = data => {
 const getTabs = id => http.get(`teacher/get-tabs/${id}/`);
 
 const sendTheme = body => http.post('teacher/theme/', body);
+const getTheme = id => http.get(`/teacher/theme/${id}/`);
 
 const getTest = id => http.get(`teacher/test/${id}/`);
 
@@ -86,6 +87,7 @@ const Api = {
   createTest,
   getTabs,
   sendTheme,
+  getTheme,
   getTest,
   getSolution,
   sendMark,

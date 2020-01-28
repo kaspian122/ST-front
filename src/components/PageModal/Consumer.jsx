@@ -7,15 +7,14 @@ import TestPage from '../../pages/testPage';
 import TestInfo from '../TestInfo';
 
 function Consumer({ children }) {
-  const type = useSelector(state => state.modal?.type);
-
-  console.log(type);
-
+  const modal = useSelector(state => state.modal);
+  const type = modal?.type;
   const modalComponent = useMemo(() => {
     switch (type) {
       case ModalTypes.ADD_THEME:
+        return <AddThemeModal modal={modal} />;
       case ModalTypes.EDIT_THEME:
-        return <AddThemeModal />;
+        return <AddThemeModal modal={modal} isEdit />;
       case ModalTypes.ADD_TEST:
         return <TestPage />;
       case ModalTypes.CHECK_TEST:
@@ -23,8 +22,7 @@ function Consumer({ children }) {
       default:
         return null;
     }
-  }, [type]);
-
+  }, [modal, type]);
   return (
     <>
       {!!type && modalComponent}

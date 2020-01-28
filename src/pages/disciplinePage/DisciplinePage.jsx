@@ -36,7 +36,12 @@ function DisciplinePage({ setTitle = () => {} }) {
       setDiscipline(response);
     });
   });
-  const handleThemeClick = useCallback(() => {}, []);
+  const handleThemeClick = useCallback(
+    item => {
+      dispatch(ModalActions.openModal(ModalTypes.EDIT_THEME, item));
+    },
+    [dispatch]
+  );
   const handleTestClick = item => {
     history.push(`/test/${item.id}`);
   };

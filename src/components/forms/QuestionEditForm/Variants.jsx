@@ -9,7 +9,7 @@ import GovnoUpload from '../../govnoUpload';
 
 const { Option } = Select;
 
-function Item({ pk, value, onClose, onChange, onChangeImage }) {
+function Item({ pk, value, imagee, onClose, onChange, onChangeImage }) {
   const handleClose = useCallback(() => {
     onClose(pk);
   }, [pk, onClose]);
@@ -35,7 +35,7 @@ function Item({ pk, value, onClose, onChange, onChangeImage }) {
           </span>
         }
       />
-      <GovnoUpload onChange={onChangeImage} />
+      <GovnoUpload value={imagee} onChange={onChangeImage} />
     </>
   );
 }
@@ -77,6 +77,7 @@ function Variants({ value, onAdd, onDelete, onChange, onChangeImage, onSelectCor
               <Item
                 pk={index}
                 value={it.name}
+                imagee={it.image}
                 onClose={onDelete(index)}
                 onChange={onChange(index)}
                 onChangeImage={onChangeImage(index)}
@@ -91,9 +92,10 @@ function Variants({ value, onAdd, onDelete, onChange, onChangeImage, onSelectCor
                 multiple
                   ? value
                       .map((it, index) => ({ ...it, pk: index }))
-                      .filter(it => it.name && it.is_correct)
-                      .map(it => String(it.pk))
-                  : value.find(it => it.is_correct)?.name
+                      .filter(it => (it.name || it.image) && it.is_correct)
+                      .map(it => String(it.pk + 1))
+                  : value.map((it, index) => ({ ...it, pk: index })).find(it => it.is_correct)?.pk +
+                    1
               }
               mode={multiple ? 'multiple' : 'default'}
               size="large"
@@ -101,10 +103,10 @@ function Variants({ value, onAdd, onDelete, onChange, onChangeImage, onSelectCor
             >
               {value
                 .map((it, index) => ({ ...it, pk: index }))
-                .filter(it => it.name)
+                .filter(it => it.name || it.image)
                 .map(it => (
-                  <Option key={String(it.pk)} title={it.name}>
-                    {it.name}
+                  <Option key={String(it.pk)} title={it.pk + 1}>
+                    {it.pk + 1}
                   </Option>
                 ))}
             </Select>
