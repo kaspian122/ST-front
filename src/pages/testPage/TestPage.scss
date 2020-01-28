@@ -38,7 +38,9 @@
   &__theme-name {
     height: 40px;
     width: 460px;
-    border: #008fbc dashed 1px;
+    border: #008fbc dashed 2px;
+    border-radius: 6px;
+    text-align: center;
   }
 }
 
@@ -71,4 +73,5 @@
 .input {
   height: 40px;
   border-color: #008fbc;
+  border-radius: 6px;
 }

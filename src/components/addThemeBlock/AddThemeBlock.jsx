@@ -11,7 +11,7 @@ function AddThemeBlock(props) {
     onThemeChange(id, { theme: value, count });
   };
   const handleCountChange = event => {
-    onThemeChange(id, { theme: theme.id, count: event.target.value });
+    onThemeChange(id, { theme: theme.theme, count: event.target.value });
   };
   return (
     <div className="add-theme-block">

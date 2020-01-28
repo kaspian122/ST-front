@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { DatePicker, Input, Modal, Select, TimePicker } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router';
 import TestsActions from '../../store/actions/testsActions';
 import { useDidMount } from '../../utils/hooks';
 
 import './TestPage.scss';
 import Api from '../../services/api/api';
 import AddThemeBlock from '../../components/addThemeBlock/AddThemeBlock';
+import Button from '../../components/button';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -19,8 +21,12 @@ function TestPage(props) {
   const [themes, setThemes] = useState([]);
   const disciplines = useSelector(state => state.disciplines);
   const groups = useSelector(state => state.tests.groups);
+  const history = useHistory();
 
   const handleNameChange = event => setFormModel({ ...formModel, name: event.target.value });
+  const handleRulesChange = event => setFormModel({ ...formModel, rules: event.target.value });
+  const handleDescriptionChange = event =>
+    setFormModel({ ...formModel, description: event.target.value });
   const handleDisciplineChange = value => {
     setFormModel({ ...formModel, discipline: value });
     Api.getThemes(value).then(response => {
@@ -30,19 +36,24 @@ function TestPage(props) {
   const handleGroupsChange = value => setFormModel({ ...formModel, groups: value });
   const handleDateChange = (dates, dateStrings) =>
     setFormModel({ ...formModel, startDate: dateStrings[0], endDate: dateStrings[1] });
-  const handleTimeChange = time => setFormModel({ ...formModel, duration: time });
+  const handleTimeChange = (time, timeString) =>
+    setFormModel({
+      ...formModel,
+      duration: (timeString.split('.')[0] * 60 + timeString.split('.')[1]) * 60,
+    });
   const handleTryCountChange = event =>
     setFormModel({ ...formModel, tryCount: event.target.value });
   const handleThemeChange = (themeId, newTheme) =>
     setFormModel({
       ...formModel,
-      themes: formModel.themes.map(theme => (theme.id === themeId ? newTheme : theme)),
+      themes: formModel.themes.map((theme, index) => (index === themeId ? newTheme : theme)),
     });
   const handleNewThemeClick = () =>
     setFormModel({
       ...formModel,
-      themes: [...formModel.themes, { count: 0 }],
+      themes: [...formModel.themes, { count: '' }],
     });
+  const handleSaveClick = () => Api.createTest(formModel).then(history.push('/'));
 
   useDidMount(() => {
     dispatch(TestsActions.setGroups());
@@ -53,7 +64,13 @@ function TestPage(props) {
     const list = [];
     formModel.themes.forEach((theme, index) => {
       list.push(
-        <AddThemeBlock onThemeChange={handleThemeChange} id={index} theme={theme} themes={themes} />
+        <AddThemeBlock
+          onThemeChange={handleThemeChange}
+          count={theme.count}
+          id={index}
+          theme={theme}
+          themes={themes}
+        />
       );
     });
     list.push(
@@ -95,7 +112,7 @@ function TestPage(props) {
               }
             >
               {disciplines?.map(discipline => (
-                <Option value={discipline.name}>{discipline.name}</Option>
+                <Option value={discipline.id}>{discipline.name}</Option>
               ))}
             </Select>
           </section>
@@ -125,8 +142,8 @@ function TestPage(props) {
             <p className="test-page__label">Введите описание теста</p>
             <TextArea
               rows="4"
-              value={formModel.name}
-              onChange={handleNameChange}
+              value={formModel.description}
+              onChange={handleDescriptionChange}
               className="input test-page__input"
             />
           </section>
@@ -134,8 +151,8 @@ function TestPage(props) {
             <p className="test-page__label">Крадкое руководство для прохождения теста</p>
             <TextArea
               rows="4"
-              value={formModel.name}
-              onChange={handleNameChange}
+              value={formModel.rules}
+              onChange={handleRulesChange}
               className="input test-page__input"
             />
           </section>
@@ -154,10 +171,10 @@ function TestPage(props) {
         <section className="test-page__form-cell test-page__form-cell--small">
           <p className="test-page__label">Временные ограничения</p>
           <TimePicker
-            value={formModel.duration}
             style={{ width: '300px' }}
             onChange={handleTimeChange}
-            placeholder="00:00:00"
+            placeholder="00:00"
+            format="HH.mm"
           />
         </section>
         <section className="test-page__form-cell test-page__form-cell--small">
@@ -176,6 +193,7 @@ function TestPage(props) {
           {renderThemesList()}
         </section>
       </div>
+      <Button onClick={handleSaveClick}>Сохранить тест</Button>
     </div>
   );
 }

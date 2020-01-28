@@ -38,12 +38,32 @@ const logout = () =>
     }
   });
 
-const getDisciplines = () => http.get('teacher/disciplines');
+const getDisciplines = () => http.get('teacher/disciplines/');
 
 const getGroups = () => http.get('teacher/group-list/');
 
 const getThemes = discipline => http.get(`teacher/themes/${discipline}/`);
 
-const Api = { authMe, auth, logout, getDisciplines, getThemes, getGroups };
+const createTest = data => {
+  const formattedData = {
+    name: data.name,
+    type: 'GROUPS',
+    duration: data.duration,
+    discipline: data.discipline,
+    description: data.description,
+    try_count: Number(data.tryCount),
+    date_start: data.startDate,
+    date_end: data.endDate,
+    rules: data.rules,
+    themes: data.themes.map(theme => ({
+      theme: theme.theme,
+      count_questions: Number(theme.count),
+    })),
+    groups: data.groups,
+  };
+  return http.post('/teacher/create-test/', formattedData);
+};
+
+const Api = { authMe, auth, logout, getDisciplines, getThemes, getGroups, createTest };
 
 export default Api;
