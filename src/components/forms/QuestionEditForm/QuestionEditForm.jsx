@@ -5,6 +5,7 @@ import { Input, Select } from 'antd';
 import Answers from './Answers';
 import './QuestionEditForm.scss';
 import QuestionConstants from '../../../constants/questions';
+import GovnoUpload from '../../govnoUpload';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -55,6 +56,7 @@ function QuestionEditForm({ onChange, form }) {
           <div className="question-form__row-item">
             <div className="question-form__label">Текст вопроса</div>
             <TextArea className="input" value={form.name} onChange={handleChange('name')} />
+            <GovnoUpload onChange={handleChange('image')} />
           </div>
           <div className="question-form__row-item">
             <div className="question-form__label">Тип вопроса</div>

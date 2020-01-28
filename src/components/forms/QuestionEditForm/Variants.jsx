@@ -5,10 +5,11 @@ import { Input, Select } from 'antd';
 
 import { ReactComponent as CloseSVG } from '../../../static/images/svg/close.svg';
 import { ReactComponent as AddSVG } from '../../../static/images/svg/add.svg';
+import GovnoUpload from '../../govnoUpload';
 
 const { Option } = Select;
 
-function Item({ pk, value, onClose, onChange }) {
+function Item({ pk, value, onClose, onChange, onChangeImage }) {
   const handleClose = useCallback(() => {
     onClose(pk);
   }, [pk, onClose]);
@@ -21,18 +22,21 @@ function Item({ pk, value, onClose, onChange }) {
   );
 
   return (
-    <Input
-      value={value}
-      size="large"
-      className="variant"
-      addonBefore={pk + 1}
-      onChange={handleChange}
-      addonAfter={
-        <span onClick={handleClose}>
-          <CloseSVG />
-        </span>
-      }
-    />
+    <>
+      <Input
+        value={value}
+        size="large"
+        className="variant"
+        addonBefore={pk + 1}
+        onChange={handleChange}
+        addonAfter={
+          <span onClick={handleClose}>
+            <CloseSVG />
+          </span>
+        }
+      />
+      <GovnoUpload onChange={onChangeImage} />
+    </>
   );
 }
 
@@ -62,7 +66,7 @@ function NewItem({ onClick }) {
 
 NewItem.propTypes = { onClick: PropTypes.func.isRequired };
 
-function Variants({ value, onAdd, onDelete, onChange, onSelectCorrect, multiple }) {
+function Variants({ value, onAdd, onDelete, onChange, onChangeImage, onSelectCorrect, multiple }) {
   return (
     <div className="question-form__answers-multiple">
       {!isEmpty(value) ? (
@@ -75,6 +79,7 @@ function Variants({ value, onAdd, onDelete, onChange, onSelectCorrect, multiple 
                 value={it.name}
                 onClose={onDelete(index)}
                 onChange={onChange(index)}
+                onChangeImage={onChangeImage(index)}
               />
             ))}
             <NewItem onClick={onAdd} />
