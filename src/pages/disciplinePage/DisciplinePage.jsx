@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useRouteMatch } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { Tabs } from 'antd';
+import { useHistory } from 'react-router-dom';
 
 import RouterPaths from '../../constants/routerPaths';
 import Api from '../../services/api/api';
@@ -16,6 +17,7 @@ import { ModalTypes } from '../../constants/modalConstants';
 const { TabPane } = Tabs;
 
 function DisciplinePage({ setTitle = () => {} }) {
+  const history = useHistory();
   const [discipline, setDiscipline] = useState({});
   const { params } = useRouteMatch(RouterPaths.discipline);
   const dispatch = useDispatch();
@@ -35,6 +37,9 @@ function DisciplinePage({ setTitle = () => {} }) {
     });
   });
   const handleThemeClick = useCallback(() => {}, []);
+  const handleTestClick = item => {
+    history.push(`/test/${item.id}`);
+  };
   const handleNewThemeClick = useCallback(() => {
     dispatch(ModalActions.openModal(ModalTypes.ADD_THEME));
   }, [dispatch]);
@@ -50,9 +55,9 @@ function DisciplinePage({ setTitle = () => {} }) {
             <BadgeList
               items={discipline.test_list}
               keyMap={{ title: 'name' }}
-              onClick={handleThemeClick}
+              onClick={handleTestClick}
               onNewClick={handleNewTestClick}
-              newText="Создать тему"
+              newText="Создать тест"
             />
           )}
         </TabPane>

@@ -4,9 +4,12 @@ import { useSelector } from 'react-redux';
 import { ModalTypes } from '../../constants/modalConstants';
 import AddThemeModal from './AddThemeModal';
 import TestPage from '../../pages/testPage';
+import TestInfo from '../TestInfo';
 
 function Consumer({ children }) {
   const type = useSelector(state => state.modal?.type);
+
+  console.log(type);
 
   const modalComponent = useMemo(() => {
     switch (type) {
@@ -15,13 +18,16 @@ function Consumer({ children }) {
         return <AddThemeModal />;
       case ModalTypes.ADD_TEST:
         return <TestPage />;
+      case ModalTypes.CHECK_TEST:
+        return <TestInfo />;
       default:
         return null;
     }
   }, [type]);
+
   return (
     <>
-      {type && modalComponent}
+      {!!type && modalComponent}
       <div
         className="page"
         key="ORA_ORA_ORA_ORA_ORA_ORA_ORA_ORA_ORA_ORA"

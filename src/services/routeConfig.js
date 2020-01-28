@@ -6,7 +6,7 @@ import IndexPage from '../pages/indexPage';
 import DisciplinesPage from '../pages/disciplinesPage';
 import TestsPage from '../pages/testsPage';
 import DisciplinePage from '../pages/disciplinePage';
-import TestPage from '../pages/testPage';
+import TestInfo from '../components/TestInfo';
 
 const Routes = [
   makeRoute(RouterPaths.mainPage, IndexPage, true),
@@ -15,7 +15,7 @@ const Routes = [
   makeRoute(RouterPaths.discipline, DisciplinePage, false, true),
   makeRoute(RouterPaths.tests, TestsPage, false, true),
   makeRoute(RouterPaths.registration, RegistrationPage),
-  makeRoute(RouterPaths.testPage, TestPage, false, true),
+  makeRoute(RouterPaths.testPage, TestInfo, false, true),
 ];
 
 export default Routes;

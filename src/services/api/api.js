@@ -65,10 +65,11 @@ const createTest = data => {
   return http.post('/teacher/create-test/', formattedData);
 };
 
-// WTFAK
 const getTabs = id => http.get(`teacher/get-tabs/${id}/`);
 
 const sendTheme = body => http.post('teacher/theme/', body);
+
+const getTest = id => http.get(`teacher/test/${id}`);
 
 const Api = {
   authMe,
@@ -81,6 +82,7 @@ const Api = {
   createTest,
   getTabs,
   sendTheme,
+  getTest,
 };
 
 export default Api;
