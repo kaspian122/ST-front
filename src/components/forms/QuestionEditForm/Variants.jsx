@@ -9,7 +9,7 @@ import GovnoUpload from '../../govnoUpload';
 
 const { Option } = Select;
 
-function Item({ pk, value, onClose, onChange, onChangeImage }) {
+function Item({ pk, value, imagee, onClose, onChange, onChangeImage }) {
   const handleClose = useCallback(() => {
     onClose(pk);
   }, [pk, onClose]);
@@ -35,7 +35,7 @@ function Item({ pk, value, onClose, onChange, onChangeImage }) {
           </span>
         }
       />
-      <GovnoUpload onChange={onChangeImage} />
+      <GovnoUpload value={imagee} onChange={onChangeImage} />
     </>
   );
 }
@@ -77,6 +77,7 @@ function Variants({ value, onAdd, onDelete, onChange, onChangeImage, onSelectCor
               <Item
                 pk={index}
                 value={it.name}
+                imagee={it.image}
                 onClose={onDelete(index)}
                 onChange={onChange(index)}
                 onChangeImage={onChangeImage(index)}

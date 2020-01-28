@@ -34,7 +34,12 @@ function DisciplinePage({ setTitle = () => {} }) {
       setDiscipline(response);
     });
   });
-  const handleThemeClick = useCallback(() => {}, []);
+  const handleThemeClick = useCallback(
+    item => {
+      dispatch(ModalActions.openModal(ModalTypes.EDIT_THEME, item));
+    },
+    [dispatch]
+  );
   const handleNewThemeClick = useCallback(() => {
     dispatch(ModalActions.openModal(ModalTypes.ADD_THEME));
   }, [dispatch]);
@@ -52,7 +57,7 @@ function DisciplinePage({ setTitle = () => {} }) {
               keyMap={{ title: 'name' }}
               onClick={handleThemeClick}
               onNewClick={handleNewTestClick}
-              newText="Создать тему"
+              newText="Создать тест"
             />
           )}
         </TabPane>

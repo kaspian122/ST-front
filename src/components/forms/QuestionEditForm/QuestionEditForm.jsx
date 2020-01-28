@@ -56,7 +56,7 @@ function QuestionEditForm({ onChange, form }) {
           <div className="question-form__row-item">
             <div className="question-form__label">Текст вопроса</div>
             <TextArea className="input" value={form.name} onChange={handleChange('name')} />
-            <GovnoUpload onChange={handleChange('image')} />
+            <GovnoUpload value={form.image} onChange={handleChange('image')} />
           </div>
           <div className="question-form__row-item">
             <div className="question-form__label">Тип вопроса</div>
