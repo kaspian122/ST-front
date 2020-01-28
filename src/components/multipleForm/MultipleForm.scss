@@ -1,0 +1,105 @@
+@import 'src/scss/vars';
+
+.multiple-form {
+  &__selector {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    overflow-y: hidden;
+    margin: 30px 0 25px 0;
+    padding-bottom: 5px;
+
+    &-item {
+      $selector-item: &;
+      position: relative;
+      vertical-align: top;
+      display: inline-flex;
+      width: 110px;
+      height: 60px;
+      border-radius: 6px;
+      color: $main-blue;
+      border: 1px solid $main-blue;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 18px;
+      margin-right: 10px;
+
+      &:hover {
+        #{$selector-item}-close {
+          display: block;
+        }
+      }
+
+      &:not(&--active) {
+        &:hover {
+          cursor: pointer;
+          background: $hover-blue;
+        }
+
+        &:active {
+          background: $active-blue;
+        }
+      }
+
+      &--new {
+        content: 'pidoras';
+        border-style: dashed;
+
+        svg {
+          width: 24px;
+        }
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &-close {
+        position: absolute;
+        color: $main-blue;
+        height: 10px;
+        width: 10px;
+        top: 3px;
+        right: 3px;
+
+        display: none;
+
+        svg {
+          vertical-align: top;
+          width: 100%;
+          height: 100%;
+        }
+
+        path {
+          stroke: $main-blue;
+        }
+
+        &:hover {
+          cursor: pointer;
+          path {
+            stroke: $disabled-blue;
+          }
+          color: $disabled-blue;
+        }
+      }
+
+      &--active {
+        background: $main-blue;
+        color: white;
+        #{$selector-item}-close {
+          color: white;
+          path {
+            stroke: white;
+          }
+          &:hover {
+            color: $disabled-blue;
+            path {
+              stroke: $disabled-blue;
+            }
+          }
+        }
+      }
+    }
+  }
+}

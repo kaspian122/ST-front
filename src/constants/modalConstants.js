@@ -1,8 +1,9 @@
-const ModalConstants = {
-  mainModal: 'mainModal',
-  contractTextModal: 'contractTextModal',
-  logoutConfirmModal: 'logoutConfirmModal',
-  developmentModal: 'developmentModal',
+export const ModalTypes = {
+  ADD_THEME: 'ADD_THEME',
+  EDIT_THEME: 'EDIT_THEME',
 };
 
-export default ModalConstants;
+export const ModalTitles = {
+  [ModalTypes.ADD_THEME]: 'Создание темы',
+  [ModalTypes.EDIT_THEME]: 'Редактирование темы',
+};

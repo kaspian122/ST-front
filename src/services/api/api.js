@@ -1,7 +1,6 @@
 import http from './apiConfig';
 import history from '../../utils/history';
 import RouterPaths from '../../constants/routerPaths';
-import AppActions from '../../store/actions/appActions';
 
 /**
  * @param body {Object}
@@ -40,6 +39,8 @@ const logout = () =>
 
 const getDisciplines = () => http.get('teacher/disciplines/');
 
+const getDiscipline = id => http.get(`teacher/discipline/${id}/`);
+
 const getGroups = () => http.get('teacher/group-list/');
 
 const getThemes = discipline => http.get(`teacher/themes/${discipline}/`);
@@ -64,6 +65,22 @@ const createTest = data => {
   return http.post('/teacher/create-test/', formattedData);
 };
 
-const Api = { authMe, auth, logout, getDisciplines, getThemes, getGroups, createTest };
+// WTFAK
+const getTabs = id => http.get(`teacher/get-tabs/${id}/`);
+
+const sendTheme = body => http.post('teacher/theme/', body);
+
+const Api = {
+  authMe,
+  auth,
+  logout,
+  getDisciplines,
+  getDiscipline,
+  getThemes,
+  getGroups,
+  createTest,
+  getTabs,
+  sendTheme,
+};
 
 export default Api;

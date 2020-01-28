@@ -10,19 +10,19 @@ export const ModalActionTypes = {
  * Opens modal with specified identifier.
  * Example: ModalConstants[modalName]
  * @param identifier {string}
+ * @param additionalProps {object?}
  */
-const openModal = identifier => ({
+const openModal = (identifier, additionalProps) => ({
   type: ModalActionTypes.OPEN,
-  payload: identifier,
+  payload: { type: identifier, additionalProps },
 });
 
 /**
  * Closes an existing modal by specified identifier
  * @param identifier {string}
  */
-const closeModalById = identifier => ({
+const closeModalById = () => ({
   type: ModalActionTypes.CLOSE,
-  payload: identifier,
 });
 
 const resetModal = () => ({
@@ -34,15 +34,15 @@ const resetModal = () => ({
  * If no modal exists, or it is presented by other identifier, the function will reset modal system and throw an error.
  * @param identifier {string}
  */
-const closeModal = identifier => (dispatch, getState) => {
+const closeModal = () => (dispatch, getState) => {
   const stateModal = getState().modal;
-  if (!stateModal || stateModal !== identifier) {
+  if (!stateModal) {
     dispatch(resetModal());
     throw new Error(
-      `Attempt to close modal with id "${identifier}", which does not exist. The modal system has been reset.`
+      `Attempt to close modal, which does not exist. The modal system has been reset.`
     );
   }
-  dispatch(closeModalById(identifier));
+  dispatch(closeModalById());
 };
 
 const ModalActions = {

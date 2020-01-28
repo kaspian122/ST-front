@@ -14,10 +14,10 @@
   cursor: pointer;
 
   &:hover {
-    background: #d1f4ff66;
+    background: $hover-blue;
   }
   &:active {
-    background: #d1f4ff;
+    background: $active-blue;
   }
   &__title {
     color: $main-blue;

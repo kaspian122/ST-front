@@ -1,0 +1,97 @@
+@import 'src/scss/vars';
+
+.question-form {
+  &__label {
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 14px;
+    color: #585858;
+    font-weight: 500;
+  }
+
+  &__row {
+    $row: &;
+    display: flex;
+    width: 100%;
+    margin-top: 10px;
+
+    &-item {
+      margin-right: 10px;
+      flex: 1;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    &--half {
+      flex-direction: column;
+      width: 50%;
+      #{$row}-item {
+        margin-right: 5px;
+        //&:last-child {
+        //  margin-right: 5px;
+        //}
+      }
+    }
+  }
+
+  .ant-select {
+    display: block;
+  }
+
+  .variant {
+    margin-bottom: 20px;
+
+    .ant-input {
+      border-color: $main-blue;
+
+      &-group-addon {
+        color: $main-blue;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 14px;
+        border-color: $main-blue;
+        background: white;
+        width: 40px;
+        svg {
+          height: 14px;
+          width: 14px;
+        }
+        & > * {
+          vertical-align: middle;
+        }
+      }
+      &:focus {
+        box-shadow: none;
+      }
+    }
+
+    &--new {
+      .ant-input {
+        text-align: center;
+        font-weight: bold;
+        color: $main-blue;
+
+        &[disabled],
+        &-disabled {
+          color: $main-blue;
+          background-color: white;
+          cursor: pointer;
+          opacity: inherit;
+        }
+        &,
+        &-group-addon {
+          border-style: dashed;
+        }
+      }
+      &:hover {
+        .ant-input,
+        .ant-input-group-addon {
+          cursor: pointer;
+          background-color: $hover-blue;
+        }
+      }
+    }
+  }
+}
