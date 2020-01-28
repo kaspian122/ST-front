@@ -40,7 +40,7 @@ function AddThemeModal() {
     <div className="add-theme">
       <div className="add-theme__title">
         <div className="add-theme__title-label">Название темы</div>
-        <Input className="add-theme__title-input" onChange={handleChange('name')} />
+        <Input className="input add-theme__title-input" onChange={handleChange('name')} />
       </div>
       <MultipleForm
         value={form.questions}

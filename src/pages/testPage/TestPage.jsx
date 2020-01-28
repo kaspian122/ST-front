@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { DatePicker, Input, Modal, Select, TimePicker } from 'antd';
+import { DatePicker, Input, Select, TimePicker } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
-import { useHistory } from 'react-router';
+import { isEmpty } from 'lodash';
 import TestsActions from '../../store/actions/testsActions';
 import { useDidMount } from '../../utils/hooks';
 
@@ -10,18 +9,19 @@ import './TestPage.scss';
 import Api from '../../services/api/api';
 import AddThemeBlock from '../../components/addThemeBlock/AddThemeBlock';
 import Button from '../../components/button';
+import ModalActions from '../../store/actions/modalActions';
+import DisciplinesActions from '../../store/actions/disciplinesActions';
 
 const { TextArea } = Input;
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
-function TestPage(props) {
+function TestPage() {
   const dispatch = useDispatch();
   const [formModel, setFormModel] = useState({ themes: [] });
   const [themes, setThemes] = useState([]);
   const disciplines = useSelector(state => state.disciplines);
   const groups = useSelector(state => state.tests.groups);
-  const history = useHistory();
 
   const handleNameChange = event => setFormModel({ ...formModel, name: event.target.value });
   const handleRulesChange = event => setFormModel({ ...formModel, rules: event.target.value });
@@ -53,11 +53,12 @@ function TestPage(props) {
       ...formModel,
       themes: [...formModel.themes, { count: '' }],
     });
-  const handleSaveClick = () => Api.createTest(formModel).then(history.push('/'));
+  const handleSaveClick = () =>
+    Api.createTest(formModel).then(() => dispatch(ModalActions.closeModal()));
 
   useDidMount(() => {
     dispatch(TestsActions.setGroups());
-    props.setTitle('Создание теста');
+    if (isEmpty(disciplines)) dispatch(DisciplinesActions.setDisciplines());
   });
 
   const renderThemesList = () => {
@@ -197,9 +198,5 @@ function TestPage(props) {
     </div>
   );
 }
-
-TestPage.propTypes = {
-  setTitle: PropTypes.func.isRequired,
-};
 
 export default TestPage;

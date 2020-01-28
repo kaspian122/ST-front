@@ -38,12 +38,23 @@ function DisciplinePage({ setTitle = () => {} }) {
   const handleNewThemeClick = useCallback(() => {
     dispatch(ModalActions.openModal(ModalTypes.ADD_THEME));
   }, [dispatch]);
+  const handleNewTestClick = useCallback(() => {
+    dispatch(ModalActions.openModal(ModalTypes.ADD_TEST));
+  }, [dispatch]);
 
   return (
     <div className="discipline-page">
       <Tabs defaultActiveKey="themes">
         <TabPane tab="Тесты" key="tests">
-          xyu
+          {discipline.test_list && (
+            <BadgeList
+              items={discipline.test_list}
+              keyMap={{ title: 'name' }}
+              onClick={handleThemeClick}
+              onNewClick={handleNewTestClick}
+              newText="Создать тему"
+            />
+          )}
         </TabPane>
         <TabPane tab="Темы" key="themes">
           {discipline.theme_list && (

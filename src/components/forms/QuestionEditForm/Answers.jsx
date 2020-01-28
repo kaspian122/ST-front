@@ -66,7 +66,7 @@ function Answers({ onChange, type, value }) {
         <div className="question-form__row question-form__row--half">
           <div className="question-form__row-item">
             <div className="question-form__label">Правильный ответ</div>
-            <Input value={value && value[0].name} onChange={handleNumberChange} />
+            <Input className="input" value={value && value[0].name} onChange={handleNumberChange} />
           </div>
         </div>
       );
