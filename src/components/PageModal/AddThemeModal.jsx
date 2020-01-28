@@ -26,7 +26,7 @@ function AddThemeModal({ modal, isEdit }) {
   const handleChange = useCallback(
     fieldName => e => {
       let value = e;
-      if (e?.target?.value) {
+      if (e?.target?.value || Object.getPrototypeOf(e).constructor.name === 'SyntheticEvent') {
         value = e.target?.value;
       }
       setForm(prevState => ({ ...prevState, [fieldName]: value }));
