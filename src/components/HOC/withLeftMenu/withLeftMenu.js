@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 
 import Menu from '../../menu';
@@ -9,6 +9,9 @@ import { ReactComponent as ExitSVG } from '../../../static/images/svg/exit.svg';
 import { ReactComponent as BackSVG } from '../../../static/images/svg/left-arrow.svg';
 import { ReactComponent as LogoSVG } from '../../../static/images/svg/logo.svg';
 import './withLeftMenu.scss';
+import Consumer from '../../PageModal';
+import ModalActions from '../../../store/actions/modalActions';
+import { ModalTitles } from '../../../constants/modalConstants';
 
 function withLeftMenu(Component) {
   return function Wrapper() {
@@ -16,11 +19,20 @@ function withLeftMenu(Component) {
     const user = useSelector(state => state.app.user);
     const history = useHistory();
     const { pathname } = useLocation();
+    const modal = useSelector(state => state.modal);
+    const dispatch = useDispatch();
+
+    useEffect(() => {}, []);
+
     const handleLogOut = useCallback(() => {
       Api.logout();
     }, []);
     const handleGoBack = () => {
-      history.goBack();
+      if (modal) {
+        dispatch(ModalActions.closeModal());
+      } else {
+        history.goBack();
+      }
     };
     return (
       <div className="logged-zone">
@@ -48,9 +60,13 @@ function withLeftMenu(Component) {
                   <BackSVG />
                 </div>
               )}
-              <div className="logged-zone__header-title">{title}</div>
+              <div className="logged-zone__header-title">
+                {modal ? ModalTitles[modal.type] : title}
+              </div>
             </div>
-            <Component setTitle={setTitle} />
+            <Consumer>
+              <Component setTitle={setTitle} />
+            </Consumer>
           </div>
         </div>
       </div>

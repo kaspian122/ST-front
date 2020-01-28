@@ -1,6 +1,7 @@
 @import 'src/scss/vars';
 .logged-zone {
   display: flex;
+  background: url('../../../static/images/svg/bg_logo1.svg') no-repeat top right/auto 250px;
 
   &__menu {
     box-sizing: border-box;
@@ -52,11 +53,11 @@
     outline: none;
 
     &:hover {
-      background: #d1f4ff66;
+      background: $hover-blue;
     }
 
     &:active {
-      background: #d1f4ff;
+      background: $active-blue;
     }
   }
 
@@ -96,7 +97,7 @@
 
     &-back {
       position: absolute;
-      bottom: -8px;
+      bottom: 0;
       left: -60px;
       width: 40px;
       height: 40px;
@@ -107,12 +108,12 @@
       align-items: center;
       cursor: pointer;
 
-      &:active {
-        background: #d1f4ff !important;
+      &:hover {
+        background: $hover-blue;
       }
 
-      &:hover {
-        background: #d1f4ff66;
+      &:active {
+        background: $active-blue;
       }
     }
   }
@@ -133,13 +134,13 @@
         padding-left: 18px;
       }
 
-      &--active,
-      &:active {
-        background: #d1f4ff !important;
+      &:hover {
+        background: $hover-blue;
       }
 
-      &:hover {
-        background: #d1f4ff66;
+      &--active,
+      &:active {
+        background: $active-blue;
       }
 
       &-logo {

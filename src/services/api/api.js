@@ -1,7 +1,6 @@
 import http from './apiConfig';
 import history from '../../utils/history';
 import RouterPaths from '../../constants/routerPaths';
-import AppActions from '../../store/actions/appActions';
 
 /**
  * @param body {Object}
@@ -38,10 +37,17 @@ const logout = () =>
     }
   });
 
-const getDisciplines = () => http.get('teacher/disciplines');
+const getDisciplines = () => http.get('teacher/disciplines/');
+
+const getDiscipline = id => http.get(`teacher/discipline/${id}/`);
 
 const getThemes = discipline => http.get(`teacher/themes/${discipline}/`);
 
-const Api = { authMe, auth, logout, getDisciplines, getThemes };
+// WTFAK
+const getTabs = id => http.get(`teacher/get-tabs/${id}/`);
+
+const sendTheme = body => http.post('teacher/theme/', body);
+
+const Api = { authMe, auth, logout, getDisciplines, getDiscipline, getThemes, getTabs, sendTheme };
 
 export default Api;
