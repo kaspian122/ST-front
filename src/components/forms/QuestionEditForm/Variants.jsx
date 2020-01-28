@@ -93,9 +93,9 @@ function Variants({ value, onAdd, onDelete, onChange, onChangeImage, onSelectCor
                   ? value
                       .map((it, index) => ({ ...it, pk: index }))
                       .filter(it => (it.name || it.image) && it.is_correct)
-                      .map(it => String(it.pk))
-                  : value.map(it => String(it.pk)).find(it => it.is_correct)?.name ||
-                    value.map(it => String(it.pk)).find(it => it.is_correct)?.pk
+                      .map(it => String(it.pk + 1))
+                  : value.map((it, index) => ({ ...it, pk: index })).find(it => it.is_correct)?.pk +
+                    1
               }
               mode={multiple ? 'multiple' : 'default'}
               size="large"
@@ -105,8 +105,8 @@ function Variants({ value, onAdd, onDelete, onChange, onChangeImage, onSelectCor
                 .map((it, index) => ({ ...it, pk: index }))
                 .filter(it => it.name || it.image)
                 .map(it => (
-                  <Option key={String(it.pk)} title={it.name || it.pk + 1}>
-                    {it.name || it.pk + 1}
+                  <Option key={String(it.pk)} title={it.pk + 1}>
+                    {it.pk + 1}
                   </Option>
                 ))}
             </Select>
