@@ -1,0 +1,77 @@
+.test-page {
+  &__form-row {
+    width: 100%;
+    margin-bottom: 30px;
+    padding: 0;
+    display: flex;
+  }
+
+  &__form-cell {
+    min-height: 65px;
+    margin-right: 20px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &--big {
+      width: 460px;
+    }
+
+    &--small {
+      width: 300px;
+    }
+  }
+
+  &__label {
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 14px;
+  }
+
+  &__input {
+    height: 40px;
+    border-color: #008fbc;
+  }
+
+  &__theme-name {
+    height: 40px;
+    width: 460px;
+    border: #008fbc dashed 2px;
+    border-radius: 6px;
+    text-align: center;
+  }
+}
+
+.ant-select-selection {
+  border-color: #008fbc;
+
+  &--single {
+    height: 40px;
+  }
+
+  &__rendered {
+    line-height: 40px;
+  }
+
+  &--multiple {
+    padding-bottom: 2px;
+  }
+
+  &--mulpiple &__rerendered > ul > li {
+    margin-top: 8px;
+  }
+}
+
+.ant-calendar-picker-input.ant-input,
+.ant-time-picker-input {
+  height: 40px;
+  border-color: #008fbc;
+}
+
+.input {
+  height: 40px;
+  border-color: #008fbc;
+  border-radius: 6px;
+}

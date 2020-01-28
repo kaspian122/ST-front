@@ -41,13 +41,46 @@ const getDisciplines = () => http.get('teacher/disciplines/');
 
 const getDiscipline = id => http.get(`teacher/discipline/${id}/`);
 
+const getGroups = () => http.get('teacher/group-list/');
+
 const getThemes = discipline => http.get(`teacher/themes/${discipline}/`);
+
+const createTest = data => {
+  const formattedData = {
+    name: data.name,
+    type: 'GROUPS',
+    duration: data.duration,
+    discipline: data.discipline,
+    description: data.description,
+    try_count: Number(data.tryCount),
+    date_start: data.startDate,
+    date_end: data.endDate,
+    rules: data.rules,
+    themes: data.themes.map(theme => ({
+      theme: theme.theme,
+      count_questions: Number(theme.count),
+    })),
+    groups: data.groups,
+  };
+  return http.post('/teacher/create-test/', formattedData);
+};
 
 // WTFAK
 const getTabs = id => http.get(`teacher/get-tabs/${id}/`);
 
 const sendTheme = body => http.post('teacher/theme/', body);
 
-const Api = { authMe, auth, logout, getDisciplines, getDiscipline, getThemes, getTabs, sendTheme };
+const Api = {
+  authMe,
+  auth,
+  logout,
+  getDisciplines,
+  getDiscipline,
+  getThemes,
+  getGroups,
+  createTest,
+  getTabs,
+  sendTheme,
+};
 
 export default Api;

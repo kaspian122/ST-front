@@ -54,7 +54,7 @@ function QuestionEditForm({ onChange, form }) {
         <div className="question-form__row">
           <div className="question-form__row-item">
             <div className="question-form__label">Текст вопроса</div>
-            <TextArea value={form.name} onChange={handleChange('name')} />
+            <TextArea className="input" value={form.name} onChange={handleChange('name')} />
           </div>
           <div className="question-form__row-item">
             <div className="question-form__label">Тип вопроса</div>
