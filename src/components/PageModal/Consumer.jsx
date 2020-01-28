@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { ModalTypes } from '../../constants/modalConstants';
 import AddThemeModal from './AddThemeModal';
 import TestPage from '../../pages/testPage';
+import TestInfo from '../TestInfo';
 
 function Consumer({ children }) {
   const modal = useSelector(state => state.modal);
@@ -16,13 +17,15 @@ function Consumer({ children }) {
         return <AddThemeModal modal={modal} isEdit />;
       case ModalTypes.ADD_TEST:
         return <TestPage />;
+      case ModalTypes.CHECK_TEST:
+        return <TestInfo />;
       default:
         return null;
     }
   }, [modal, type]);
   return (
     <>
-      {type && modalComponent}
+      {!!type && modalComponent}
       <div
         className="page"
         key="ORA_ORA_ORA_ORA_ORA_ORA_ORA_ORA_ORA_ORA"

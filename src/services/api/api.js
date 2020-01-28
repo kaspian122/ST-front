@@ -65,11 +65,16 @@ const createTest = data => {
   return http.post('/teacher/create-test/', formattedData);
 };
 
-// WTFAK
 const getTabs = id => http.get(`teacher/get-tabs/${id}/`);
 
 const sendTheme = body => http.post('teacher/theme/', body);
 const getTheme = id => http.get(`/teacher/theme/${id}/`);
+
+const getTest = id => http.get(`teacher/test/${id}/`);
+
+const getSolution = id => http.get(`teacher/details-solution/${id}/`);
+
+const sendMark = data => http.post('/teacher/send-mark/', data);
 
 const Api = {
   authMe,
@@ -83,6 +88,9 @@ const Api = {
   getTabs,
   sendTheme,
   getTheme,
+  getTest,
+  getSolution,
+  sendMark,
 };
 
 export default Api;
