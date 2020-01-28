@@ -21,18 +21,13 @@ function GovnoUpload({ value, onChange }) {
 
   return (
     <div>
-      <label htmlFor="pidar">
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control,jsx-a11y/label-has-for */}
+      <label>
         <div style={{ padding: '5px', display: 'inline-block', border: '1px solid blue' }}>
           Загрузи
         </div>
         <div>{value && 'есть прикрепление'}</div>
-        <input
-          id="pidar"
-          name="pidar"
-          style={{ display: 'none' }}
-          type="file"
-          onChange={handleFileChange}
-        />
+        <input style={{ display: 'none' }} type="file" onChange={handleFileChange} />
       </label>
       {value && <img src={value} style={{ width: '100px' }} alt="gavno" />}
     </div>
