@@ -69,7 +69,7 @@ function LoginPage() {
               <Button type="submit" label="Вход" />
             </div>
             <div className="login-form__registration-button">
-              <Button label="Реггистрация преподавателя" secondary />
+              <Button label="Регистрация преподавателя" secondary />
             </div>
           </div>
         </form>

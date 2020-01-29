@@ -149,7 +149,7 @@ function TestPage() {
             />
           </section>
           <section className="test-page__form-cell test-page__form-cell--big">
-            <p className="test-page__label">Крадкое руководство для прохождения теста</p>
+            <p className="test-page__label">Краткое руководство для прохождения теста</p>
             <TextArea
               rows="4"
               value={formModel.rules}
