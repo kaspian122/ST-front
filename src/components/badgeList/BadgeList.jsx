@@ -22,6 +22,7 @@ function BadgeList({ items, keyMap, onClick, onNewClick, newText }) {
       }, {}),
     [keyMap]
   );
+  console.log(newText);
   return (
     <div className="badge-list">
       <NewBadge text={newText} onClick={onNewClick} />

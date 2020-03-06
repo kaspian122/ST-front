@@ -1,0 +1,55 @@
+@import 'src/scss/vars';
+
+.discipline-form {
+  width: 940px;
+
+  &__info-label {
+    margin-bottom: 10px;
+  }
+
+  &__info-box-input {
+    width: 620px;
+    height: 40px;
+    border: 1px solid $main-blue;
+  }
+  &__info-box-select {
+    width: 300px;
+    height: 40px;
+    :focus {
+      background-color: $main-blue;
+      color: #fff;
+      :first-child {
+        color: #fff;
+      }
+    }
+  }
+
+  &__info-box {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  &__description-text {
+    width: 620px;
+    height: 155px !important;
+    border: 1px solid $main-blue;
+  }
+
+  &__description-label {
+    margin-bottom: 10px;
+  }
+
+  &__info-box-select-variant {
+    border: 1px solid $main-blue;
+
+    &:nth-child(even) {
+      background-color: $light-blue;
+      border-top: none;
+      border-bottom: none;
+      &:last-child {
+        border-bottom: 1px solid $main-blue;
+      }
+    }
+  }
+}
