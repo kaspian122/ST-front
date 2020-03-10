@@ -38,9 +38,7 @@ const closeModal = () => (dispatch, getState) => {
   const stateModal = getState().modal;
   if (!stateModal) {
     dispatch(resetModal());
-    throw new Error(
-      `Attempt to close modal, which does not exist. The modal system has been reset.`
-    );
+    console.warn('Modals nof found');
   }
   dispatch(closeModalById());
 };
