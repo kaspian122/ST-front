@@ -15,6 +15,9 @@
   &__info-box-select {
     width: 300px;
     height: 40px;
+    :first-child {
+      color: $main-blue;
+    }
     :focus {
       background-color: $main-blue;
       color: #fff;
@@ -52,4 +55,7 @@
       }
     }
   }
+}
+.erro {
+  border: 1px solid #eb5757;
 }

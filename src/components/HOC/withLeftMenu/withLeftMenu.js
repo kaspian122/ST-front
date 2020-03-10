@@ -55,7 +55,7 @@ function withLeftMenu(Component) {
         <div className="logged-zone__content">
           <div className="logged-zone__content-wrapper">
             <div className="logged-zone__header">
-              {!/^\/\w+$/g.test(pathname) && (
+              {/^\/\w+$/g.test(pathname) && ( //нужно перед условием вернуть "!"
                 <div className="logged-zone__header-back" onClick={handleGoBack}>
                   <BackSVG />
                 </div>

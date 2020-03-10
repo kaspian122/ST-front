@@ -1,17 +1,14 @@
 import React, { useCallback, useState } from 'react';
 import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
-import { Input } from 'antd';
+import DisciplineCreateForm from '../forms/DisciplineForm/DisciplineCreateForm';
+
 import './AddDisciplineModal.scss';
 import Button from '../button';
 import RouterPaths from '../../constants/routerPaths';
 import Api from '../../services/api/api';
 import { useDidMount } from '../../utils/hooks';
 import ModalActions from '../../store/actions/modalActions';
-
-import DisciplineCreateForm from '../forms/DisciplineForm/DisciplineCreateForm';
-import { QuestionEditForm } from '../forms';
-import MultipleForm from '../multipleForm';
 
 function AddDisciplineModal({ modal, isEdit }) {
   const [form, setForm] = useState({ name: '', questions: [{}] });
@@ -41,7 +38,6 @@ function AddDisciplineModal({ modal, isEdit }) {
     },
     [form, handleChange]
   );
-
   const handleSubmitForm = useCallback(() => {
     Api.sendTheme({ ...form, discipline }).then(() => {
       dispatch(ModalActions.closeModal());
