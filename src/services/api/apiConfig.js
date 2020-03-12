@@ -12,7 +12,7 @@ const standUrl = process.env.NODE_ENV !== 'production' ? stands[0] : stands[0];
 
 const http = axios.create({
   baseURL: standUrl + apiPath,
-  // timeout: 1000,
+  timeout: 1000,
   headers: { 'Content-Type': 'application/json' },
 });
 
