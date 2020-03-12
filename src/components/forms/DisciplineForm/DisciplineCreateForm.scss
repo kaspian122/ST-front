@@ -7,10 +7,21 @@
     margin-bottom: 10px;
   }
 
+  &__info {
+    &--correct {
+      background-color: #008fbc;
+      border-color: #008fbc;
+    }
+  }
+
   &__info-box-input {
     width: 620px;
     height: 40px;
     border: 1px solid $main-blue;
+
+    &--incorrect {
+      border-color: $false;
+    }
   }
   &__info-box-select {
     width: 300px;
@@ -25,6 +36,12 @@
         color: #fff;
       }
     }
+    &--incorrect {
+      :first-child {
+        border-color: $false;
+        color: $false;
+      }
+    }
   }
 
   &__info-box {
@@ -37,6 +54,9 @@
     width: 620px;
     height: 155px !important;
     border: 1px solid $main-blue;
+    &--incorrect {
+      border-color: $false;
+    }
   }
 
   &__description-label {
@@ -47,7 +67,7 @@
     border: 1px solid $main-blue;
 
     &:nth-child(even) {
-      background-color: $light-blue;
+      background-color: $active-blue;
       border-top: none;
       border-bottom: none;
       &:last-child {
@@ -56,6 +76,6 @@
     }
   }
 }
-.erro {
-  border: 1px solid #eb5757;
+
+.incorrect {
 }

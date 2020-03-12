@@ -6,7 +6,7 @@ import RouterPaths from '../../constants/routerPaths';
 const apiPath = 'api';
 // const apiVersion = '/v1';
 
-const stands = ['http://95.191.27.214:8000/'];
+const stands = ['http://2.59.41.80:8000/'];
 
 const standUrl = process.env.NODE_ENV !== 'production' ? stands[0] : stands[0];
 

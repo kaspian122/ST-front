@@ -24,10 +24,13 @@ function AddThemeModal({ modal, isEdit }) {
   });
   const { id: discipline } = useParams(RouterPaths.discipline);
   const handleChange = useCallback(
-    fieldName => e => {
-      let value = e;
-      if (e?.target?.value || Object.getPrototypeOf(e).constructor.name === 'SyntheticEvent') {
-        value = e.target?.value;
+    fieldName => event => {
+      let value = event;
+      if (
+        event?.target?.value ||
+        Object.getPrototypeOf(event).constructor.name === 'SyntheticEvent'
+      ) {
+        value = event.target?.value;
       }
       setForm(prevState => ({ ...prevState, [fieldName]: value }));
     },
