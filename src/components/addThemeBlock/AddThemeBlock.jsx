@@ -17,7 +17,7 @@ function AddThemeBlock(props) {
   return (
     <div className="add-theme-block">
       <div className="add-theme-block__cell-number">
-        <span className="add-theme-block__cell-number__number">{id + 1}</span>
+        <span className="add-theme-block__number">{id + 1}</span>
       </div>
       <Select
         onChange={handleThemeChange}

@@ -12,6 +12,8 @@ import Button from '../../components/button';
 import ModalActions from '../../store/actions/modalActions';
 import DisciplinesActions from '../../store/actions/disciplinesActions';
 
+import { ReactComponent as PlusSVG } from '../../static/images/svg/add.svg';
+
 const { TextArea } = Input;
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -77,21 +79,7 @@ function TestPage() {
     list.push(
       <div className="test-page__theme" key="new">
         <div className="test-page__badge">
-          <svg
-            className="test-page__badge-new"
-            width="18"
-            height="18"
-            viewBox="0 0 40 40"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M20 3V20M20 20H28.5H37M20 20V28.5V37M20 20H11.5H3"
-              stroke="#008FBC"
-              strokeWidth="5"
-              strokeLinecap="round"
-            />
-          </svg>
+          <PlusSVG className="test-page__badge-new" />
         </div>
         <div className="test-page__theme-name" onClick={handleNewThemeClick}>
           <span className="test-page__button-text">Добавить тему</span>
