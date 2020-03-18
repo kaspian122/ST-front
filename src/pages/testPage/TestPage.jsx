@@ -76,8 +76,25 @@ function TestPage() {
     });
     list.push(
       <div className="test-page__theme" key="new">
+        <div className="test-page__badge">
+          <svg
+            className="test-page__badge-new"
+            width="18"
+            height="18"
+            viewBox="0 0 40 40"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20 3V20M20 20H28.5H37M20 20V28.5V37M20 20H11.5H3"
+              stroke="#008FBC"
+              strokeWidth="5"
+              strokeLinecap="round"
+            />
+          </svg>
+        </div>
         <div className="test-page__theme-name" onClick={handleNewThemeClick}>
-          Новая тема
+          <span className="test-page__button-text">Добавить тему</span>
         </div>
       </div>
     );
@@ -190,7 +207,15 @@ function TestPage() {
       </div>
       <div className="test-page__form-row">
         <section>
-          <p className="test-page__label">Наименование тем</p>
+          <p
+            className="test-page__label"
+            style={{ display: 'inline-block', 'margin-right': '360px' }}
+          >
+            Наименование тем
+          </p>
+          <p className="test-page__label" style={{ display: 'inline-block' }}>
+            Кол-во вопросов
+          </p>
           {renderThemesList()}
         </section>
       </div>

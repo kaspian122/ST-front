@@ -1,8 +1,34 @@
 .add-theme-block {
   display: flex;
   margin-bottom: 10px;
-
   &__count {
-    width: 50px;
+    width: 60px;
+    height: 48px;
+    color: #008fbc;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  &__cell-number {
+    width: 60px;
+    height: 48px;
+    border: 1px solid #008fbc;
+    border-radius: 6px 0 0 6px;
+    border-right: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  &__cell-number__number {
+    color: #008fbc;
+    font-size: 14px;
+  }
+
+  .ant-select-selection--single {
+    height: 48px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
   }
 }
