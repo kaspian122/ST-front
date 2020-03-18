@@ -13,12 +13,16 @@ function AddThemeBlock(props) {
   const handleCountChange = event => {
     onThemeChange(id, { theme: theme.theme, count: event.target.value });
   };
+
   return (
     <div className="add-theme-block">
+      <div className="add-theme-block__cell-number">
+        <span className="add-theme-block__number">{id + 1}</span>
+      </div>
       <Select
         onChange={handleThemeChange}
         placeholder="Не указана"
-        style={{ width: '390px', 'margin-right': '20px' }}
+        style={{ width: '480px', 'margin-right': '20px' }}
       >
         {themes.map(item => (
           <Option key={item.id} value={item.id}>
