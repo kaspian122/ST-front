@@ -1,37 +1,45 @@
 import React, { useCallback, useState } from 'react';
 import { Input, Select } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
+import { useHistory, useParams, useRouteMatch } from 'react-router';
 import './DisciplineCreateForm.scss';
-import CssUtils from '../../../utils/sassUtils';
 import Button from '../../button';
+import CssUtils from '../../../utils/sassUtils';
+import Api from '../../../services/api/api';
+import ModalActions from '../../../store/actions/modalActions';
+import { useDidMount } from '../../../utils/hooks';
+import RouterPaths from '../../../constants/routerPaths';
 
 const { TextArea } = Input;
 const { Option } = Select;
 
 function DisciplineCreateForm() {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { params } = useRouteMatch(RouterPaths.newdiscipline);
   const [form, setForm] = useState({
     name: '',
     description: '',
     semester: '',
   });
-  const semesters = [
+  const INIsemesters = [
     {
       name: 'Осенний семестр 2019/2020',
-      id: '2019/2020-autumn',
-    },
-    {
-      name: 'Весенний семестр 2019/2020',
-      id: '2019/2020-spring',
-    },
-    {
-      name: 'Осенний семестр 2020/2021',
-      id: '2020/2021-autumn',
-    },
-    {
-      name: 'Весенний семестр 2020/2021',
-      id: '2020/2021-spring',
+      id: 24436,
     },
   ];
+  const [semesters, setSemesters] = useState(INIsemesters);
+  const handleSaveClick = () => {
+    Api.createDiscipline(form).then(() => history.push('/disciplines'));
+  };
+
+  useDidMount(() => {
+    Api.getSemester(params.id).then(response => {
+      console.log('respo');
+      setSemesters(response);
+    });
+  });
 
   const [formData, setFormData] = useState({
     corTitle: false,
@@ -40,14 +48,13 @@ function DisciplineCreateForm() {
   });
 
   const setFormValue = name => event => {
-    console.log(event);
     const value = event.target ? event.target.value : event;
     setForm({ ...form, [name]: value });
   };
 
   const validateForm = name => event => {
-    console.log(event);
     const value = event && event.target ? event.target.value : event;
+    console.log(event);
     setFormData({ ...formData, [name]: isEmpty(value) });
   };
 
@@ -72,7 +79,11 @@ function DisciplineCreateForm() {
             placeholder="Выберете семстр"
           >
             {semesters.map(item => (
-              <Option className="discipline-form__info-box-select-variant" value={item.id}>
+              <Option
+                className="discipline-form__info-box-select-variant"
+                value={item}
+                key={item.id}
+              >
                 {item.name}
               </Option>
             ))}
@@ -91,7 +102,7 @@ function DisciplineCreateForm() {
           />
         </div>
       </div>
-      <Button>Сохранить</Button>
+      <Button onClick={handleSaveClick}>Сохранить</Button>
     </div>
   );
 }
