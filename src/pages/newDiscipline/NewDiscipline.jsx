@@ -13,13 +13,11 @@ function NewDiscipline() {
   const { params } = useRouteMatch(RouterPaths.newdiscipline);
   const dispatch = useDispatch();
 
-  console.log('helllo');
   return (
     <div className="add-theme">
       <div className="add-theme__title">
         <DisciplineCreateForm />
       </div>
-      <Button>Сохранить</Button>
     </div>
   );
 }

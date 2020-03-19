@@ -1,73 +1,55 @@
 import React, { useCallback, useState } from 'react';
-import PropTypes from 'prop-types';
 import { Input, Select } from 'antd';
-import { useParams } from 'react-router';
+import { isEmpty } from 'lodash';
 import './DisciplineCreateForm.scss';
 import CssUtils from '../../../utils/sassUtils';
+import Button from '../../button';
 
-import RouterPaths from '../../../constants/routerPaths';
 const { TextArea } = Input;
 const { Option } = Select;
 
 function DisciplineCreateForm() {
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState({
+    name: '',
+    description: '',
+    semester: '',
+  });
   const semesters = [
     {
-      title: 'Осенний семестр 2019/2020',
-      value: '2019/2020-autumn',
+      name: 'Осенний семестр 2019/2020',
+      id: '2019/2020-autumn',
     },
     {
-      title: 'Весенний семестр 2019/2020',
-      value: '2019/2020-spring',
+      name: 'Весенний семестр 2019/2020',
+      id: '2019/2020-spring',
     },
     {
-      title: 'Осенний семестр 2020/2021',
-      value: '2020/2021-autumn',
+      name: 'Осенний семестр 2020/2021',
+      id: '2020/2021-autumn',
     },
     {
-      title: 'Весенний семестр 2020/2021',
-      value: '2020/2021-spring',
+      name: 'Весенний семестр 2020/2021',
+      id: '2020/2021-spring',
     },
   ];
 
-  const [corTitle, setCorTitle] = useState(false);
-  const [corDescription, setCorDescription] = useState(false);
-  const [corSelect, setCorSelect] = useState(false);
+  const [formData, setFormData] = useState({
+    corTitle: false,
+    corDescription: false,
+    corSelect: false,
+  });
 
-  const handleChangeDesc = useCallback(
-    name => event => {
-      const description = event.target.value;
-      setForm({ ...form, description });
-      if (description !== '') {
-        setCorDescription(true);
-      } else {
-        setCorDescription(false);
-      }
-    },
-    [form, setForm]
-  );
+  const setFormValue = name => event => {
+    console.log(event);
+    const value = event.target ? event.target.value : event;
+    setForm({ ...form, [name]: value });
+  };
 
-  const handleChangeTitle = useCallback(
-    name => event => {
-      const title = event.target.value;
-      setForm({ ...form, title });
-      if (title !== '') {
-        setCorTitle(true);
-      } else {
-        setCorTitle(false);
-      }
-    },
-    [form, setForm]
-  );
-
-  const handleSelect = useCallback(
-    name => event => {
-      const period = event;
-      setForm(prevState => ({ ...prevState, period }));
-      setCorSelect(true);
-    },
-    [setForm]
-  );
+  const validateForm = name => event => {
+    console.log(event);
+    const value = event && event.target ? event.target.value : event;
+    setFormData({ ...formData, [name]: isEmpty(value) });
+  };
 
   return (
     <div className="discipline-form">
@@ -76,20 +58,22 @@ function DisciplineCreateForm() {
         <div className="discipline-form__info-box">
           <Input
             className={CssUtils.mergeModifiers('discipline-form__info-box-input', {
-              incorrect: !corTitle,
+              incorrect: formData.corTitle,
             })}
-            onChange={handleChangeTitle('title')}
+            onChange={setFormValue('name')}
+            onBlur={validateForm('corTitle')}
           />
           <Select
-            onSelect={handleSelect('select')}
+            onSelect={setFormValue('semester')}
+            onBlur={validateForm('corSelect')}
             className={CssUtils.mergeModifiers('discipline-form__info-box-select', {
-              incorrect: !corSelect,
+              incorrect: formData.corSelect,
             })}
             placeholder="Выберете семстр"
           >
             {semesters.map(item => (
-              <Option className="discipline-form__info-box-select-variant" value={item.value}>
-                {item.title}
+              <Option className="discipline-form__info-box-select-variant" value={item.id}>
+                {item.name}
               </Option>
             ))}
           </Select>
@@ -100,12 +84,14 @@ function DisciplineCreateForm() {
           </div>
           <TextArea
             className={CssUtils.mergeModifiers('discipline-form__description-text', {
-              incorrect: !corDescription,
+              incorrect: formData.corDescription,
             })}
-            onChange={handleChangeDesc('description')}
+            onChange={setFormValue('description')}
+            onBlur={validateForm('corDescription')}
           />
         </div>
       </div>
+      <Button>Сохранить</Button>
     </div>
   );
 }
