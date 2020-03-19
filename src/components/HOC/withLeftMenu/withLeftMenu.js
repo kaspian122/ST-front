@@ -12,7 +12,7 @@ import './withLeftMenu.scss';
 import Consumer from '../../PageModal';
 import ModalActions from '../../../store/actions/modalActions';
 import { ModalTitles } from '../../../constants/modalConstants';
-
+import Parent from '../../popup/closeDiscipline/closeDiscipline';
 function withLeftMenu(Component) {
   return function Wrapper() {
     const [title, setTitle] = useState('Название страницы');
@@ -27,11 +27,20 @@ function withLeftMenu(Component) {
     const handleLogOut = useCallback(() => {
       Api.logout();
     }, []);
+
+    function callModal() {
+      console.log('ya tyyyyyyyta');
+      return <Parent />;
+    }
+
     const handleGoBack = () => {
       if (modal) {
+        callModal();
         dispatch(ModalActions.closeModal());
       } else {
+        callModal();
         history.goBack();
+        console.log('ya tyta');
       }
     };
     return (
@@ -55,7 +64,7 @@ function withLeftMenu(Component) {
         <div className="logged-zone__content">
           <div className="logged-zone__content-wrapper">
             <div className="logged-zone__header">
-              {/^\/\w+$/g.test(pathname) && ( //нужно перед условием вернуть "!"
+              {!/^\/\w+$/g.test(pathname) && (
                 <div className="logged-zone__header-back" onClick={handleGoBack}>
                   <BackSVG />
                 </div>
@@ -64,6 +73,7 @@ function withLeftMenu(Component) {
                 {modal ? ModalTitles[modal.type] : title}
               </div>
             </div>
+
             <Consumer>
               <Component setTitle={setTitle} />
             </Consumer>

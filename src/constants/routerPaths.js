@@ -2,6 +2,7 @@ const RouterPaths = {
   mainPage: '/',
   languageSelectPage: '/language-select',
   disciplines: '/disciplines',
+  newdiscipline: '/disciplines/new',
   discipline: '/disciplines/:id',
   tests: '/tests',
   loginPage: '/login',

@@ -12,16 +12,15 @@ import BadgeList from '../../components/badgeList';
 import { ReactComponent as LupaSVG } from '../../static/images/svg/lupa.svg';
 import './DisciplinesPage.scss';
 import NewDiscipline from '../../components/discipline/NewDiscipline';
-import ModalActions from '../../store/actions/modalActions';
-import { ModalTypes } from '../../constants/modalConstants';
 
 function DisciplinesPage({ setTitle = () => {}, items, onClick, onNewClick, newText }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const disciplines = useSelector(state => state.disciplines);
-  const handleNewThemeClick = useCallback(() => {
-    dispatch(ModalActions.openModal(ModalTypes.ADD_DIS));
-  }, [dispatch]);
+  const handleNewDisciplineClick = useCallback(() => {
+    history.push(`/disciplines/new`);
+  }, [history]);
+
   useDidMount(() => {
     dispatch(DisciplinesActions.setDisciplines());
     setTitle('Дисциплины');
@@ -45,7 +44,7 @@ function DisciplinesPage({ setTitle = () => {}, items, onClick, onNewClick, newT
         <NewDiscipline
           className="disciplines-page__add"
           text="Добавить дисциплину"
-          onClick={handleNewThemeClick}
+          onClick={handleNewDisciplineClick}
         />
       </div>
       <div className="disciplines-page__disciplines">
