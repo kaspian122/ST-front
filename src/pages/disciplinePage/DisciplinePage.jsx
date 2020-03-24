@@ -77,7 +77,7 @@ function DisciplinePage({ setTitle = () => {} }) {
           )}
         </TabPane>
         <TabPane tab="Журнал" key="journal">
-          2
+          bla bla car
         </TabPane>
         <TabPane tab="Информация" key="info" disabled>
           xyu1

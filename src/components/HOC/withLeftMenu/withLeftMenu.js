@@ -28,19 +28,11 @@ function withLeftMenu(Component) {
       Api.logout();
     }, []);
 
-    function callModal() {
-      console.log('ya tyyyyyyyta');
-      return <Parent />;
-    }
-
     const handleGoBack = () => {
       if (modal) {
-        callModal();
         dispatch(ModalActions.closeModal());
       } else {
-        callModal();
         history.goBack();
-        console.log('ya tyta');
       }
     };
     return (

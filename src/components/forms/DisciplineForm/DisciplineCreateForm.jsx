@@ -1,27 +1,34 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Input, Select } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
-import { useHistory, useParams, useRouteMatch } from 'react-router';
+import { useHistory, useRouteMatch } from 'react-router';
 import './DisciplineCreateForm.scss';
 import Button from '../../button';
 import CssUtils from '../../../utils/sassUtils';
 import Api from '../../../services/api/api';
-import ModalActions from '../../../store/actions/modalActions';
 import { useDidMount } from '../../../utils/hooks';
 import RouterPaths from '../../../constants/routerPaths';
+import PortalActions from '../../../store/actions/portalsAction';
+
+import { PortalTypes } from '../../../constants/portalConstants';
 
 const { TextArea } = Input;
 const { Option } = Select;
 
 function DisciplineCreateForm() {
-  const history = useHistory();
   const dispatch = useDispatch();
+  const history = useHistory();
   const { params } = useRouteMatch(RouterPaths.newdiscipline);
   const [form, setForm] = useState({
     name: '',
     description: '',
     semester: '',
+  });
+  const [formData, setFormData] = useState({
+    corTitle: false,
+    corDescription: false,
+    corSelect: false,
   });
   const INIsemesters = [
     {
@@ -29,22 +36,23 @@ function DisciplineCreateForm() {
       id: 24436,
     },
   ];
+
   const [semesters, setSemesters] = useState(INIsemesters);
   const handleSaveClick = () => {
-    Api.createDiscipline(form).then(() => history.push('/disciplines'));
+    dispatch(PortalActions.openPortal(PortalTypes.CLOSE_CORRECT_DISCIPLINE));
+    if (
+      formData.corTitle === false &&
+      formData.corDescription === false &&
+      formData.corSelect === false
+    ) {
+      Api.createDiscipline(form).then(() => history.push('/disciplines'));
+    }
   };
 
   useDidMount(() => {
     Api.getSemester(params.id).then(response => {
-      console.log('respo');
       setSemesters(response);
     });
-  });
-
-  const [formData, setFormData] = useState({
-    corTitle: false,
-    corDescription: false,
-    corSelect: false,
   });
 
   const setFormValue = name => event => {
@@ -54,7 +62,6 @@ function DisciplineCreateForm() {
 
   const validateForm = name => event => {
     const value = event && event.target ? event.target.value : event;
-    console.log(event);
     setFormData({ ...formData, [name]: isEmpty(value) });
   };
 
@@ -67,6 +74,7 @@ function DisciplineCreateForm() {
             className={CssUtils.mergeModifiers('discipline-form__info-box-input', {
               incorrect: formData.corTitle,
             })}
+            value={form.name}
             onChange={setFormValue('name')}
             onBlur={validateForm('corTitle')}
           />
@@ -97,6 +105,7 @@ function DisciplineCreateForm() {
             className={CssUtils.mergeModifiers('discipline-form__description-text', {
               incorrect: formData.corDescription,
             })}
+            value={form.description}
             onChange={setFormValue('description')}
             onBlur={validateForm('corDescription')}
           />
@@ -106,7 +115,5 @@ function DisciplineCreateForm() {
     </div>
   );
 }
-
-DisciplineCreateForm.propTypes = {};
 
 export default DisciplineCreateForm;

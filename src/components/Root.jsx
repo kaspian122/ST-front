@@ -1,6 +1,7 @@
 import React from 'react';
 import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import Modal from './modal/Modal';
 
 import history from '../utils/history';
 import Routes from '../services/routeConfig';
@@ -14,6 +15,7 @@ function Root() {
     <Provider store={store}>
       <Router history={history}>
         <App routes={Routes} />
+        <Modal></Modal>
       </Router>
     </Provider>
   );
