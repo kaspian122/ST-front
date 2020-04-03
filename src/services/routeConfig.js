@@ -8,6 +8,8 @@ import TestsPage from '../pages/testsPage';
 import DisciplinePage from '../pages/disciplinePage';
 import TestInfo from '../components/TestInfo';
 import TestSolution from '../components/TestSolution';
+import FakePage from '../pages/_fakePage';
+import StudentDisciplinePage from '../pages/studentDisciplinePage';
 
 const Routes = [
   makeRoute(RouterPaths.mainPage, IndexPage, true),
@@ -18,6 +20,8 @@ const Routes = [
   makeRoute(RouterPaths.registration, RegistrationPage),
   makeRoute(RouterPaths.testPage, TestInfo, false, true),
   makeRoute(RouterPaths.testSolution, TestSolution, false, true),
+  makeRoute(RouterPaths.fakePage, FakePage),
+  makeRoute(RouterPaths.studentDiscipline, StudentDisciplinePage, true, true),
 ];
 
 export default Routes;

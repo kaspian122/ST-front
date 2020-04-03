@@ -11,6 +11,7 @@ const RouterPaths = {
   makeHera: 'hera',
   testPage: '/test/:id',
   testSolution: '/test-solution/:id',
+  studentDiscipline: '/studentDisciplines/:id',
 };
 
 export const freeRoutes = [RouterPaths.mainPage, RouterPaths.registration, RouterPaths.loginPage];
