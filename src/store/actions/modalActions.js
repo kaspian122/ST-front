@@ -14,7 +14,7 @@ export const ModalActionTypes = {
  */
 const openModal = (identifier, additionalProps) => ({
   type: ModalActionTypes.OPEN,
-  payload: { type: identifier, additionalProps },
+  payload: { type: identifier, props: additionalProps },
 });
 
 /**
