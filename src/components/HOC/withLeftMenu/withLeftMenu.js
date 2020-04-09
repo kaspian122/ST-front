@@ -12,7 +12,7 @@ import './withLeftMenu.scss';
 import Consumer from '../../PageModal';
 import ModalActions from '../../../store/actions/modalActions';
 import { ModalTitles } from '../../../constants/modalConstants';
-
+import Parent from '../../popup/closeDiscipline/closeDiscipline';
 function withLeftMenu(Component) {
   return function Wrapper() {
     const [title, setTitle] = useState('Название страницы');
@@ -27,6 +27,7 @@ function withLeftMenu(Component) {
     const handleLogOut = useCallback(() => {
       Api.logout();
     }, []);
+
     const handleGoBack = () => {
       if (modal) {
         dispatch(ModalActions.closeModal());
@@ -64,6 +65,7 @@ function withLeftMenu(Component) {
                 {modal ? ModalTitles[modal.type] : title}
               </div>
             </div>
+
             <Consumer>
               <Component setTitle={setTitle} />
             </Consumer>

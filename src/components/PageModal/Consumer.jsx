@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { ModalTypes } from '../../constants/modalConstants';
 import AddThemeModal from './AddThemeModal';
+
 import TestPage from '../../pages/testPage';
 import TestInfo from '../TestInfo';
 
@@ -13,6 +14,7 @@ function Consumer({ children }) {
     switch (type) {
       case ModalTypes.ADD_THEME:
         return <AddThemeModal modal={modal} />;
+
       case ModalTypes.EDIT_THEME:
         return <AddThemeModal modal={modal} isEdit />;
       case ModalTypes.ADD_TEST:

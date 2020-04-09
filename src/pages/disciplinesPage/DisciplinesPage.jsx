@@ -3,16 +3,23 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { Input } from 'antd';
+
 import { useDidMount } from '../../utils/hooks';
 import DisciplinesActions from '../../store/actions/disciplinesActions';
 import BadgeList from '../../components/badgeList';
 
+import { ReactComponent as LupaSVG } from '../../static/images/svg/lupa.svg';
 import './DisciplinesPage.scss';
+import NewDiscipline from '../../components/discipline/NewDiscipline';
 
-function DisciplinesPage({ setTitle = () => {} }) {
+function DisciplinesPage({ setTitle = () => {}, items, onClick, onNewClick, newText }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const disciplines = useSelector(state => state.disciplines);
+  const handleNewDisciplineClick = useCallback(() => {
+    history.push(`/disciplines/new`);
+  }, [history]);
 
   useDidMount(() => {
     dispatch(DisciplinesActions.setDisciplines());
@@ -28,12 +35,18 @@ function DisciplinesPage({ setTitle = () => {} }) {
 
   return (
     <div className="disciplines-page">
-      {/*<div className="disciplines-page__actions">*/}
-
-      {/*  <div className="disciplines-page__search"></div>*/}
-      {/*  <div className="disciplines-page__add"></div>*/}
-      {/*</div>*/}
-
+      <div className="disciplines-page__actions">
+        <Input
+          className="disciplines-page__search"
+          placeholder="ПОИСК ДИСЦИПЛИНЫ"
+          prefix={<LupaSVG />}
+        />
+        <NewDiscipline
+          className="disciplines-page__add"
+          text="Добавить дисциплину"
+          onClick={handleNewDisciplineClick}
+        />
+      </div>
       <div className="disciplines-page__disciplines">
         <BadgeList
           items={disciplines}
@@ -47,6 +60,14 @@ function DisciplinesPage({ setTitle = () => {} }) {
 
 DisciplinesPage.propTypes = {
   setTitle: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
+  onNewClick: PropTypes.func,
+  newText: PropTypes.string,
+};
+DisciplinesPage.defaultProps = {
+  onClick: () => {},
+  onNewClick: undefined,
+  newText: 'Пропсу забыл текста Э',
 };
 
 export default DisciplinesPage;

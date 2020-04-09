@@ -10,7 +10,6 @@ import Api from '../../services/api/api';
 import { useDidMount } from '../../utils/hooks';
 import BadgeList from '../../components/badgeList';
 
-import './DisciplinePage.scss';
 import ModalActions from '../../store/actions/modalActions';
 import { ModalTypes } from '../../constants/modalConstants';
 
@@ -77,8 +76,8 @@ function DisciplinePage({ setTitle = () => {} }) {
             />
           )}
         </TabPane>
-        <TabPane tab="Журнал" key="journal" disabled>
-          2
+        <TabPane tab="Журнал" key="journal">
+          bla bla car
         </TabPane>
         <TabPane tab="Информация" key="info" disabled>
           xyu1
