@@ -70,5 +70,4 @@ DisciplinesPage.defaultProps = {
   onNewClick: undefined,
   newText: 'Пропсу забыл текста Э',
 };
-
 export default DisciplinesPage;

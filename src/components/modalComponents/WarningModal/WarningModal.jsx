@@ -47,7 +47,7 @@ WarningModal.propTypes = {
 
 WarningModal.defaultProps = {
   title: '',
-  acceptTitle: '',
+  acceptTitle: 'Сохранить',
   text: '',
   cancelTitle: 'Отмена',
   onClose: () => {},

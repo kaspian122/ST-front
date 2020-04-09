@@ -26,7 +26,6 @@ const INIsemesters = [
 function DisciplineCreateForm() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { params } = useRouteMatch(RouterPaths.newDiscipline);
   const [form, setForm] = useState({
     name: '',
     description: '',
@@ -40,7 +39,7 @@ function DisciplineCreateForm() {
   const [semesters, setSemesters] = useState(INIsemesters);
 
   useDidMount(() => {
-    Api.getSemester(params.id).then(response => {
+    Api.getSemester().then(response => {
       setSemesters(response);
     });
   });
@@ -58,7 +57,7 @@ function DisciplineCreateForm() {
             if (form.description !== '' && form.name !== '' && form.semester !== '') {
               Api.createDiscipline(form).then(() => {
                 console.log('ya dobavil');
-                history.goBack();
+                history.push(RouterPaths.disciplines);
               });
             }
           },

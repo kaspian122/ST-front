@@ -82,7 +82,7 @@ const createDiscipline = data =>
     semester: data.semester.id,
   });
 
-const getSemester = id => http.get(`/teacher/semester/`);
+const getSemester = () => http.get(`/teacher/semester/`);
 
 const Api = {
   authMe,
