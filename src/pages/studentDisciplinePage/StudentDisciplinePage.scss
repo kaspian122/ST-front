@@ -1,0 +1,159 @@
+@import 'src/scss/vars';
+
+.student-discipline-page {
+  &__info-table {
+    height: 96px;
+    width: 100%;
+    background-color: $main-blue;
+    position: relative;
+  }
+
+  &__label {
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 30px 0;
+  }
+
+  &__label--bold {
+    color: #ffffff;
+    font-weight: 500;
+    position: absolute;
+    top: 10%;
+    left: 42.5%;
+  }
+
+  &__label--white {
+    color: #ffffff;
+    position: absolute;
+    top: 50%;
+    left: 27.5%;
+  }
+
+  &__pointer {
+    position: absolute;
+    top: 37%;
+    left: 21%;
+  }
+
+  &__label--blue {
+    color: $main-blue;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  &__discipline-description {
+    width: 100%;
+    border: 1px solid $main-blue;
+    border-radius: 6px;
+    padding: 20px;
+    margin-top: 50px;
+  }
+
+  .badge-list {
+    margin-top: 20px;
+  }
+
+  .badge {
+    height: 48px;
+    text-align: center;
+    padding: 10px;
+
+    &__title {
+      font-size: 14px;
+      font-weight: 500;
+      color: $text-heading;
+    }
+  }
+
+  .badge:nth-of-type(2n) {
+    background-color: $main-blue;
+
+    &:hover {
+      background-color: darken($main-blue, 5%);
+    }
+  }
+
+  .badge:nth-of-type(2n) .badge__title {
+    color: #ffffff;
+  }
+
+  &__start-check {
+    border: 1px solid #02b76a;
+    border-radius: 6px;
+    background-color: #02b76a;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
+    height: 48px;
+    width: 300px;
+    color: #fff;
+    word-break: break-word;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    outline: none;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.1s ease-out;
+    margin: 20px auto;
+    align-items: center;
+    position: relative;
+    left: 34%;
+
+    &:hover {
+      background-color: darken(#02b76a, 5%);
+    }
+  }
+
+  .ant-tabs {
+    &-bar {
+      border: 0;
+    }
+
+    &-nav {
+      width: 100%;
+
+      div:not([class]) {
+        display: flex;
+      }
+    }
+
+    &-tab {
+      $tab: &;
+
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 17px;
+      color: $disabled-blue;
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 2px solid $disabled-blue;
+      transition: border-bottom-color 0.2s ease;
+      padding-bottom: 15px;
+
+      &:hover {
+        color: $main-blue;
+      }
+
+      &-active {
+        border-bottom-color: transparent;
+        color: $main-blue;
+      }
+
+      &-disabled {
+        color: grey;
+        border-bottom: 2px solid grey;
+
+        &:hover {
+          cursor: default;
+          color: grey;
+        }
+      }
+    }
+
+    &-ink-bar {
+      background-color: $main-blue;
+    }
+  }
+}
