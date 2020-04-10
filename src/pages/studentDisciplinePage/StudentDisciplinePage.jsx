@@ -1,28 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useRouteMatch } from 'react-router';
 import { Tabs } from 'antd';
 
 import { ReactComponent as PointerSVG } from '../../static/images/svg/marker.svg';
 import './StudentDisciplinePage.scss';
 import BadgeList from '../../components/badgeList';
 
+import RouterPaths from '../../constants/routerPaths';
+import Api from '../../services/api/api';
+
 const { TabPane } = Tabs;
 
 function StudentDisciplinePage({ setTitle = () => {} }) {
-  const discipline = {
-    name: 'Физика',
-    test_list: [
-      { name: 'Термодинамика' },
-      { name: 'Динамика' },
-      { name: 'Термодинамика' },
-      { name: 'Динамика' },
-      { name: 'Термодинамика' },
-      { name: 'Динамика' },
-    ],
-  };
+  const [studentDiscipline, setStudentDiscipline] = useState({});
+  const { params } = useRouteMatch(RouterPaths.studentDiscipline);
 
   useEffect(() => {
-    setTitle(discipline?.name);
-  }, [setTitle, discipline]);
+    setTitle(studentDiscipline?.name);
+  }, [setTitle, studentDiscipline]);
+
+  useEffect(() => {
+    Api.getStudentDisciplines(params.id).then(response => {
+      setStudentDiscipline(response);
+    });
+  });
 
   return (
     <div className="student-discipline-page">
@@ -39,10 +40,10 @@ function StudentDisciplinePage({ setTitle = () => {} }) {
               Для каждого раздела будет сформировано по 10 вопросов
             </p>
           </div>
-          {discipline.test_list && (
+          {studentDiscipline.test_list && (
             <BadgeList
               className="student-discipline-page__disciplines"
-              items={discipline.test_list}
+              items={studentDiscipline.test_list}
               keyMap={{ title: 'name' }}
             />
           )}

@@ -1,6 +1,31 @@
-@import 'src/scss/vars';
+@import 'src/scss/vars.scss';
 
 .student-discipline-page {
+  &__badge {
+    height: 136px;
+    width: 300px;
+    padding: 10px 15px;
+    margin: 0 20px 20px 0;
+    position: relative;
+
+    &:nth-of-type(3n) {
+      margin-right: 0;
+    }
+  }
+
+  &__title {
+    font-size: 24px;
+    line-height: 23px;
+    font-weight: 500;
+    color: $main-blue;
+  }
+
+  &__info-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
   &__info-table {
     height: 96px;
     width: 100%;
@@ -53,28 +78,28 @@
     margin-top: 20px;
   }
 
-  .badge {
-    height: 48px;
-    text-align: center;
-    padding: 10px;
+  &__self-test {
+    .badge {
+      height: 48px;
+      text-align: center;
+      padding: 10px;
 
-    &__title {
-      font-size: 14px;
-      font-weight: 500;
-      color: $text-heading;
+      &__title {
+        font-size: 14px;
+        font-weight: 500;
+        color: $text-heading;
+      }
     }
-  }
+    .badge:nth-of-type(2n) {
+      background-color: $main-blue;
 
-  .badge:nth-of-type(2n) {
-    background-color: $main-blue;
-
-    &:hover {
-      background-color: darken($main-blue, 5%);
+      &:hover {
+        background-color: darken($main-blue, 5%);
+      }
     }
-  }
-
-  .badge:nth-of-type(2n) .badge__title {
-    color: #ffffff;
+    .badge:nth-of-type(2n) .badge__title {
+      color: #ffffff;
+    }
   }
 
   &__start-check {
@@ -110,7 +135,7 @@
     }
 
     &-nav {
-      width: 100%;
+      width: 70%;
 
       div:not([class]) {
         display: flex;
@@ -120,6 +145,7 @@
     &-tab {
       $tab: &;
 
+      width: 240px;
       font-weight: 500;
       font-size: 18px;
       line-height: 17px;
