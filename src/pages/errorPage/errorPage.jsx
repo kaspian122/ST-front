@@ -1,12 +1,9 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { useDidMount } from '../../utils/hooks';
 import './errorPage.scss';
 function ErrorPage({ setTitle = () => {} }) {
-  const dispatch = useDispatch();
   const history = useHistory();
-  const disciplines = useSelector(state => state.disciplines);
   useDidMount(() => {
     setTitle('');
   });
