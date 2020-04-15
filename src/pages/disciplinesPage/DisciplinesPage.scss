@@ -1,4 +1,20 @@
 @import 'src/scss/vars';
 
 .disciplines-page {
+  &__actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  &__search {
+    width: 460px;
+    input {
+      padding-left: 45px !important;
+      border: 1px solid $main-blue;
+    }
+  }
+  &__add {
+    display: inline;
+  }
 }
