@@ -10,6 +10,7 @@ import { useDidMount } from '../utils/hooks';
 import Api from '../services/api/api';
 import AppActions from '../store/actions/appActions';
 import RouterPaths, { freeRoutes } from '../constants/routerPaths';
+import Modal from './Modal/Modal';
 
 function PrivateRoute(route) {
   return (
@@ -54,6 +55,7 @@ function App(props) {
             )
           )}
         </Switch>
+        <Modal />
       </div>
     )
   );
