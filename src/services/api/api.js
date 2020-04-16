@@ -78,6 +78,14 @@ const getSolution = id => http.get(`teacher/details-solution/${id}/`);
 
 const sendMark = data => http.post('/teacher/send-mark/', data);
 
+const createDiscipline = data =>
+  http.post('/teacher/discipline/create/', {
+    ...data,
+    semester: data.semester.id,
+  });
+
+const getSemester = () => http.get(`/teacher/semester/`);
+
 const Api = {
   authMe,
   auth,
@@ -94,6 +102,8 @@ const Api = {
   getSolution,
   sendMark,
   getStudentDiscipline,
+  createDiscipline,
+  getSemester,
 };
 
 export default Api;
