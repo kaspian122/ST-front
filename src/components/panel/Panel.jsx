@@ -4,53 +4,43 @@ import PropTypes from 'prop-types';
 import CssUtils from '../../utils/sassUtils';
 
 import './Panel.scss';
+import TestStatus from './panelConstants';
 
-function Panel(props) {
-  const [status, setStatus] = useState('');
+function Panel({ title, status, score, date, icon, onClick }) {
+  const className = CssUtils.mergeModifiers('panel', { [status]: !!status });
 
-  const baseClass = 'panel';
-  const className = CssUtils.mergeModifiers(baseClass, {
-    available: props.status === 'available',
-    completed: props.status === 'completed',
-    closed: props.status === 'closed',
-  });
-
-  useEffect(() => {
-    setStatus(props.status);
-  }, [setStatus, props.status]);
-
-  let info;
+  const info = [];
   switch (status) {
-    case 'available':
-      info = (
-        <div className={`${baseClass}__info`}>
-          <div className={`${baseClass}__text--left`}>Доступен</div>
-          <div className={`${baseClass}__text--right`}>до {props.date}</div>
+    case TestStatus.COMPLETED:
+      info.push(
+        <div className="panel__info">
+          <div className="panel__text panel__text--left">Доступен</div>
+          <div className="panel__text panel__text--right">до {date}</div>
         </div>
       );
       break;
-    case 'completed':
-      info = (
-        <div className={`${baseClass}__info`}>
-          <div className={`${baseClass}__text--left`}>Завершен</div>
-          <div className={`${baseClass}__text--right`}>
-            {!Number.isNaN(Number(props.score)) ? `Оценка ${props.score}` : `${props.score}`}
+    case TestStatus.AVAILABLE:
+      info.push(
+        <div className="panel__info">
+          <div className="panel__text--left">Завершен</div>
+          <div className="panel__text--right">
+            {!Number.isNaN(Number(score)) ? `Оценка ${score}` : `${score}`}
           </div>
         </div>
       );
       break;
     default:
-      info = (
-        <div className={`${baseClass}__info`}>
-          <div className={`${baseClass}__text--left`}>Закрыт</div>
+      info.push(
+        <div className="panel__info">
+          <div className="panel__text--left">Закрыт</div>
         </div>
       );
   }
 
   return (
-    <div className={`badge ${className}`} onClick={props.onClick}>
-      <div className={`${baseClass}__title`}>{props.title}</div>
-      <div className={`${baseClass}__icon ${baseClass}__icon--${props.status}`}>{props.icon}</div>
+    <div className={`badge ${className}`} onClick={onClick}>
+      <div className="panel__title">{title}</div>
+      <div className={`panel__icon panel__icon--${status}`}>{icon}</div>
       {info}
     </div>
   );
@@ -58,7 +48,7 @@ function Panel(props) {
 
 Panel.propTypes = {
   title: PropTypes.string,
-  status: PropTypes.oneOf(['available', 'completed', 'closed']),
+  status: PropTypes.oneOf([TestStatus.COMPLETED, TestStatus.AVAILABLE, TestStatus.CLOSED]),
   score: PropTypes.string,
   date: PropTypes.string,
   icon: PropTypes.element,
@@ -67,7 +57,7 @@ Panel.propTypes = {
 
 Panel.defaultProps = {
   title: '',
-  status: null,
+  status: undefined,
   score: '',
   date: '',
   icon: null,

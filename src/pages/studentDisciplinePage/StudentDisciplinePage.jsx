@@ -1,34 +1,129 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router';
 import { Tabs } from 'antd';
 
 import { ReactComponent as PointerSVG } from '../../static/images/svg/marker.svg';
-import './StudentDisciplinePage.scss';
+import { ReactComponent as InfoSVG } from '../../static/images/svg/info.svg';
+
+import Panel from '../../components/panel';
 import BadgeList from '../../components/badgeList';
 
-import RouterPaths from '../../constants/routerPaths';
+import './StudentDisciplinePage.scss';
+import '../../scss/tabs.scss';
 import Api from '../../services/api/api';
 
+import RouterPaths from '../../constants/routerPaths';
 const { TabPane } = Tabs;
 
 function StudentDisciplinePage({ setTitle = () => {} }) {
-  const [studentDiscipline, setStudentDiscipline] = useState({});
-  const { params } = useRouteMatch(RouterPaths.studentDiscipline);
+  const studentDiscipline = {
+    id: 0,
+    name: 'Физика',
+    test_list: [
+      {
+        id: 0,
+        name: 'Термодинамика',
+        status: 'available',
+        date: '01.01.2020',
+        score: '4',
+        questions: 25,
+        time: 20,
+        attempts: 2,
+      },
+      {
+        id: 1,
+        name: 'Динамика',
+        status: 'completed',
+        date: '01.01.2020',
+        score: '4',
+        questions: 25,
+        time: 20,
+        attempts: 2,
+      },
+      {
+        id: 2,
+        name: 'Термодинамика',
+        status: 'available',
+        date: '01.01.2020',
+        score: '4',
+        questions: 25,
+        time: 20,
+        attempts: 2,
+      },
+      {
+        id: 3,
+        name: 'Динамика',
+        status: 'closed',
+        date: '01.01.2020',
+        score: '4',
+        questions: 25,
+        time: 20,
+        attempts: 2,
+      },
+      {
+        id: 4,
+        name: 'Термодинамика',
+        status: 'completed',
+        date: '01.01.2020',
+        score: '4',
+        questions: 25,
+        time: 20,
+        attempts: 2,
+      },
+      {
+        id: 5,
+        name: 'Динамика',
+        status: 'closed',
+        date: '01.01.2020',
+        score: '4',
+        questions: 25,
+        time: 20,
+        attempts: 2,
+      },
+      {
+        id: 6,
+        name: 'Термодинамика',
+        status: 'completed',
+        date: '01.01.2020',
+        score: 'На проверке',
+        questions: 25,
+        time: 20,
+        attempts: 2,
+      },
+    ],
+  };
+
+  // const [studentDiscipline, setStudentDiscipline] = useState({});
+  // const { params } = useRouteMatch(RouterPaths.studentDiscipline);
+  // const modalType = useSelector(state => state.modal?.type);
 
   useEffect(() => {
-    setTitle(studentDiscipline?.name);
+    setTitle(studentDiscipline.name);
   }, [setTitle, studentDiscipline]);
 
-  useEffect(() => {
-    Api.getStudentDisciplines(params.id).then(response => {
-      setStudentDiscipline(response);
-    });
-  });
+  // useEffect(() => {
+  //   Api.getStudentDiscipline(params.id).then(response => {
+  //     setStudentDiscipline(response);
+  //   });
+  // }, [params.id, modalType]);
 
+  const icon = <InfoSVG />;
   return (
     <div className="student-discipline-page">
-      <Tabs defaultActiveKey="self-test">
-        <TabPane tab="Тесты" key="tests" disabled />
+      <Tabs defaultActiveKey="tests">
+        <TabPane tab="Тесты" key="tests">
+          {studentDiscipline.test_list.map(test => (
+            <Panel
+              key={test.id}
+              title={test.name}
+              status={test.status}
+              date={test.date}
+              score={test.score}
+              icon={icon}
+            ></Panel>
+          ))}
+        </TabPane>
         <TabPane tab="Самопроверка" key="self-test">
           <p className="student-discipline-page__label">
             Тест для проведения самопроверки, оценка не ставится
@@ -40,13 +135,15 @@ function StudentDisciplinePage({ setTitle = () => {} }) {
               Для каждого раздела будет сформировано по 10 вопросов
             </p>
           </div>
-          {studentDiscipline.test_list && (
-            <BadgeList
-              className="student-discipline-page__disciplines"
-              items={studentDiscipline.test_list}
-              keyMap={{ title: 'name' }}
-            />
-          )}
+          <div className="student-discipline-page__self-test">
+            {studentDiscipline.test_list && (
+              <BadgeList
+                className="student-discipline-page__self-test"
+                items={studentDiscipline.test_list}
+                keyMap={{ title: 'name' }}
+              />
+            )}
+          </div>
           <button type="button" className="student-discipline-page__start-check">
             Начать самопроверку
           </button>
