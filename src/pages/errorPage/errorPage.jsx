@@ -1,14 +1,16 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDidMount } from '../../utils/hooks';
+import RouterPaths from '../../constants/routerPaths';
 import './errorPage.scss';
+
 function ErrorPage({ setTitle = () => {} }) {
   const history = useHistory();
   useDidMount(() => {
     setTitle('');
   });
   const handleDisciplinesClick = useCallback(() => {
-    history.push(`/disciplines`);
+    history.push(RouterPaths.disciplines);
   }, [history]);
   return (
     <div className="error-page">
@@ -17,7 +19,7 @@ function ErrorPage({ setTitle = () => {} }) {
         <span>Страница не найдена</span>
       </div>
       <div className="error-page__button" onClick={handleDisciplinesClick}>
-        Вернуться на главную(?){' '}
+        Вернуться на главную(?)
       </div>
     </div>
   );
