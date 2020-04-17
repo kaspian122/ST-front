@@ -41,6 +41,8 @@ const getDisciplines = () => http.get('teacher/disciplines/');
 
 const getDiscipline = id => http.get(`teacher/discipline/${id}/`);
 
+const getStudentDiscipline = id => http.get(`student/discipline/${id}/`);
+
 const getGroups = () => http.get('teacher/group-list/');
 
 const getThemes = discipline => http.get(`teacher/themes/${discipline}/`);
@@ -99,6 +101,7 @@ const Api = {
   getTest,
   getSolution,
   sendMark,
+  getStudentDiscipline,
   createDiscipline,
   getSemester,
 };
