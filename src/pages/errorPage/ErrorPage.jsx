@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDidMount } from '../../utils/hooks';
 import RouterPaths from '../../constants/routerPaths';
-import './errorPage.scss';
+import './ErrorPage.scss';
 
 function ErrorPage({ setTitle = () => {} }) {
   const history = useHistory();
