@@ -8,7 +8,7 @@ import TestsPage from '../pages/testsPage';
 import DisciplinePage from '../pages/disciplinePage';
 import TestInfo from '../components/TestInfo';
 import TestSolution from '../components/TestSolution';
-import ErrorPage from '../pages/errorPage';
+import ErrorPage from '../pages/errorPage/errorPage';
 
 const Routes = [
   makeRoute(RouterPaths.mainPage, IndexPage, true),

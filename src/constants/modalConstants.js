@@ -3,6 +3,7 @@ export const ModalTypes = {
   EDIT_THEME: 'EDIT_THEME',
   ADD_TEST: 'ADD_TEST',
   CHECK_TEST: 'CHECK_TEST',
+  WARNING: 'WARNING',
 };
 
 export const ModalTitles = {
