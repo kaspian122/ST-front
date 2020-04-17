@@ -1,17 +1,22 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDidMount } from '../../utils/hooks';
 import RouterPaths from '../../constants/routerPaths';
 import './ErrorPage.scss';
+import TitleContext from '../../utils/titleContext';
 
-function ErrorPage({ setTitle = () => {} }) {
+function ErrorPage() {
   const history = useHistory();
+  const { setTitle } = useContext(TitleContext);
+
   useDidMount(() => {
     setTitle('');
   });
+
   const handleDisciplinesClick = useCallback(() => {
     history.push(RouterPaths.disciplines);
   }, [history]);
+
   return (
     <div className="error-page">
       <div className="error-page__text">

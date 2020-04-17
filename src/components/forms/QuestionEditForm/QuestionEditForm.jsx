@@ -84,4 +84,8 @@ QuestionEditForm.propTypes = {
   onChange: PropTypes.func,
 };
 
+QuestionEditForm.defaultProps = {
+  onChange: () => {},
+};
+
 export default QuestionEditForm;

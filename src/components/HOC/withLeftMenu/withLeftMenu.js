@@ -12,6 +12,7 @@ import './withLeftMenu.scss';
 import Consumer from '../../PageModal';
 import ModalActions from '../../../store/actions/modalActions';
 import { ModalTitles } from '../../../constants/modalConstants';
+import TitleContext from '../../../utils/titleContext';
 
 function withLeftMenu(Component) {
   return function Wrapper() {
@@ -64,9 +65,11 @@ function withLeftMenu(Component) {
                 {modal ? ModalTitles[modal.type] : title}
               </div>
             </div>
-            <Consumer>
-              <Component setTitle={setTitle} />
-            </Consumer>
+            <TitleContext.Provider value={{ title, setTitle }}>
+              <Consumer>
+                <Component />
+              </Consumer>
+            </TitleContext.Provider>
           </div>
         </div>
       </div>
