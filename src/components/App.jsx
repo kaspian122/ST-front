@@ -10,7 +10,7 @@ import { useDidMount } from '../utils/hooks';
 import Api from '../services/api/api';
 import AppActions from '../store/actions/appActions';
 import RouterPaths, { freeRoutes } from '../constants/routerPaths';
-import Modal from './Modal/Modal';
+import Modal from './modal/Modal';
 
 function PrivateRoute(route) {
   return (

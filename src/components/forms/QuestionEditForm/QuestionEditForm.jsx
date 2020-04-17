@@ -81,7 +81,7 @@ QuestionEditForm.propTypes = {
       PropTypes.shape({ name: PropTypes.string.isRequired, is_correct: PropTypes.bool.isRequired })
     ),
   }).isRequired,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default QuestionEditForm;

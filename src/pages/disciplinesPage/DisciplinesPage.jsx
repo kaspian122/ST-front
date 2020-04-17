@@ -11,7 +11,7 @@ import BadgeList from '../../components/badgeList';
 
 import { ReactComponent as LupaSVG } from '../../static/images/svg/lupa.svg';
 import './DisciplinesPage.scss';
-import NewDiscipline from '../newDiscipline/NewDiscipline';
+import NewDiscipline from '../../components/discipline/NewDiscipline';
 import RouterPaths from '../../constants/routerPaths';
 
 function DisciplinesPage({ setTitle = () => {}, items, onClick, onNewClick, newText }) {
