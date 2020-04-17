@@ -7,7 +7,7 @@ const RouterPaths = {
   tests: '/tests',
   loginPage: '/login',
   registration: '/registration',
-  errorPage: '/error',
+  errorPage: '',
   fakePage: '/fake',
   makeHera: 'hera',
   testPage: '/test/:id',
