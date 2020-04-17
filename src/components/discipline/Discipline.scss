@@ -2,10 +2,8 @@
 
 .discipline {
   $self: &;
-
   border: 1px solid $main-blue;
   border-radius: 6px;
-
   height: 40px;
   display: inline-flex;
   flex-direction: column;
@@ -17,9 +15,11 @@
   &:hover {
     background: $hover-blue;
   }
+
   &:active {
     background: $active-blue;
   }
+
   &__title {
     color: $main-blue;
     font-weight: bold;
@@ -46,6 +46,7 @@
     box-sizing: border-box;
     box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
     cursor: pointer;
+    
     #{$self}__text {
       font-size: 12px;
       line-height: 11px;

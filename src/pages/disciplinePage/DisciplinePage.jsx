@@ -77,10 +77,10 @@ function DisciplinePage({ setTitle = () => {} }) {
             />
           )}
         </TabPane>
-        <TabPane tab="Журнал" key="journal" >
+        <TabPane tab="Журнал" key="journal" disabled>
           2
         </TabPane>
-        <TabPane tab="Информация" key="info" >
+        <TabPane tab="Информация" key="info" disabled>
           xyu1
         </TabPane>
       </Tabs>
