@@ -1,4 +1,17 @@
 @import 'src/scss/vars';
 
 .disciplines-page {
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    &-search {
+      width: 460px;
+    }
+  }
+
+  &__button {
+    width: 300px;
+  }
 }

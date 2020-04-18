@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { useRouteMatch } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { Tabs } from 'antd';
@@ -13,29 +12,36 @@ import BadgeList from '../../components/badgeList';
 import './DisciplinePage.scss';
 import ModalActions from '../../store/actions/modalActions';
 import { ModalTypes } from '../../constants/modalConstants';
+import NewDisciplinePage from '../newDisciplinePage';
+import TitleContext from '../../utils/titleContext';
 
 const { TabPane } = Tabs;
 
-function DisciplinePage({ setTitle = () => {} }) {
+function DisciplinePageById() {
   const history = useHistory();
   const [discipline, setDiscipline] = useState({});
   const { params } = useRouteMatch(RouterPaths.discipline);
+  const { setTitle } = useContext(TitleContext);
+
   const dispatch = useDispatch();
   const modalType = useSelector(state => state.modal?.type);
 
   useEffect(() => {
     setTitle(discipline?.name);
   }, [setTitle, discipline]);
+
   useEffect(() => {
     Api.getDiscipline(params.id).then(response => {
       setDiscipline(response);
     });
   }, [params.id, modalType]);
+
   useDidMount(() => {
     Api.getDiscipline(params.id).then(response => {
       setDiscipline(response);
     });
   });
+
   const handleThemeClick = useCallback(
     item => {
       dispatch(ModalActions.openModal(ModalTypes.EDIT_THEME, item));
@@ -88,8 +94,12 @@ function DisciplinePage({ setTitle = () => {} }) {
   );
 }
 
-DisciplinePage.propTypes = {
-  setTitle: PropTypes.func.isRequired,
+const DisciplinePage = () => {
+  const { params } = useRouteMatch(RouterPaths.discipline);
+
+  const Component = params.id === 'new' ? NewDisciplinePage : DisciplinePageById;
+
+  return <Component />;
 };
 
 export default DisciplinePage;

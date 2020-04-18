@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useRouteMatch } from 'react-router';
+import React, { useContext, useEffect } from 'react';
 import { Tabs } from 'antd';
 
 import { ReactComponent as PointerSVG } from '../../static/images/svg/marker.svg';
@@ -11,12 +9,10 @@ import BadgeList from '../../components/badgeList';
 
 import './StudentDisciplinePage.scss';
 import '../../scss/tabs.scss';
-import Api from '../../services/api/api';
-
-import RouterPaths from '../../constants/routerPaths';
+import TitleContext from '../../utils/titleContext';
 const { TabPane } = Tabs;
 
-function StudentDisciplinePage({ setTitle = () => {} }) {
+function StudentDisciplinePage() {
   const studentDiscipline = {
     id: 0,
     name: 'Физика',
@@ -93,6 +89,8 @@ function StudentDisciplinePage({ setTitle = () => {} }) {
       },
     ],
   };
+
+  const { setTitle } = useContext(TitleContext);
 
   // const [studentDiscipline, setStudentDiscipline] = useState({});
   // const { params } = useRouteMatch(RouterPaths.studentDiscipline);
