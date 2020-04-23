@@ -1,3 +1,5 @@
+@import 'src/scss/vars';
+
 @font-face {
   font-family: 'Montserrat';
   src: url('static/fonts/Montserrat/Montserrat-Thin.ttf') format('truetype');
@@ -256,4 +258,28 @@ code {
 a {
   color: black;
   text-decoration: none;
+}
+
+::-webkit-scrollbar-button {
+  height: 0;
+}
+
+::-webkit-scrollbar-track {
+  background: #b3ddeb;
+  -webkit-border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  background-color: $main-blue;
+}
+
+::-webkit-resizer {
+  height: 0;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 7px;
 }

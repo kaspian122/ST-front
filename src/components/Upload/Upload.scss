@@ -1,0 +1,45 @@
+@import 'src/scss/vars';
+
+.upload {
+  &__panel {
+    height: 48px;
+    padding: 10px 10px 6px 10px;
+    border: 1px dashed $main-blue;
+    box-sizing: border-box;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0.5;
+
+    &--secondary {
+      opacity: 1;
+    }
+  }
+
+  &__label {
+    font-size: 14px;
+    line-height: 13px;
+    color: $main-blue;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+
+  &__input {
+    display: none;
+  }
+
+  &__picture {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  &__addon {
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    right: -20%;
+    top: -20%;
+  }
+}

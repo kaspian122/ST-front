@@ -5,7 +5,10 @@ import { Input, Select } from 'antd';
 import Answers from './Answers';
 import './QuestionEditForm.scss';
 import QuestionConstants from '../../../constants/questions';
-import GovnoUpload from '../../govnoUpload';
+import Upload from '../../Upload';
+
+import { ReactComponent as PictureSVG } from '../../../static/images/svg/upload-picture.svg';
+import { ReactComponent as ArrowSVG } from '../../../static/images/svg/arrow.svg';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -40,31 +43,56 @@ function QuestionEditForm({ onChange, form }) {
           res.answers = [];
           break;
         case QuestionConstants.questionTypes.INPUT_NUMBER:
+        case QuestionConstants.questionTypes.INPUT_STRING:
           res.answers = [{}];
           break;
         default:
       }
-
       handleComplexChange(res);
     },
     [handleComplexChange]
   );
+
   return (
     form && (
       <div className="question-form">
         <div className="question-form__row">
           <div className="question-form__row-item">
-            <div className="question-form__label">Текст вопроса</div>
-            <TextArea className="input" value={form.name} onChange={handleChange('name')} />
-            <GovnoUpload value={form.image} onChange={handleChange('image')} />
+            <div className="question-form__label">Введите вопрос</div>
+            <TextArea
+              className="question-form__text-area"
+              value={form.name}
+              onChange={handleChange('name')}
+            />
           </div>
           <div className="question-form__row-item">
-            <div className="question-form__label">Тип вопроса</div>
-            <Select value={form.type} onChange={handleTypeChange}>
-              {QuestionConstants.allowedQuestionTypes.map(type => (
-                <Option key={type}>{QuestionConstants.questionTypesTitles[type]}</Option>
-              ))}
-            </Select>
+            <div className="question-form__column">
+              <div className="question-form__column-item">
+                <div className="question-form__label">Тип вопроса</div>
+                <Select
+                  value={form.type}
+                  onChange={handleTypeChange}
+                  placeholder="Выбор типа ответа"
+                  suffixIcon={<ArrowSVG className="question-form__icon" />}
+                  dropdownRender={menu => (
+                    <div className="question-form__question-type-select">{menu}</div>
+                  )}
+                >
+                  {QuestionConstants.allowedQuestionTypes.map(type => (
+                    <Option key={type}>{QuestionConstants.questionTypesTitles[type]}</Option>
+                  ))}
+                </Select>
+              </div>
+              <div className="question-form__column-item">
+                <Upload
+                  className="question-form__upload"
+                  value={form.image}
+                  onChange={handleChange('image')}
+                  label="Загрузить изображение к вопросу"
+                  icon={<PictureSVG />}
+                />
+              </div>
+            </div>
           </div>
         </div>
         <Answers value={form.answers} onChange={handleChange('answers')} type={form.type} />
