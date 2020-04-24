@@ -38,10 +38,7 @@ const logout = () =>
     }
   });
 
-const getDisciplines = role => {
-  if (role === appConstants.roles.STUDENT) return http.get('student/disciplines/');
-  return http.get('teacher/disciplines/');
-};
+const getDisciplines = () => http.get('/common/disciplines/');
 
 const getDiscipline = id => http.get(`teacher/discipline/${id}/`);
 
@@ -55,7 +52,7 @@ const createTest = data => {
   const formattedData = {
     name: data.name,
     type: 'GROUPS',
-    duration: data.duration,
+    duration: Number(data.duration),
     discipline: data.discipline,
     description: data.description,
     try_count: Number(data.tryCount),
