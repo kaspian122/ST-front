@@ -1,4 +1,4 @@
-import { makeRoute } from '../utils/routerUtils';
+import { makeRoleRoute, makeRoute } from '../utils/routerUtils';
 import RouterPaths from '../constants/routerPaths';
 import LoginPage from '../pages/loginPage';
 import RegistrationPage from '../pages/registrationPage';
@@ -10,11 +10,13 @@ import TestInfo from '../components/TestInfo';
 import TestSolution from '../components/TestSolution';
 import ErrorPage from '../pages/errorPage';
 
+const ROLES = { teacher: 'TEACHER', student: 'STUDENT' };
+
 const Routes = [
   makeRoute(RouterPaths.mainPage, IndexPage, true),
   makeRoute(RouterPaths.loginPage, LoginPage),
   makeRoute(RouterPaths.disciplines, DisciplinesPage, true, true),
-  makeRoute(RouterPaths.discipline, DisciplinePage, false, true),
+  makeRoleRoute([ROLES.student])(RouterPaths.discipline, DisciplinePage, false, true),
   makeRoute(RouterPaths.tests, TestsPage, false, true),
   makeRoute(RouterPaths.registration, RegistrationPage),
   makeRoute(RouterPaths.testPage, TestInfo, false, true),

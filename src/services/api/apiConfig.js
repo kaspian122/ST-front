@@ -30,7 +30,12 @@ http.interceptors.response.use(
     if (status === 401) {
       sessionStorage.removeItem('refresh');
       sessionStorage.removeItem('token');
-      if (history.pathname !== RouterPaths.loginPage) history.push(RouterPaths.loginPage);
+      if (history.pathname !== RouterPaths.loginPage) history.replace(RouterPaths.loginPage);
+    }
+    if (status === 403) {
+      if (history.pathname !== RouterPaths.disciplines) history.replace(RouterPaths.disciplines);
+      // если не доступны дисципллины, то перейти на главную доступную страницу
+      // else history.replace(RouterPaths.)
     }
     return Promise.reject(error);
   }
