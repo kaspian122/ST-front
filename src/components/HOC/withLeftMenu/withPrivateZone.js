@@ -13,17 +13,30 @@ import Consumer from '../../PageModal';
 import ModalActions from '../../../store/actions/modalActions';
 import { ModalTitles } from '../../../constants/modalConstants';
 import TitleContext from '../../../utils/titleContext';
+import RouterPaths from '../../../constants/routerPaths';
+import AppSelectors from '../../../store/selectors/appSelectors';
 
-function withLeftMenu(Component) {
-  return function Wrapper() {
+function withPrivateZone(Component, allowedRoles = []) {
+  return function PrivateZone() {
     const [title, setTitle] = useState('Название страницы');
     const user = useSelector(state => state.app.user);
+    const isAuthorized = !!sessionStorage.getItem('token');
+    const userRole = useSelector(AppSelectors.userRole);
     const history = useHistory();
     const { pathname } = useLocation();
     const modal = useSelector(state => state.modal);
     const dispatch = useDispatch();
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+      if (!isAuthorized) {
+        history.replace(RouterPaths.loginPage);
+        return;
+      }
+
+      if (!allowedRoles.includes(userRole)) {
+        history.replace(RouterPaths.disciplines);
+      }
+    }, [history, isAuthorized, userRole]);
 
     const handleLogOut = useCallback(() => {
       Api.logout();
@@ -35,6 +48,7 @@ function withLeftMenu(Component) {
         history.goBack();
       }
     };
+
     return (
       <div className="logged-zone">
         <div className="logged-zone__menu">
@@ -77,4 +91,4 @@ function withLeftMenu(Component) {
   };
 }
 
-export default withLeftMenu;
+export default withPrivateZone;

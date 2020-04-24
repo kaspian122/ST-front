@@ -19,15 +19,16 @@ function DisciplinesPage({ items, onClick, onNewClick, newText }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const disciplines = useSelector(state => state.disciplines);
-  const handleNewDisciplineClick = useCallback(() => {
-    history.push(RouterPaths.newDiscipline);
-  }, [history]);
   const { setTitle } = useContext(TitleContext);
 
   useDidMount(() => {
     dispatch(DisciplinesActions.setDisciplines());
     setTitle('Дисциплины');
   });
+
+  const handleNewDisciplineClick = useCallback(() => {
+    history.push(RouterPaths.newDiscipline);
+  }, [history]);
 
   const handleDisciplineClick = useCallback(
     item => {
@@ -60,7 +61,6 @@ function DisciplinesPage({ items, onClick, onNewClick, newText }) {
 }
 
 DisciplinesPage.propTypes = {
-  setTitle: PropTypes.func.isRequired,
   onClick: PropTypes.func,
   onNewClick: PropTypes.func,
   newText: PropTypes.string,

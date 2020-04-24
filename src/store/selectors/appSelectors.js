@@ -1,5 +1,7 @@
 const userDataId = state => state.app.userData.id;
 
+const userRole = state => state.app.user.role;
+
 const chosenTariffId = state => state.app.chosenTariffId;
 
 const chosenNumber = state => state.app.chosenNumber;
@@ -18,6 +20,7 @@ const locale = state => state.app.locale;
 
 const AppSelectors = {
   userDataId,
+  userRole,
   chosenTariffId,
   chosenNumber,
   headerHeight,
