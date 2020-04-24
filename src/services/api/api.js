@@ -1,6 +1,7 @@
 import http from './apiConfig';
 import history from '../../utils/history';
 import RouterPaths from '../../constants/routerPaths';
+import appConstants from '../../constants/appConstants';
 
 /**
  * @param body {Object}
@@ -37,7 +38,10 @@ const logout = () =>
     }
   });
 
-const getDisciplines = () => http.get('teacher/disciplines/');
+const getDisciplines = role => {
+  if (role === appConstants.roles.STUDENT) return http.get('student/disciplines/');
+  return http.get('teacher/disciplines/');
+};
 
 const getDiscipline = id => http.get(`teacher/discipline/${id}/`);
 

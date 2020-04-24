@@ -16,7 +16,12 @@ const Routes = [
   makeRoute(RouterPaths.mainPage, IndexPage, true),
   makeRoute(RouterPaths.loginPage, LoginPage),
   makeRoute(RouterPaths.disciplines, DisciplinesPage, true, true),
-  makeRoleRoute([ROLES.student])(RouterPaths.discipline, DisciplinePage, false, true),
+  makeRoleRoute([ROLES.student, ROLES.teacher])(
+    RouterPaths.discipline,
+    DisciplinePage,
+    false,
+    true
+  ),
   makeRoute(RouterPaths.tests, TestsPage, false, true),
   makeRoute(RouterPaths.registration, RegistrationPage),
   makeRoute(RouterPaths.testPage, TestInfo, false, true),

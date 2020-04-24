@@ -11,8 +11,8 @@ const setData = disciplines => ({
   payload: disciplines,
 });
 
-const setDisciplines = () => dispatch => {
-  Api.getDisciplines().then(disciplines => {
+const setDisciplines = role => dispatch => {
+  Api.getDisciplines(role).then(disciplines => {
     dispatch(setData(disciplines));
   });
 };

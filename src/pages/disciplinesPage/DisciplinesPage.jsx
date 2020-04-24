@@ -14,15 +14,17 @@ import './DisciplinesPage.scss';
 import RouterPaths from '../../constants/routerPaths';
 import TitleContext from '../../utils/titleContext';
 import Button from '../../components/button';
+import AppSelectors from '../../store/selectors/appSelectors';
 
 function DisciplinesPage({ items, onClick, onNewClick, newText }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const disciplines = useSelector(state => state.disciplines);
+  const userRole = useSelector(AppSelectors.userRole);
   const { setTitle } = useContext(TitleContext);
 
   useDidMount(() => {
-    dispatch(DisciplinesActions.setDisciplines());
+    dispatch(DisciplinesActions.setDisciplines(userRole));
     setTitle('Дисциплины');
   });
 
