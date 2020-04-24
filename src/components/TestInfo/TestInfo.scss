@@ -1,0 +1,99 @@
+@import 'src/scss/vars';
+
+.test-info {
+  &__title {
+    color: $main-blue;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  &__dropdown {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 20px 16px 20px;
+    background: #ffffff;
+    border: 1px solid $main-blue;
+    border-radius: 6px;
+    margin-top: 20px;
+    cursor: pointer;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
+
+    &--incorrect {
+      background-color: #02b76a;
+    }
+    &_id {
+      font-size: 18px;
+      width: 100%;
+      background-color: $main-blue;
+    }
+    &_name {
+      display: flex;
+      font-size: 18px;
+      color: $main-blue;
+    }
+    &__arrow {
+      padding-top: 5px;
+      height: 24px;
+      width: 24px;
+    }
+    &__arrow path {
+      stroke: $main-blue;
+    }
+  }
+  &__dropdown:hover {
+    background: $main-blue;
+  }
+
+  &__dropdown:hover &__dropdown_name,
+  &__dropdown:hover &__dropdown__arrow path {
+    color: #ffffff;
+    stroke: #ffffff;
+  }
+}
+
+.dropdown {
+  border: 1px solid $main-blue;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  padding: 10px;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+
+  &_content {
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    div {
+      width: 48%;
+      border: 1px solid $main-blue;
+      border-radius: 6px;
+      padding: 20px 0 20px 20px;
+      margin-bottom: 10px;
+
+      h3 {
+        font-size: 14px;
+        color: $text-heading;
+        margin-bottom: 10px;
+      }
+    }
+  }
+  span {
+    color: $main-blue;
+  }
+  &__question {
+    padding: 17px 16px 17px 20px;
+    border-radius: 6px;
+    border: 1px solid $false;
+    margin-top: 10px;
+    &--incorrect {
+      border: 1px solid $main-blue;
+    }
+  }
+  &__arrow {
+    float: right;
+  }
+  &__question--incorrect path {
+    stroke: $main-blue;
+  }
+}
