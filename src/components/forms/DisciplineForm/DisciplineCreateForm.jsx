@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Input, Select } from 'antd';
 import { isEmpty } from 'lodash';
-import { useHistory, useRouteMatch } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import './DisciplineCreateForm.scss';
+import PropTypes from 'prop-types';
 import Button from '../../button';
 import CssUtils from '../../../utils/sassUtils';
 import Api from '../../../services/api/api';
@@ -16,14 +17,7 @@ import { ModalTypes } from '../../../constants/modalConstants';
 const { TextArea } = Input;
 const { Option } = Select;
 
-const INIsemesters = [
-  {
-    name: 'Осенний семестр 2019/2020',
-    id: 24436,
-  },
-];
-
-function DisciplineCreateForm() {
+function DisciplineCreateForm({ isEdit }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const [form, setForm] = useState({
@@ -36,13 +30,25 @@ function DisciplineCreateForm() {
     corDescription: false,
     corSelect: false,
   });
-  const [semesters, setSemesters] = useState(INIsemesters);
+  const [semesters, setSemesters] = useState([{ id: null, name: '' }]);
+  const discipline = useParams(RouterPaths.discipline);
 
-  useDidMount(() => {
-    Api.getSemester().then(response => {
-      setSemesters(response);
-    });
-  });
+  const handleEditClick = () => {
+    Api.editDiscipline(discipline.id, form).then(dispatch(ModalActions.closeModal()));
+  };
+
+  const handleDeleteClick = () => {
+    dispatch(
+      ModalActions.openModal(ModalTypes.WARNING, {
+        title: 'Удаление дисциплины',
+        onOk: () => {
+          Api.deleteDiscipline(discipline.id).then(dispatch(ModalActions.closeModal()));
+        },
+        text: 'Вы уверены, что хотите удалить дисциплину?',
+        acceptTitle: 'Ок',
+      })
+    );
+  };
 
   const handleSaveClick = () => {
     if (
@@ -54,9 +60,8 @@ function DisciplineCreateForm() {
         ModalActions.openModal(ModalTypes.WARNING, {
           title: 'Сохранение дисциплины',
           onOk: () => {
-            if (form.description !== '' && form.name !== '' && form.semester !== '') {
+            if (form.description && form.name && form.semester) {
               Api.createDiscipline(form).then(() => {
-                console.log('ya dobavil');
                 history.push(RouterPaths.disciplines);
               });
             }
@@ -77,8 +82,24 @@ function DisciplineCreateForm() {
     setFormData({ ...formData, [name]: isEmpty(value) });
   };
 
+  useDidMount(() => {
+    Api.getSemester().then(response => {
+      setSemesters(response);
+    });
+    if (isEdit) {
+      Api.getDiscipline(discipline.id).then(response => {
+        setForm(response);
+      });
+    }
+  });
+
   return (
     <div className="discipline-form">
+      {isEdit && (
+        <div className="discipline-form__delete-button" onClick={handleDeleteClick}>
+          удалить дисциплину
+        </div>
+      )}
       <div className="discipline-form__info">
         <div className="discipline-form__info-label">Ведите название дисциплины</div>
         <div className="discipline-form__info-box">
@@ -97,12 +118,12 @@ function DisciplineCreateForm() {
             className={CssUtils.mergeModifiers('discipline-form__info-box-select', {
               incorrect: formData.corSelect,
             })}
-            placeholder="Выберете семстр"
+            placeholder="Выберите семестр"
           >
             {semesters.map(item => (
               <Option
                 className="discipline-form__info-box-select-variant"
-                value={item}
+                value={item.name}
                 key={item.id}
               >
                 {item.name}
@@ -124,9 +145,23 @@ function DisciplineCreateForm() {
           />
         </div>
       </div>
-      <Button onClick={handleSaveClick}>Сохранить</Button>
+      <Button
+        parentBlock="discipline-form"
+        type="submit"
+        onClick={isEdit ? handleEditClick : handleSaveClick}
+      >
+        Сохранить
+      </Button>
     </div>
   );
 }
+
+DisciplineCreateForm.propTypes = {
+  isEdit: PropTypes.bool,
+};
+
+DisciplineCreateForm.defaultProps = {
+  isEdit: false,
+};
 
 export default DisciplineCreateForm;

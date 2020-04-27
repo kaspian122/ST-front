@@ -10,6 +10,7 @@ import { useDidMount } from '../../utils/hooks';
 import BadgeList from '../../components/badgeList';
 
 import './DisciplinePage.scss';
+import '../../scss/tabs.scss';
 import ModalActions from '../../store/actions/modalActions';
 import { ModalTypes } from '../../constants/modalConstants';
 import NewDisciplinePage from '../newDisciplinePage';
@@ -17,6 +18,7 @@ import TitleContext from '../../utils/titleContext';
 import AppSelectors from '../../store/selectors/appSelectors';
 import appConstants from '../../constants/appConstants';
 import StudentDisciplinePage from '../studentDisciplinePage';
+import Button from '../../components/button';
 
 const { TabPane } = Tabs;
 
@@ -61,6 +63,9 @@ function DisciplinePageById() {
     dispatch(ModalActions.openModal(ModalTypes.ADD_TEST));
   }, [dispatch]);
 
+  const handleEditDisciplineClick = useCallback(() => {
+    dispatch(ModalActions.openModal(ModalTypes.EDIT_DISCIPLINE));
+  }, [dispatch]);
   return (
     <div className="discipline-page">
       <Tabs defaultActiveKey="themes">
@@ -89,8 +94,20 @@ function DisciplinePageById() {
         <TabPane tab="Журнал" key="journal" disabled>
           2
         </TabPane>
-        <TabPane tab="Информация" key="info" disabled>
-          xyu1
+        <TabPane tab="Информация" key="info">
+          <div className="discipline-page__row">
+            <div className="discipline-page__row-item">
+              <div className="discipline-page__discipline-description">
+                <p className="discipline-page__label">Описание дисциплины</p>
+                {discipline.description}
+              </div>
+            </div>
+            <div className="discipline-page__row-item">
+              <Button type="button" onClick={handleEditDisciplineClick} secondary>
+                редактировать дисциплину
+              </Button>
+            </div>
+          </div>
         </TabPane>
       </Tabs>
     </div>

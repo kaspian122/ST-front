@@ -89,6 +89,14 @@ const createDiscipline = data =>
 
 const getSemester = () => http.get(`teacher/semester/`);
 
+const editDiscipline = (id, data) =>
+  http.patch(`/teacher/discipline/${id}/`, {
+    ...data,
+    semester: data.semester.id,
+  });
+
+const deleteDiscipline = id => http.delete(`/teacher/discipline/${id}/`);
+
 const Api = {
   authMe,
   auth,
@@ -108,6 +116,8 @@ const Api = {
   getTestsForStudentByDiscipline,
   createDiscipline,
   getSemester,
+  editDiscipline,
+  deleteDiscipline,
 };
 
 export default Api;
