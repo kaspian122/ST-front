@@ -13,7 +13,6 @@ const RouterPaths = {
   testPage: '/test/:id',
   testSolution: '/test-solution/:id',
   studentDiscipline: '/student-disciplines/:id',
-
 };
 
 export const freeRoutes = [RouterPaths.mainPage, RouterPaths.registration, RouterPaths.loginPage];

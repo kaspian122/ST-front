@@ -1,6 +1,7 @@
 import http from './apiConfig';
 import history from '../../utils/history';
 import RouterPaths from '../../constants/routerPaths';
+import appConstants from '../../constants/appConstants';
 
 /**
  * @param body {Object}
@@ -37,7 +38,7 @@ const logout = () =>
     }
   });
 
-const getDisciplines = () => http.get('teacher/disciplines/');
+const getDisciplines = () => http.get('/common/disciplines/');
 
 const getDiscipline = id => http.get(`teacher/discipline/${id}/`);
 
@@ -51,7 +52,7 @@ const createTest = data => {
   const formattedData = {
     name: data.name,
     type: 'GROUPS',
-    duration: data.duration,
+    duration: Number(data.duration),
     discipline: data.discipline,
     description: data.description,
     try_count: Number(data.tryCount),

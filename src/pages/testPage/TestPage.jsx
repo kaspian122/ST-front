@@ -38,11 +38,12 @@ function TestPage() {
   const handleGroupsChange = value => setFormModel({ ...formModel, groups: value });
   const handleDateChange = (dates, dateStrings) =>
     setFormModel({ ...formModel, startDate: dateStrings[0], endDate: dateStrings[1] });
-  const handleTimeChange = (time, timeString) =>
+  const handleTimeChange = (time, timeString) => {
     setFormModel({
       ...formModel,
-      duration: (timeString.split('.')[0] * 60 + timeString.split('.')[1]) * 60,
+      duration: timeString.split('.')[0] * 60 + timeString.split('.')[1],
     });
+  };
   const handleTryCountChange = event =>
     setFormModel({ ...formModel, tryCount: event.target.value });
   const handleThemeChange = (themeId, newTheme) =>
