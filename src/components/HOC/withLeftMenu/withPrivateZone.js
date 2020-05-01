@@ -33,7 +33,7 @@ function withPrivateZone(Component, allowedRoles = []) {
         return;
       }
 
-      if (!allowedRoles.includes(userRole)) {
+      if (!!allowedRoles.length && !allowedRoles.includes(userRole)) {
         history.replace(RouterPaths.disciplines);
       }
     }, [history, isAuthorized, userRole]);

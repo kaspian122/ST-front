@@ -38,7 +38,7 @@ const logout = () =>
     }
   });
 
-const getDisciplines = () => http.get('/common/disciplines/');
+const getDisciplines = () => http.get('common/disciplines/');
 
 const getDiscipline = id => http.get(`teacher/discipline/${id}/`);
 
@@ -65,27 +65,27 @@ const createTest = data => {
     })),
     groups: data.groups,
   };
-  return http.post('/teacher/create-test/', formattedData);
+  return http.post('teacher/create-test/', formattedData);
 };
 
 const getTabs = id => http.get(`teacher/get-tabs/${id}/`);
 
 const sendTheme = body => http.post('teacher/theme/', body);
-const getTheme = id => http.get(`/teacher/theme/${id}/`);
+const getTheme = id => http.get(`teacher/theme/${id}/`);
 
 const getTest = id => http.get(`teacher/test/${id}/`);
 
 const getSolution = id => http.get(`teacher/details-solution/${id}/`);
 
-const sendMark = data => http.post('/teacher/send-mark/', data);
+const sendMark = data => http.post('teacher/send-mark/', data);
 
 const createDiscipline = data =>
-  http.post('/teacher/discipline/create/', {
+  http.post('teacher/discipline/create/', {
     ...data,
     semester: data.semester.id,
   });
 
-const getSemester = () => http.get(`/teacher/semester/`);
+const getSemester = () => http.get(`teacher/semester/`);
 
 const Api = {
   authMe,
