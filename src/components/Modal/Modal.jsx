@@ -5,7 +5,7 @@ import { ModalTypes } from '../../constants/modalConstants';
 import WarningModal from '../modalComponents/WarningModal';
 
 function Modal() {
-  const modal = useSelector(state => state.modal);
+  const modal = useSelector(state => state.portal);
   const type = modal?.type;
   const modalProps = modal?.props;
 

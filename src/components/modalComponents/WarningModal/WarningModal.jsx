@@ -4,18 +4,19 @@ import PropTypes from 'prop-types';
 
 import './WarningModal.scss';
 import ModalActions from '../../../store/actions/modalActions';
+import { ModalTypes } from '../../../constants/modalConstants';
 
 function WarningModal(props) {
   const dispatch = useDispatch();
 
   function handleCloseClick() {
     props.onClose();
-    dispatch(ModalActions.closeModal());
+    dispatch(ModalActions.closeModal(ModalTypes.WARNING));
   }
 
   function handleOkClick() {
     props.onOk();
-    dispatch(ModalActions.closeModal());
+    dispatch(ModalActions.closeModal(ModalTypes.WARNING));
   }
 
   return (
