@@ -15,8 +15,9 @@ import RouterPaths from '../../constants/routerPaths';
 import TitleContext from '../../utils/titleContext';
 import Button from '../../components/button';
 import AppSelectors from '../../store/selectors/appSelectors';
+import appConstants from '../../constants/appConstants';
 
-function DisciplinesPage({ items, onClick, onNewClick, newText }) {
+function DisciplinesPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const disciplines = useSelector(state => state.disciplines);
@@ -34,9 +35,13 @@ function DisciplinesPage({ items, onClick, onNewClick, newText }) {
 
   const handleDisciplineClick = useCallback(
     item => {
-      history.push(`/disciplines/${item.id}`);
+      if (userRole === appConstants.roles.STUDENT) {
+        history.push(`/student-disciplines/${item.id}`);
+      } else if (userRole === appConstants.roles.TEACHER) {
+        history.push(`/disciplines/${item.id}`);
+      }
     },
-    [history]
+    [history, userRole]
   );
 
   return (
@@ -47,9 +52,11 @@ function DisciplinesPage({ items, onClick, onNewClick, newText }) {
           placeholder="ПОИСК ДИСЦИПЛИНЫ"
           prefix={<LupaSVG />}
         />
-        <Button color="white" parentBlock="disciplines-page" onClick={handleNewDisciplineClick}>
-          Добавить дисциплину
-        </Button>
+        {userRole === appConstants.roles.TEACHER && (
+          <Button color="white" parentBlock="disciplines-page" onClick={handleNewDisciplineClick}>
+            Добавить дисциплину
+          </Button>
+        )}
       </div>
       <div className="disciplines-page__disciplines">
         <BadgeList
@@ -62,11 +69,6 @@ function DisciplinesPage({ items, onClick, onNewClick, newText }) {
   );
 }
 
-DisciplinesPage.propTypes = {
-  onClick: PropTypes.func,
-  onNewClick: PropTypes.func,
-  newText: PropTypes.string,
-};
 DisciplinesPage.defaultProps = {
   onClick: () => {},
   onNewClick: undefined,
