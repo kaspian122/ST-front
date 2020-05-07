@@ -1,5 +1,6 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Tabs } from 'antd';
+import { useRouteMatch } from 'react-router';
 
 import { ReactComponent as PointerSVG } from '../../static/images/svg/marker.svg';
 import { ReactComponent as InfoSVG } from '../../static/images/svg/info.svg';
@@ -10,117 +11,50 @@ import BadgeList from '../../components/badgeList';
 import './StudentDisciplinePage.scss';
 import '../../scss/tabs.scss';
 import TitleContext from '../../utils/titleContext';
+
+import Api from '../../services/api/api';
+import { useDidMount } from '../../utils/hooks';
+
+import RouterPaths from '../../constants/routerPaths';
+
 const { TabPane } = Tabs;
 
 function StudentDisciplinePage() {
-  const studentDiscipline = {
-    id: 0,
-    name: 'Физика',
-    test_list: [
-      {
-        id: 0,
-        name: 'Термодинамика',
-        status: 'available',
-        date: '01.01.2020',
-        score: '4',
-        questions: 25,
-        time: 20,
-        attempts: 2,
-      },
-      {
-        id: 1,
-        name: 'Динамика',
-        status: 'completed',
-        date: '01.01.2020',
-        score: '4',
-        questions: 25,
-        time: 20,
-        attempts: 2,
-      },
-      {
-        id: 2,
-        name: 'Термодинамика',
-        status: 'available',
-        date: '01.01.2020',
-        score: '4',
-        questions: 25,
-        time: 20,
-        attempts: 2,
-      },
-      {
-        id: 3,
-        name: 'Динамика',
-        status: 'closed',
-        date: '01.01.2020',
-        score: '4',
-        questions: 25,
-        time: 20,
-        attempts: 2,
-      },
-      {
-        id: 4,
-        name: 'Термодинамика',
-        status: 'completed',
-        date: '01.01.2020',
-        score: '4',
-        questions: 25,
-        time: 20,
-        attempts: 2,
-      },
-      {
-        id: 5,
-        name: 'Динамика',
-        status: 'closed',
-        date: '01.01.2020',
-        score: '4',
-        questions: 25,
-        time: 20,
-        attempts: 2,
-      },
-      {
-        id: 6,
-        name: 'Термодинамика',
-        status: 'completed',
-        date: '01.01.2020',
-        score: 'На проверке',
-        questions: 25,
-        time: 20,
-        attempts: 2,
-      },
-    ],
-  };
-
+  // const history = useHistory();
+  const [discipline, setDiscipline] = useState({});
+  const { params } = useRouteMatch(RouterPaths.studentDiscipline);
   const { setTitle } = useContext(TitleContext);
+  // const dispatch = useDispatch();
 
-  // const [studentDiscipline, setStudentDiscipline] = useState({});
-  // const { params } = useRouteMatch(RouterPaths.studentDiscipline);
-  // const modalType = useSelector(state => state.modal?.type);
+  useDidMount(() => {
+    Api.getTestsForStudentByDiscipline(params.id).then(response => {
+      setDiscipline(response);
+    });
+  });
 
   useEffect(() => {
-    setTitle(studentDiscipline.name);
-  }, [setTitle, studentDiscipline]);
-
-  // useEffect(() => {
-  //   Api.getStudentDiscipline(params.id).then(response => {
-  //     setStudentDiscipline(response);
-  //   });
-  // }, [params.id, modalType]);
+    setTitle((discipline.discipline && discipline.discipline.name) || 'Дисциплины');
+  }, [setTitle, discipline]);
 
   const icon = <InfoSVG />;
   return (
     <div className="student-discipline-page">
       <Tabs defaultActiveKey="tests">
         <TabPane tab="Тесты" key="tests">
-          {studentDiscipline.test_list.map(test => (
-            <Panel
-              key={test.id}
-              title={test.name}
-              status={test.status}
-              date={test.date}
-              score={test.score}
-              icon={icon}
-            ></Panel>
-          ))}
+          {discipline.testList?.length ? (
+            discipline.testList.map(test => (
+              <Panel
+                key={test.id}
+                title={test.name}
+                status={test.status}
+                date={test.date}
+                score={test.score}
+                icon={icon}
+              />
+            ))
+          ) : (
+            <p>Список тестов пуст</p>
+          )}
         </TabPane>
         <TabPane tab="Самопроверка" key="self-test">
           <p className="student-discipline-page__label">
@@ -134,10 +68,10 @@ function StudentDisciplinePage() {
             </p>
           </div>
           <div className="student-discipline-page__self-test">
-            {studentDiscipline.test_list && (
+            {discipline.testList && (
               <BadgeList
                 className="student-discipline-page__self-test"
-                items={studentDiscipline.test_list}
+                items={discipline.testList}
                 keyMap={{ title: 'name' }}
               />
             )}
@@ -149,12 +83,7 @@ function StudentDisciplinePage() {
         <TabPane tab="Информация" key="info">
           <div className="student-discipline-page__discipline-description">
             <p className="student-discipline-page__label--blue">Описание дисциплины</p>
-            <p>Дисциплина посвящена изучению великих законов физики</p>
-            <p>Ссылки на литературу:</p>
-            <p>
-              «Jаnssens D. (2006) Hаbeas Cоrpus?: Pierre Mаnent and the Politics of Europe //
-              Europеаn Jоurnal of Pоlitical Theоry. 2006. № 5. P. 171-190».
-            </p>
+            <p>{discipline?.discipline?.description}</p>
           </div>
         </TabPane>
       </Tabs>

@@ -9,6 +9,7 @@ import DisciplinePage from '../pages/disciplinePage';
 import TestInfo from '../components/TestInfo';
 import TestSolution from '../components/TestSolution';
 import ErrorPage from '../pages/errorPage';
+import StudentDisciplinePage from '../pages/studentDisciplinePage';
 
 const ROLES = { teacher: 'TEACHER', student: 'STUDENT' };
 
@@ -16,12 +17,8 @@ const Routes = [
   makeRoute(RouterPaths.mainPage, IndexPage, true),
   makeRoute(RouterPaths.loginPage, LoginPage),
   makeRoute(RouterPaths.disciplines, DisciplinesPage, true, true),
-  makeRoleRoute([ROLES.student, ROLES.teacher])(
-    RouterPaths.discipline,
-    DisciplinePage,
-    false,
-    true
-  ),
+  makeRoleRoute([ROLES.teacher])(RouterPaths.discipline, DisciplinePage, false, true),
+  makeRoleRoute([ROLES.student])(RouterPaths.studentDiscipline, StudentDisciplinePage, false, true),
   makeRoute(RouterPaths.tests, TestsPage, false, true),
   makeRoute(RouterPaths.registration, RegistrationPage),
   makeRoute(RouterPaths.testPage, TestInfo, false, true),
