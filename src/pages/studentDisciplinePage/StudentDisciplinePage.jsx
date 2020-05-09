@@ -28,12 +28,12 @@ function StudentDisciplinePage() {
 
   useDidMount(() => {
     Api.getTestsForStudentByDiscipline(params.id).then(response => {
-      setDiscipline(response);
+      setDiscipline(response.discipline);
     });
   });
 
   useEffect(() => {
-    setTitle((discipline.discipline && discipline.discipline.name) || 'Дисциплины');
+    setTitle((discipline && discipline.name) || 'Дисциплины');
   }, [setTitle, discipline]);
 
   const icon = <InfoSVG />;
