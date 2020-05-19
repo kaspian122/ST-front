@@ -14,6 +14,9 @@ import ModalActions from '../../store/actions/modalActions';
 import { ModalTypes } from '../../constants/modalConstants';
 import NewDisciplinePage from '../newDisciplinePage';
 import TitleContext from '../../utils/titleContext';
+import AppSelectors from '../../store/selectors/appSelectors';
+import appConstants from '../../constants/appConstants';
+import StudentDisciplinePage from '../studentDisciplinePage';
 
 const { TabPane } = Tabs;
 
@@ -96,8 +99,16 @@ function DisciplinePageById() {
 
 const DisciplinePage = () => {
   const { params } = useRouteMatch(RouterPaths.discipline);
+  const userRole = useSelector(AppSelectors.userRole);
 
-  const Component = params.id === 'new' ? NewDisciplinePage : DisciplinePageById;
+  let Component;
+  if (params.id === 'new') {
+    Component = NewDisciplinePage;
+  } else if (userRole === appConstants.roles.STUDENT) {
+    Component = StudentDisciplinePage;
+  } else {
+    Component = DisciplinePageById;
+  }
 
   return <Component />;
 };
