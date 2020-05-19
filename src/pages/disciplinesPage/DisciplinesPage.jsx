@@ -35,13 +35,9 @@ function DisciplinesPage() {
 
   const handleDisciplineClick = useCallback(
     item => {
-      if (userRole === appConstants.roles.STUDENT) {
-        history.push(`/student-disciplines/${item.id}`);
-      } else if (userRole === appConstants.roles.TEACHER) {
-        history.push(`/disciplines/${item.id}`);
-      }
+      history.push(`/disciplines/${item.id}`);
     },
-    [history, userRole]
+    [history]
   );
 
   return (
