@@ -20,15 +20,15 @@ import RouterPaths from '../../constants/routerPaths';
 const { TabPane } = Tabs;
 
 function StudentDisciplinePage() {
-  // const history = useHistory();
   const [discipline, setDiscipline] = useState({});
+  const [testList, setTestList] = useState([]);
   const { params } = useRouteMatch(RouterPaths.studentDiscipline);
   const { setTitle } = useContext(TitleContext);
-  // const dispatch = useDispatch();
 
   useDidMount(() => {
     Api.getTestsForStudentByDiscipline(params.id).then(response => {
       setDiscipline(response.discipline);
+      setTestList(response.testList);
     });
   });
 
@@ -41,8 +41,8 @@ function StudentDisciplinePage() {
     <div className="student-discipline-page">
       <Tabs defaultActiveKey="tests">
         <TabPane tab="Тесты" key="tests">
-          {discipline.testList?.length ? (
-            discipline.testList.map(test => (
+          {testList.length ? (
+            testList.map(test => (
               <Panel
                 key={test.id}
                 title={test.name}
@@ -68,10 +68,10 @@ function StudentDisciplinePage() {
             </p>
           </div>
           <div className="student-discipline-page__self-test">
-            {discipline.testList && (
+            {testList && (
               <BadgeList
                 className="student-discipline-page__self-test"
-                items={discipline.testList}
+                items={testList}
                 keyMap={{ title: 'name' }}
               />
             )}
@@ -83,7 +83,7 @@ function StudentDisciplinePage() {
         <TabPane tab="Информация" key="info">
           <div className="student-discipline-page__discipline-description">
             <p className="student-discipline-page__label--blue">Описание дисциплины</p>
-            <p>{discipline?.discipline?.description}</p>
+            <p>{discipline?.description}</p>
           </div>
         </TabPane>
       </Tabs>
