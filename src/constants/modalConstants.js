@@ -6,6 +6,15 @@ export const ModalTypes = {
   WARNING: 'WARNING',
 };
 
+export const allowedModalTypes = [
+  ModalTypes.ADD_THEME,
+  ModalTypes.EDIT_THEME,
+  ModalTypes.ADD_TEST,
+  ModalTypes.CHECK_TEST,
+];
+
+export const allowedPortalModalTypes = [ModalTypes.WARNING];
+
 export const ModalTitles = {
   [ModalTypes.ADD_THEME]: 'Создание темы',
   [ModalTypes.EDIT_THEME]: 'Редактирование темы',

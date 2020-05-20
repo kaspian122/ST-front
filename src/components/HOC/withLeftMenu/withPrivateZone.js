@@ -11,7 +11,7 @@ import { ReactComponent as LogoSVG } from '../../../static/images/svg/logo.svg';
 import './withLeftMenu.scss';
 import Consumer from '../../PageModal';
 import ModalActions from '../../../store/actions/modalActions';
-import { ModalTitles } from '../../../constants/modalConstants';
+import { ModalTitles, ModalTypes } from '../../../constants/modalConstants';
 import TitleContext from '../../../utils/titleContext';
 import RouterPaths from '../../../constants/routerPaths';
 import AppSelectors from '../../../store/selectors/appSelectors';
@@ -43,7 +43,7 @@ function withPrivateZone(Component, allowedRoles = []) {
     }, []);
     const handleGoBack = () => {
       if (modal) {
-        dispatch(ModalActions.closeModal());
+        dispatch(ModalActions.closeModal(modal.type));
       } else {
         history.goBack();
       }

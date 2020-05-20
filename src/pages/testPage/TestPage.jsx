@@ -13,6 +13,7 @@ import ModalActions from '../../store/actions/modalActions';
 import DisciplinesActions from '../../store/actions/disciplinesActions';
 
 import { ReactComponent as PlusSVG } from '../../static/images/svg/add.svg';
+import { ModalTypes } from '../../constants/modalConstants';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -57,7 +58,7 @@ function TestPage() {
       themes: [...formModel.themes, { count: '' }],
     });
   const handleSaveClick = () =>
-    Api.createTest(formModel).then(() => dispatch(ModalActions.closeModal()));
+    Api.createTest(formModel).then(() => dispatch(ModalActions.closeModal(ModalTypes.ADD_TEST)));
 
   useDidMount(() => {
     dispatch(TestsActions.setGroups());

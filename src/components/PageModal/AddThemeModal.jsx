@@ -44,9 +44,9 @@ function AddThemeModal({ modal, isEdit }) {
 
   const handleSubmitForm = useCallback(() => {
     Api.sendTheme({ ...form, discipline }).then(() => {
-      dispatch(ModalActions.closeModal());
+      dispatch(ModalActions.closeModal(modal.type));
     });
-  }, [dispatch, form, discipline]);
+  }, [form, discipline, dispatch, modal.type]);
 
   return (
     <div className="add-theme">

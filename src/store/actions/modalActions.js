@@ -1,9 +1,24 @@
+import { allowedModalTypes, allowedPortalModalTypes } from '../../constants/modalConstants';
+
 const entity = 'MODAL';
+
+const ActionTypes = {
+  OPEN: 'OPEN',
+  CLOSE: 'CLOSE',
+  RESET: 'RESET',
+};
 
 export const ModalActionTypes = {
   OPEN: `${entity}.OPEN`,
   CLOSE: `${entity}.CLOSE`,
   RESET: `${entity}.RESET`,
+};
+
+const getActionTypeById = (identifier, type) => {
+  let mod;
+  if (allowedModalTypes.includes(identifier)) mod = 'MODAL';
+  if (allowedPortalModalTypes.includes(identifier)) mod = 'PORTAL';
+  return `${mod}.${type}`;
 };
 
 /**
@@ -13,7 +28,7 @@ export const ModalActionTypes = {
  * @param additionalProps {object?}
  */
 const openModal = (identifier, additionalProps) => ({
-  type: ModalActionTypes.OPEN,
+  type: getActionTypeById(identifier, ActionTypes.OPEN),
   payload: { type: identifier, props: additionalProps },
 });
 
@@ -21,12 +36,12 @@ const openModal = (identifier, additionalProps) => ({
  * Closes an existing modal by specified identifier
  * @param identifier {string}
  */
-const closeModalById = () => ({
-  type: ModalActionTypes.CLOSE,
+const closeModalById = identifier => ({
+  type: getActionTypeById(identifier, ActionTypes.CLOSE),
 });
 
-const resetModal = () => ({
-  type: ModalActionTypes.RESET,
+const resetModal = identifier => ({
+  type: getActionTypeById(identifier, ActionTypes.RESET),
 });
 
 /**
@@ -34,13 +49,13 @@ const resetModal = () => ({
  * If no modal exists, or it is presented by other identifier, the function will reset modal system and throw an error.
  * @param identifier {string}
  */
-const closeModal = () => (dispatch, getState) => {
+const closeModal = identifier => (dispatch, getState) => {
   const stateModal = getState().modal;
   if (!stateModal) {
-    dispatch(resetModal());
+    dispatch(resetModal(identifier));
     console.warn('Modals nof found');
   }
-  dispatch(closeModalById());
+  dispatch(closeModalById(identifier));
 };
 
 const ModalActions = {
