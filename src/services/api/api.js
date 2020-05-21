@@ -79,6 +79,10 @@ const getSolution = id => http.get(`teacher/details-solution/${id}/`);
 
 const sendMark = data => http.post('teacher/send-mark/', data);
 
+const getSolutionTest = id => http.get(`/api/teacher/solution-list/${id}/`);
+
+const getSolutionGroup = id => http.get(`/api/teacher/group/${id}/`);
+
 const createDiscipline = data =>
   http.post('teacher/discipline/create/', {
     ...data,
@@ -105,6 +109,8 @@ const Api = {
   getStudentDiscipline,
   createDiscipline,
   getSemester,
+  getSolutionTest,
+  getSolutionGroup,
 };
 
 export default Api;

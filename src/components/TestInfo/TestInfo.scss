@@ -1,11 +1,51 @@
 @import 'src/scss/vars';
-
+.test {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 20px 16px 20px;
+  background: #ffffff;
+  border: 1px solid $main-blue;
+  border-radius: 6px;
+  margin-top: 20px;
+  cursor: pointer;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
+}
 .test-info {
-  &__title {
-    color: $main-blue;
-    font-size: 24px;
-    font-weight: bold;
+  display: flex;
+  flex-direction: column;
+
+  &_main {
+    justify-content: center;
+    &__title {
+      padding-top: 15px;
+      color: $main-blue;
+      font-size: 24px;
+      font-weight: bold;
+      line-height: 23px;
+    }
+    &__button {
+      margin-top: -10px;
+      background: #ffffff;
+      box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+      border-radius: 6px;
+      font-size: 12px;
+      color: $main-blue;
+      float: right;
+      padding: 15px 10% 15px 10%;
+      border: 1px solid $main-blue;
+      font-style: normal;
+      font-weight: bold;
+      line-height: 11px;
+    }
   }
+
+  &__statistic {
+    padding-top: 30px;
+    text-align: center;
+    font-size: 18px;
+    color: $main-blue;
+  }
+
   &__dropdown {
     display: flex;
     justify-content: space-between;
@@ -18,7 +58,8 @@
     box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
 
     &--incorrect {
-      background-color: #02b76a;
+      background-color: $main-blue;
+      border-radius: 6px 6px 0 0;
     }
     &_id {
       font-size: 18px;
@@ -29,6 +70,12 @@
       display: flex;
       font-size: 18px;
       color: $main-blue;
+      &--incorrect {
+        color: #fff;
+        li {
+          color: #fff;
+        }
+      }
     }
     &__arrow {
       padding-top: 5px;
@@ -37,6 +84,9 @@
     }
     &__arrow path {
       stroke: $main-blue;
+    }
+    &__arrow--incorrect path {
+      stroke: #ffffff;
     }
   }
   &__dropdown:hover {
@@ -57,6 +107,27 @@
   padding: 10px;
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
+  &_text {
+    color: $main-blue;
+  }
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style-type: none; /* Убираем исходные маркеры */
+    counter-reset: my-counter; /* Задаём имя счетчика */
+  }
+
+  li::before {
+    content: counter(my-counter); /* Выводим число */
+    counter-increment: my-counter; /* Увеличиваем значение счётчика */
+    background: $main-blue;
+    color: #fff;
+    height: 100%;
+    padding: 20px 20px 20px 20px;
+    margin-left: -21px;
+    margin-right: 20px;
+    border-radius: 6px 0 0 6px;
+  }
 
   &_content {
     height: 100%;
@@ -64,12 +135,29 @@
     justify-content: space-around;
     flex-wrap: wrap;
 
-    div {
+    &__container {
       width: 48%;
       border: 1px solid $main-blue;
       border-radius: 6px;
       padding: 20px 0 20px 20px;
       margin-bottom: 10px;
+
+      &__time {
+        display: flex;
+        h3 {
+          width: 65%;
+        }
+      }
+      &__theme {
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        display: flex;
+
+        span {
+          width: 33%;
+        }
+      }
 
       h3 {
         font-size: 14px;
@@ -77,9 +165,6 @@
         margin-bottom: 10px;
       }
     }
-  }
-  span {
-    color: $main-blue;
   }
   &__question {
     padding: 17px 16px 17px 20px;

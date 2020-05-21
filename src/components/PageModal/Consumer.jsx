@@ -17,6 +17,8 @@ function Consumer({ children }) {
         return <AddThemeModal modal={modal} isEdit />;
       case ModalTypes.ADD_TEST:
         return <TestPage />;
+      case ModalTypes.EDIT_TEST:
+        return <TestPage modal={modal} isEdit />;
       case ModalTypes.CHECK_TEST:
         return <TestInfo />;
       default:
