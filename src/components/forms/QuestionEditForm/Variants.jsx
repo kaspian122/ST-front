@@ -1,18 +1,35 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
-import { Input, Select } from 'antd';
+import { Input } from 'antd';
+
+import './Variants.scss';
+import Upload from '../../Upload';
+import QuestionConstants from '../../../constants/questions';
 
 import { ReactComponent as CloseSVG } from '../../../static/images/svg/close.svg';
 import { ReactComponent as AddSVG } from '../../../static/images/svg/add.svg';
-import GovnoUpload from '../../govnoUpload';
+import { ReactComponent as CheckSVG } from '../../../static/images/svg/check.svg';
+import { ReactComponent as PictureSVG } from '../../../static/images/svg/upload-picture.svg';
+import CssUtils from '../../../utils/sassUtils';
 
-const { Option } = Select;
+const QuestionTypes = QuestionConstants.questionTypes;
+const QuestionLabels = QuestionConstants.questionTypesLabels;
 
-function Item({ pk, value, imagee, onClose, onChange, onChangeImage }) {
+function Item({
+  index,
+  value,
+  isCorrect,
+  image,
+  onClose,
+  onChange,
+  onChangeImage,
+  onSelectCorrect,
+  mode,
+}) {
   const handleClose = useCallback(() => {
-    onClose(pk);
-  }, [pk, onClose]);
+    onClose(index);
+  }, [index, onClose]);
 
   const handleChange = useCallback(
     e => {
@@ -21,30 +38,51 @@ function Item({ pk, value, imagee, onClose, onChange, onChangeImage }) {
     [onChange]
   );
 
+  const handleSelectCorrect = useCallback(() => {
+    onSelectCorrect(index);
+  }, [onSelectCorrect, index]);
+
   return (
-    <>
-      <Input
-        value={value}
-        size="large"
-        className="variant"
-        addonBefore={pk + 1}
-        onChange={handleChange}
-        addonAfter={
-          <span onClick={handleClose}>
-            <CloseSVG />
-          </span>
-        }
-      />
-      <GovnoUpload value={imagee} onChange={onChangeImage} />
-    </>
+    <div className="variant__row">
+      <div className="variant__row-item">
+        <Input
+          id={index}
+          value={value}
+          placeholder="Введите вариант ответа"
+          size="large"
+          className={CssUtils.mergeModifiers('variant', { selected: isCorrect })}
+          addonBefore={
+            mode === QuestionTypes.SEQUENCE || mode === QuestionTypes.CONFORMITY ? (
+              index + 1
+            ) : (
+              <span onClick={handleSelectCorrect}>
+                <CheckSVG />
+              </span>
+            )
+          }
+          onChange={handleChange}
+          addonAfter={
+            <span onClick={handleClose}>
+              <CloseSVG />
+            </span>
+          }
+        />
+      </div>
+      <div className="variant__row-item">
+        <Upload value={image} onChange={onChangeImage} hasLabel={false} icon={<PictureSVG />} />
+      </div>
+    </div>
   );
 }
 
 Item.propTypes = {
-  pk: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
   value: PropTypes.string.isRequired,
+  mode: PropTypes.oneOf(QuestionConstants.allowedQuestionTypes).isRequired,
   onClose: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
+  onChangeImage: PropTypes.func.isRequired,
+  onSelectCorrect: PropTypes.func.isRequired,
 };
 
 function NewItem({ onClick }) {
@@ -66,56 +104,33 @@ function NewItem({ onClick }) {
 
 NewItem.propTypes = { onClick: PropTypes.func.isRequired };
 
-function Variants({ value, onAdd, onDelete, onChange, onChangeImage, onSelectCorrect, multiple }) {
+function Variants({ value, onAdd, onDelete, onChange, onChangeImage, onSelectCorrect, mode }) {
   return (
-    <div className="question-form__answers-multiple">
+    <div className="variant__answers-multiple">
       {!isEmpty(value) ? (
         <div className="question-form__row">
           <div className="question-form__row-item">
-            <div className="question-form__label">Варианты ответа</div>
-            {value.map((it, index) => (
+            <div className="question-form__label">{QuestionLabels[mode]}</div>
+            {value.map((item, index) => (
               <Item
-                pk={index}
-                value={it.name}
-                imagee={it.image}
+                index={index}
+                value={item.name}
+                isCorrect={item.is_correct}
+                image={item.image}
                 onClose={onDelete(index)}
                 onChange={onChange(index)}
                 onChangeImage={onChangeImage(index)}
+                onSelectCorrect={onSelectCorrect}
+                mode={mode}
               />
             ))}
             <NewItem onClick={onAdd} />
-          </div>
-          <div className="question-form__row-item">
-            <div className="question-form__label">Правильный вариант</div>
-            <Select
-              value={
-                multiple
-                  ? value
-                      .map((it, index) => ({ ...it, pk: index }))
-                      .filter(it => (it.name || it.image) && it.is_correct)
-                      .map(it => String(it.pk + 1))
-                  : value.map((it, index) => ({ ...it, pk: index })).find(it => it.is_correct)?.pk +
-                    1
-              }
-              mode={multiple ? 'multiple' : 'default'}
-              size="large"
-              onChange={onSelectCorrect}
-            >
-              {value
-                .map((it, index) => ({ ...it, pk: index }))
-                .filter(it => it.name || it.image)
-                .map(it => (
-                  <Option key={String(it.pk)} title={it.pk + 1}>
-                    {it.pk + 1}
-                  </Option>
-                ))}
-            </Select>
           </div>
         </div>
       ) : (
         <div className="question-form__row question-form__row--half">
           <div className="question-form__row-item">
-            <div className="question-form__label">Варианты ответа</div>
+            <div className="question-form__label">{QuestionLabels[mode]}</div>
             <NewItem onClick={onAdd} />
           </div>
         </div>
@@ -130,13 +145,13 @@ Variants.propTypes = {
   onAdd: PropTypes.func.isRequired,
   onDelete: PropTypes.func,
   onChange: PropTypes.func.isRequired,
+  onChangeImage: PropTypes.func.isRequired,
   onSelectCorrect: PropTypes.func.isRequired,
-  multiple: PropTypes.bool,
+  mode: PropTypes.oneOf(QuestionConstants.allowedQuestionTypes).isRequired,
 };
 
 Variants.defaultProps = {
   onDelete: () => {},
-  multiple: false,
 };
 
 export default Variants;

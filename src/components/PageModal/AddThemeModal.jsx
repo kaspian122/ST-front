@@ -6,6 +6,7 @@ import MultipleForm from '../multipleForm';
 import { QuestionEditForm } from '../forms';
 
 import './AddThemeModal.scss';
+
 import Button from '../button';
 import RouterPaths from '../../constants/routerPaths';
 import Api from '../../services/api/api';
@@ -17,7 +18,7 @@ function AddThemeModal({ modal, isEdit }) {
   const dispatch = useDispatch();
   useDidMount(() => {
     if (isEdit) {
-      Api.getTheme(modal.additionalProps.id).then(response => {
+      Api.getTheme(modal.props.id).then(response => {
         setForm(response);
       });
     }

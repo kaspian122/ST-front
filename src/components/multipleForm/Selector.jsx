@@ -68,6 +68,7 @@ function Selector({ items, onSelect, onAdd, onDelete, selected }) {
     <div className="multiple-form__selector">
       {items.map((item, index) => (
         <Item
+          key={index.toString()}
           onClick={handleSelect(index)}
           pk={index + 1}
           isActive={selected === index}
