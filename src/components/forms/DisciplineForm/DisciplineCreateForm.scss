@@ -24,6 +24,7 @@
       border-color: $false;
     }
   }
+
   &__info-box-select {
     width: 300px;
     height: 40px;
@@ -75,6 +76,36 @@
       &:last-child {
         border-bottom: 1px solid $main-blue;
       }
+    }
+  }
+
+  &__button {
+    margin: 40px auto 0;
+    display: block;
+    width: 300px;
+  }
+
+  &__delete-button {
+    border: 1px solid #008fbc;
+    box-sizing: border-box;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: $main-blue;
+    background-color: #ffffff;
+    position: relative;
+    top: -53px;
+    left: 480px;
+    width: 220px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken(#ffffff, 3%);
     }
   }
 }

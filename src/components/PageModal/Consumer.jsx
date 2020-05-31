@@ -5,6 +5,7 @@ import { ModalTypes } from '../../constants/modalConstants';
 import AddThemeModal from './AddThemeModal';
 import TestPage from '../../pages/testPage';
 import TestInfo from '../TestInfo';
+import DisciplineCreateForm from '../forms/DisciplineForm/DisciplineCreateForm';
 
 function Consumer({ children }) {
   const modal = useSelector(state => state.modal);
@@ -19,6 +20,8 @@ function Consumer({ children }) {
         return <TestPage />;
       case ModalTypes.CHECK_TEST:
         return <TestInfo />;
+      case ModalTypes.EDIT_DISCIPLINE:
+        return <DisciplineCreateForm isEdit />;
       default:
         return null;
     }
