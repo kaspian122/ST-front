@@ -26,15 +26,18 @@ function TestInfo() {
   const { groups } = test;
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setTitle(discipline?.name);
-  }, [setTitle, discipline]);
-
   useDidMount(() => {
     Api.getTest(params.id).then(response => {
       setTest(response);
     });
   });
+
+  useDidMount(() => {
+    Api.getDiscipline(1).then(response => {
+      setDiscipline(response);
+    });
+  });
+  console.log(test, 'test', discipline);
 
   useDidMount(() => {
     Api.getGroups().then(response => {
@@ -83,29 +86,18 @@ function TestInfo() {
   };
 
   const [solutionGroup, setSolutionGroup] = useState([]);
-
-  const numberGroup = elem => {
-    Api.getThemes(elem).then(response => {
+  const solution = elem => {
+    Api.getSolutionGroup(elem).then(response => {
       setSolutionGroup([...response]);
     });
-    console.log(solutionGroup, 'group');
+    console.log(solutionGroup, 'solutiongroup');
+  };
+  const numberGroup = elem => {
+    solution(elem);
     return group.map(item => {
       return elem === item.id ? <span>{item.number}</span> : <span></span>;
     });
   };
-  // const themes = [{ id: 1 }, { id: 2 }];
-  //
-  // const themeName = () => {
-  //   return <span>{theme.name}</span>;
-  // };
-  // themeName(
-  //   useDidMount(() => {
-  //     Api.getTheme(1).then(response => {
-  //       setTheme(response);
-  //     });
-  //   })
-  // );
-  //console.log(theme, 'theme');
   function DropdownQuestion(question) {
     if (question.question.type === 'SINGLE') {
       return (
@@ -192,7 +184,15 @@ function TestInfo() {
 
     return `${da}.${mo}.${ye}`;
   };
-
+  const themeName = id => {
+    Api.getTheme(id).then(response => {
+      setTheme([response]);
+    });
+    console.log(theme.name, 'theme');
+    return theme.map(item => {
+      return item.name;
+    });
+  };
   function Dropdown(id) {
     if (id.id === '1') {
       return (
@@ -225,7 +225,7 @@ function TestInfo() {
               <h3> Темы</h3>
               <div className="dropdown_content__container__theme">
                 {test.content.questions.map(item => (
-                  <span>{item.theme.name}</span>
+                  <span>{themeName(item.theme.id)}</span>
                 ))}
               </div>
             </div>
@@ -238,7 +238,7 @@ function TestInfo() {
         <div className="dropdown">
           <ol>
             {test.content.questions.map(item => (
-              <div>
+              <div key={item.id}>
                 <div
                   className={CssUtils.mergeModifiers('test-info__dropdown', {
                     incorrect: openTest === item.id,
@@ -281,6 +281,7 @@ function TestInfo() {
     <div>
       <div className="test-info">
         <div className="test-info_main">
+          {setTitle(discipline.name)}
           <span className="test-info_main__title">{test.name}</span>
           <span className="test-info_main__button" onClick={handleEditTestClick}>
             Редактировать тест
@@ -288,7 +289,7 @@ function TestInfo() {
         </div>
         {console.log(test)}
         {content.map(item => (
-          <div>
+          <div key={item.id}>
             <div
               className={CssUtils.mergeModifiers('test-info__dropdown', {
                 incorrect: openInfo === item.id,
@@ -303,6 +304,7 @@ function TestInfo() {
               >
                 {item.name}
               </span>
+
               <ArrowSVG
                 className={CssUtils.mergeModifiers('test-info__dropdown__arrow', {
                   incorrect: openInfo === item.id,
@@ -316,7 +318,7 @@ function TestInfo() {
       </div>
       {!isEmpty(test) ? (
         groups.map(item => (
-          <div className="test-info__dropdown">
+          <div key={item.id} className="test-info__dropdown">
             <span className="test-info__dropdown_name">{numberGroup(item)}</span>
             <ArrowSVG className="test-info__dropdown__arrow" />
           </div>
